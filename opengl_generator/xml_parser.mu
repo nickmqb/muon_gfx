@@ -157,7 +157,7 @@ XmlParser struct #RefType {
 
 	parseId(s XmlParser) {
 		if s.token.type != TokenType.identifier {
-			Stdout.writeLine(format("Invalid token, expected identifier but got {}", cast(s.token.type, uint)))
+			Stderr.writeLine(format("Invalid token, expected identifier but got {}", cast(s.token.type, uint)))
 			abandon()
 		}
 		id := s.token.value
@@ -167,7 +167,7 @@ XmlParser struct #RefType {
 
 	parseStringLiteral(s XmlParser) {
 		if s.token.type != TokenType.stringLiteral {
-			Stdout.writeLine(format("Invalid token, expected string literal but got {}", cast(s.token.type, uint)))
+			Stderr.writeLine(format("Invalid token, expected string literal but got {}", cast(s.token.type, uint)))
 			abandon()
 		}
 		str := s.token.value
@@ -177,7 +177,7 @@ XmlParser struct #RefType {
 
 	matchToken(s XmlParser, type TokenType) {
 		if s.token.type != type {
-			Stdout.writeLine(format("Invalid token, expected {} but got {}, at {}", cast(type, uint), cast(s.token.type, uint), s.source.slice(s.index, s.index + 25)))
+			Stderr.writeLine(format("Invalid token, expected token type {} but got token type {}, at {} (pos: {})", cast(type, uint), cast(s.token.type, uint), s.source.slice(s.index, s.index + 25), s.index))
 			abandon()
 		}
 		readToken(s)
