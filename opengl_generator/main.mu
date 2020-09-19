@@ -254,6 +254,13 @@ parseArgs(parser CommandLineArgsParser) {
 	return args
 }
 
+skipUtf8BOM(s string) {
+	if s.length >= 3 && transmute(s[0], int) == 239 && transmute(s[1], int) == 187 && transmute(s[2], int) == 191 {
+		return s.slice(3, s.length)
+	}
+	return s
+}
+
 main() {
 	::currentAllocator = Memory.newArenaAllocator(256 * 1024 * 1024)
 	aa := pointer_cast(::currentAllocator.data, ArenaAllocator)
@@ -271,7 +278,7 @@ main() {
 	}
 
 	isLinux := args.target == "linux"
-	str := readFileWithSentinel("gl.xml")	
+	str := skipUtf8BOM(readFileWithSentinel("gl.xml"))
 
 	parser := XmlParser.from(str)
 	parser.tryParseProlog()
