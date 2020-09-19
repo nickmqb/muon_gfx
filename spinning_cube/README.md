@@ -2,10 +2,10 @@
 
 Basic cross-platform SDL and OpenGL demo!
 
-Windows
+Windows  
 ![alt text](screenshot_windows.png "Spinning cube on Windows")
 
-Linux
+Linux  
 ![alt text](screenshot_linux.png "Spinning cube on Linux")
 
 # Setup
