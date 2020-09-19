@@ -7,8 +7,8 @@ Bindings for [SDL](https://www.libsdl.org/), for Windows and Linux.
 ## Setup
 
 1. Create a new subdirectory: `SDL2`
-1. [Download the latest version of libsdl](https://www.libsdl.org/download-2.0.php) and extract its contents to the newly created `SDL2` subdirectory. You should end up with directories `SDL2/include/...`, `SDL2/docs/...` etc.
-1. If you've downloaded a source only distribution, build and install libsdl (see instructions in `INSTALL.txt`).
+1. [Download the latest stable libsdl](https://www.libsdl.org/download-2.0.php) and extract its contents to the newly created `SDL2` subdirectory. You should end up with directories `SDL2/include/...`, `SDL2/docs/...` etc.
+1. If you've downloaded the source only distribution, build libsdl (see instructions in `INSTALL.txt`).
 
 ## Using SDL: Windows (Visual Studio)
 
