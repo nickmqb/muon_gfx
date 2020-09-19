@@ -1,0 +1,11 @@
+*
+!*/
+!.gitignore
+!.gitattributes
+!*.h
+!*.mu
+!*.args
+!*.rules
+!*.md
+!*.png
+sdl_bindings/SDL2/**

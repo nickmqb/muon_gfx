@@ -1,0 +1,10 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdint.h>
+#include <stdlib.h>
+#include <memory.h>
+#include <string.h>
+#include <stdio.h>
+#include <math.h>
+#include <time.h>
+#define SDL_MAIN_HANDLED
+#include "SDL2/include/SDL.h"

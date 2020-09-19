@@ -1,0 +1,13 @@
+../../muon/lib/core.mu
+../../muon/lib/basic.mu
+../../muon/lib/containers.mu
+../../muon/lib/memory.mu
+../../muon/lib/string.mu
+../../muon/lib/stdio.mu
+../sdl_bindings/sdl_linux.mu
+../opengl_bindings/opengl_static_linux.mu
+../opengl_bindings/opengl_core3.3_linux.mu
+utils.mu
+main.mu
+--include-file external_linux.h
+--output-file spinning_cube.c

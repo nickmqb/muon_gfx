@@ -1,0 +1,15 @@
+SDL_* fun
+SDL_GetClipboardText fun prefer_cstring
+SDL_SetClipboardText fun prefer_cstring
+SDL_RWFromFile fun prefer_cstring
+SDL_* struct
+SDL_* enum
+
+// This list of SDL constants is not complete, any missing ones can be added below as needed
+SDL_INIT_* const uint
+SDL_WINDOW_* const uint
+SDL_BUTTON_* const byte
+SDL_WINDOWPOS_* const int
+SDL_AUDIO_ALLOW_* const int
+AUDIO_S16 const ushort
+KMOD_* const uint
