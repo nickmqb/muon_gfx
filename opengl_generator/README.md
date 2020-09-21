@@ -2,18 +2,18 @@
 
 Reads the [Khronos OpenGL XML specification](https://github.com/KhronosGroup/OpenGL-Registry/blob/master/xml/gl.xml) and generates a corresponding .mu file with declarations.
 
-# Build
+## Build
 
 1. Download [gl.xml](https://github.com/KhronosGroup/OpenGL-Registry/blob/master/xml/gl.xml) and place it in the current directory.
 2. On Windows (64-bit): `mu --args opengl_generator.args && cl /Zi opengl_generator.c`
 3. On Linux/macOS (64-bit): `mu --args opengl_generator.args && gcc -o opengl_generator opengl_generator.c`
 
-# Run
+## Run
 
 * On Windows: `opengl_generator --target windows > ../opengl_bindings/opengl_core3.3_windows.mu`
 * On Linux/macOS: `./opengl_generator --target linux > ../opengl_bindings/opengl_core3.3_linux.mu`
 
-# Changing the OpenGL version
+## Changing the OpenGL version
 
 By default, the program generates declarations for the OpenGL 3.3 core profile. To change this, you must make changes to the code and rebuild and rerun.
 
