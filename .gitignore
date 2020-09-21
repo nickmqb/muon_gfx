@@ -8,4 +8,4 @@
 !*.rules
 !*.md
 !*.png
-sdl_bindings/SDL2/**
+sdl_bindings/SDL2*/**
