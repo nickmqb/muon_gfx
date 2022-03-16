@@ -34,6 +34,18 @@ Element struct #RefType {
 		return null
 	}
 
+	findAttr(self Element, name string) {
+		if self.attributes == null {
+			return null
+		}
+		for a in self.attributes {
+			if a.name == name {
+				return a
+			}
+		}
+		return null
+	}
+
 	attrValue(self Element, name string) {
 		attr := pointer_cast(null, Attribute)
 		for a in self.attributes {

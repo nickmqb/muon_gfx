@@ -58,7 +58,7 @@ mapParamName(s string) {
 	return s
 }
 
-mapCommand(e Element, rb StringBuilder) {
+mapCommand(e Element, rb StringBuilder, args *Args) {
 	proto := e.find("proto")
 	name := proto.find("name").singleText()
 
@@ -99,7 +99,9 @@ mapCommand(e Element, rb StringBuilder) {
 	rb.write("_procAddress == null {\n")
 	rb.write("\t\t")
 	rb.write(name)
-	rb.write("_procAddress = pointer_cast(glGetProcAddressChecked(\"")
+	rb.write("_procAddress = pointer_cast(")
+	rb.write(args.getprocaddress)
+	rb.write("(\"")
 	rb.write(name)
 	rb.write("\"), ")
 	rb.write(funName)
@@ -188,44 +190,63 @@ mapType(s string) {
 
 mapTypename(s string) {
 	// See: https://www.khronos.org/opengl/wiki/OpenGL_Type
-	if s == "GLsizei" || s == "GLint" {
-		return "int"
-	} else if s == "GLbitfield" || s == "GLenum" || s == "GLuint" {
-		return "uint"
-	} else if s == "GLdouble" {
-		return "double"
-	} else if s == "GLuint64" {
-		return "ulong"
-	} else if s == "GLintptr" {
-		return "ssize"
+	// See: gl.xml
+	// See: https://www.khronos.org/registry/EGL/api/KHR/khrplatform.h
+	// See: https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf
+	if s == "GLbyte" {
+		return "sbyte"
 	} else if s == "GLubyte" {
 		return "byte"
-	} else if s == "GLbyte" {
-		return "sbyte"
-	} else if s == "GLchar" {
-		return "sbyte"
-	} else if s == "GLfloat" {
-		return "float"
-	} else if s == "GLboolean" {
-		return "bool"
 	} else if s == "GLshort" {
 		return "short"
 	} else if s == "GLushort" {
 		return "ushort"
-	} else if s == "GLsizeiptr" {
-		return "ssize"
-	} else if s == "GLsync" || s== "GLDEBUGPROC" {
-		return "pointer"
+	} else if s == "GLint" {
+		return "int"
+	} else if s == "GLuint" {
+		return "uint"
+	} else if s == "GLfixed" {
+		return "int"
 	} else if s == "GLint64" {
 		return "long"
+	} else if s == "GLuint64" {
+		return "ulong"
+	} else if s == "GLsizei" {
+		return "int" // Override spec, declare as signed, like in gl.xml
+	} else if s == "GLenum" {
+		return "uint"
+	} else if s == "GLintptr" {
+		return "ssize"
+	} else if s == "GLsizeiptr" {
+		return "ssize" // Override spec, declare as signed, like in gl.xml
+	} else if s == "GLsync" || s == "GLDEBUGPROC" {
+		return "pointer"
+	} else if s == "GLbitfield" {
+		return "uint"
+	} else if s == "GLhalf" {
+		return "ushort"
+	} else if s == "GLfloat" || s == "GLclampf" {
+		return "float"
+	} else if s == "GLdouble" || s == "GLclampd" {
+		return "double"
 	} else if s == "void" {
 		return "void"
+	// Undocumented, but defined in gl.xml:
+	} else if s == "GLchar" {
+		return "sbyte"
+	} else if s == "GLboolean" {
+		return "byte"
+	} else if s == "GLchar" {
+		return "sbyte" 
+	} else if s == "GLclampx" {
+		return "int" 
 	}
-	abandon()
+	return format("unknown_type_{}", s)
 }
 
 Args struct {
-	target string
+	version string
+	getprocaddress string
 }
 
 parseArgs(parser CommandLineArgsParser) {
@@ -234,12 +255,19 @@ parseArgs(parser CommandLineArgsParser) {
 	token := parser.readToken()
 
 	while token != "" {
-		if token == "--target" {
+		if token == "--version" {
 			token = parser.readToken()
-			if token != "" && (token == "windows" || token == "linux") {
-				args.target = token
+			if token == "3.3" || token == "4.6" {
+				args.version = token
 			} else {
-				parser.expected("Expected: windows or linux")
+				parser.error("Expected: 3.3 or 4.6")
+			}
+		} else if token == "--getprocaddress" {
+			token = parser.readToken()
+			if token != "" {
+				args.getprocaddress = token
+			} else {
+				parser.error("Expected: identifier")
 			}
 		} else {
 			parser.error(format("Invalid argument: {}", token))
@@ -247,8 +275,11 @@ parseArgs(parser CommandLineArgsParser) {
 		token = parser.readToken()
 	}
 
-	if args.target == "" {
-		parser.expected("--target [windows|linux]")
+	if args.version == "" {
+		parser.expected("--version [3.3|4.6]")
+	}
+	if args.getprocaddress == "" {
+		parser.expected("--getprocaddress [identifier]")
 	}
 
 	return args
@@ -277,7 +308,6 @@ main() {
 		exit(1)
 	}
 
-	isLinux := args.target == "linux"
 	str := skipUtf8BOM(readFileWithSentinel("gl.xml"))
 
 	parser := XmlParser.from(str)
@@ -292,16 +322,14 @@ main() {
 	for f in reg.where("feature") {
 		featureName := f.attrValue("name")
 		//Stdout.writeLine(featureName)
-		
-		isLowVersion := (isLinux ? 
-			(featureName == "GL_VERSION_1_0" || featureName == "GL_VERSION_1_1" ||
-			featureName == "GL_VERSION_1_2" || featureName == "GL_VERSION_1_3" ||
-			featureName == "GL_VERSION_1_4") :
-			(featureName == "GL_VERSION_1_0" || featureName == "GL_VERSION_1_1"))
-		
+
 		for rr in f.children {
 			assert(rr.name == "require" || rr.name == "remove")
 			require := rr.name == "require"
+			profileAttr := rr.findAttr("profile")
+			if require && profileAttr != null && profileAttr.value == "compatibility" {
+				continue
+			}
 			for it in rr.children {
 				name := it.attrValue("name")
 				if it.name == "enum" {
@@ -311,12 +339,10 @@ main() {
 						constants.tryRemove(name)
 					}
 				} else if it.name == "command" {
-					if !isLowVersion {
-						if require {
-							functions.tryAdd(name)
-						} else {
-							functions.tryRemove(name)
-						}
+					if require {
+						functions.tryAdd(name)
+					} else {
+						functions.tryRemove(name)
 					}
 				} else if it.name == "type" {
 					if require {
@@ -330,17 +356,17 @@ main() {
 			}
 		}
 		
-		if featureName == "GL_VERSION_3_3" {
+		if (args.version == "3.3" && featureName == "GL_VERSION_3_3") || featureName == "GL_VERSION_4_6" {
 			break
 		}
 	}
 
-	rb := new StringBuilder{}	
+	rb := new StringBuilder{}
 
 	for c in reg.find("commands").children {
 		name := getCommandName(c)
 		if functions.contains(name) {
-			mapCommand(c, rb)
+			mapCommand(c, rb, ref args)
 		}
 	}
 
@@ -355,15 +381,10 @@ main() {
 		}
 	}
 
-	if !isLinux {
-		Stdout.writeLine("glGetProcAddressChecked(name cstring) {\n\tp := wglGetProcAddress(name)\n\tassert(p != null)\n\treturn p\n}\n")
-	} else {
-		Stdout.writeLine("glGetProcAddressChecked(name cstring) {\n\tp := glXGetProcAddress(pointer_cast(name, *byte))\n\tassert(p != null)\n\treturn p\n}\n")
-	}
-
 	Stdout.write(rb.compactToString())
 
 	//Stdout.writeLine(format("{} {}", constants.count, functions.count))
 
 	//Stdout.writeLine(format("{}", aa.current.subtractSigned(aa.from) / 1024))
+
 }

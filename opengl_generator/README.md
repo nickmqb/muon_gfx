@@ -10,11 +10,8 @@ Reads the [Khronos OpenGL XML specification](https://github.com/KhronosGroup/Ope
 
 ## Run
 
-* On Windows: `opengl_generator --target windows > ../opengl_bindings/opengl_core3.3_windows.mu`
-* On Linux/macOS: `./opengl_generator --target linux > ../opengl_bindings/opengl_core3.3_linux.mu`
+`opengl_generator --version 3.3 --getprocaddress SDL_GL_GetProcAddress > ../opengl_bindings/opengl_core3.3.mu`
 
 ## Changing the OpenGL version
 
-By default, the program generates declarations for the OpenGL 3.3 core profile. To change this, you must make changes to the code and rebuild and rerun.
-
-In `main.mu`, function `main`, find the line `if featureName == "GL_VERSION_3_3"` and change it as needed. I haven't looked at this in detail, so some other changes might be needed to make things work. In the future, it might be nice to add a command line argument for selecting the OpenGL version.
+By default, the program generates declarations for the OpenGL 3.3 or 4.6 core profile, which can be selected via the command line argument `--version`. To select a version different than these two, you must make changes to the code and rebuild and rerun.

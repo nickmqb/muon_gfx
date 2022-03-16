@@ -6,6 +6,7 @@
 ../../muon/lib/stdio.mu
 ../../muon/lib/environment.mu
 ../../muon/lib/range.mu
+../../muon/lib/sort.mu
 command_line_args_parser.mu
 xml_parser.mu
 main.mu
