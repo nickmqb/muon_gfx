@@ -54,6 +54,8 @@ mapParamName(s string) {
 		return "string_"
 	} else if s == "ref" {
 		return "ref_"
+	} else if s == "pointer" {
+		return "pointer_"
 	}
 	return s
 }
