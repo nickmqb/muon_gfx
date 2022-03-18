@@ -1,13 +1,15 @@
-glGetProcAddressChecked(name cstring) {
-	p := glXGetProcAddress(pointer_cast(name, *byte))
-	assert(p != null)
-	return p
+:glActiveTexture_procAddress fun<uint, void> #Mutable
+glActiveTexture(texture uint) void {
+	if glActiveTexture_procAddress == null {
+		glActiveTexture_procAddress = pointer_cast(SDL_GL_GetProcAddress("glActiveTexture"), fun<uint, void>)
+	}
+	glActiveTexture_procAddress(texture)
 }
 
 :glAttachShader_procAddress fun<uint, uint, void> #Mutable
 glAttachShader(program uint, shader uint) void {
 	if glAttachShader_procAddress == null {
-		glAttachShader_procAddress = pointer_cast(glGetProcAddressChecked("glAttachShader"), fun<uint, uint, void>)
+		glAttachShader_procAddress = pointer_cast(SDL_GL_GetProcAddress("glAttachShader"), fun<uint, uint, void>)
 	}
 	glAttachShader_procAddress(program, shader)
 }
@@ -15,7 +17,7 @@ glAttachShader(program uint, shader uint) void {
 :glBeginConditionalRender_procAddress fun<uint, uint, void> #Mutable
 glBeginConditionalRender(id uint, mode uint) void {
 	if glBeginConditionalRender_procAddress == null {
-		glBeginConditionalRender_procAddress = pointer_cast(glGetProcAddressChecked("glBeginConditionalRender"), fun<uint, uint, void>)
+		glBeginConditionalRender_procAddress = pointer_cast(SDL_GL_GetProcAddress("glBeginConditionalRender"), fun<uint, uint, void>)
 	}
 	glBeginConditionalRender_procAddress(id, mode)
 }
@@ -23,7 +25,7 @@ glBeginConditionalRender(id uint, mode uint) void {
 :glBeginQuery_procAddress fun<uint, uint, void> #Mutable
 glBeginQuery(target uint, id uint) void {
 	if glBeginQuery_procAddress == null {
-		glBeginQuery_procAddress = pointer_cast(glGetProcAddressChecked("glBeginQuery"), fun<uint, uint, void>)
+		glBeginQuery_procAddress = pointer_cast(SDL_GL_GetProcAddress("glBeginQuery"), fun<uint, uint, void>)
 	}
 	glBeginQuery_procAddress(target, id)
 }
@@ -31,7 +33,7 @@ glBeginQuery(target uint, id uint) void {
 :glBeginTransformFeedback_procAddress fun<uint, void> #Mutable
 glBeginTransformFeedback(primitiveMode uint) void {
 	if glBeginTransformFeedback_procAddress == null {
-		glBeginTransformFeedback_procAddress = pointer_cast(glGetProcAddressChecked("glBeginTransformFeedback"), fun<uint, void>)
+		glBeginTransformFeedback_procAddress = pointer_cast(SDL_GL_GetProcAddress("glBeginTransformFeedback"), fun<uint, void>)
 	}
 	glBeginTransformFeedback_procAddress(primitiveMode)
 }
@@ -39,7 +41,7 @@ glBeginTransformFeedback(primitiveMode uint) void {
 :glBindAttribLocation_procAddress fun<uint, uint, *sbyte, void> #Mutable
 glBindAttribLocation(program uint, index uint, name *sbyte) void {
 	if glBindAttribLocation_procAddress == null {
-		glBindAttribLocation_procAddress = pointer_cast(glGetProcAddressChecked("glBindAttribLocation"), fun<uint, uint, *sbyte, void>)
+		glBindAttribLocation_procAddress = pointer_cast(SDL_GL_GetProcAddress("glBindAttribLocation"), fun<uint, uint, *sbyte, void>)
 	}
 	glBindAttribLocation_procAddress(program, index, name)
 }
@@ -47,7 +49,7 @@ glBindAttribLocation(program uint, index uint, name *sbyte) void {
 :glBindBuffer_procAddress fun<uint, uint, void> #Mutable
 glBindBuffer(target uint, buffer uint) void {
 	if glBindBuffer_procAddress == null {
-		glBindBuffer_procAddress = pointer_cast(glGetProcAddressChecked("glBindBuffer"), fun<uint, uint, void>)
+		glBindBuffer_procAddress = pointer_cast(SDL_GL_GetProcAddress("glBindBuffer"), fun<uint, uint, void>)
 	}
 	glBindBuffer_procAddress(target, buffer)
 }
@@ -55,7 +57,7 @@ glBindBuffer(target uint, buffer uint) void {
 :glBindBufferBase_procAddress fun<uint, uint, uint, void> #Mutable
 glBindBufferBase(target uint, index uint, buffer uint) void {
 	if glBindBufferBase_procAddress == null {
-		glBindBufferBase_procAddress = pointer_cast(glGetProcAddressChecked("glBindBufferBase"), fun<uint, uint, uint, void>)
+		glBindBufferBase_procAddress = pointer_cast(SDL_GL_GetProcAddress("glBindBufferBase"), fun<uint, uint, uint, void>)
 	}
 	glBindBufferBase_procAddress(target, index, buffer)
 }
@@ -63,7 +65,7 @@ glBindBufferBase(target uint, index uint, buffer uint) void {
 :glBindBufferRange_procAddress fun<uint, uint, uint, ssize, ssize, void> #Mutable
 glBindBufferRange(target uint, index uint, buffer uint, offset ssize, size ssize) void {
 	if glBindBufferRange_procAddress == null {
-		glBindBufferRange_procAddress = pointer_cast(glGetProcAddressChecked("glBindBufferRange"), fun<uint, uint, uint, ssize, ssize, void>)
+		glBindBufferRange_procAddress = pointer_cast(SDL_GL_GetProcAddress("glBindBufferRange"), fun<uint, uint, uint, ssize, ssize, void>)
 	}
 	glBindBufferRange_procAddress(target, index, buffer, offset, size)
 }
@@ -71,7 +73,7 @@ glBindBufferRange(target uint, index uint, buffer uint, offset ssize, size ssize
 :glBindFragDataLocation_procAddress fun<uint, uint, *sbyte, void> #Mutable
 glBindFragDataLocation(program uint, color uint, name *sbyte) void {
 	if glBindFragDataLocation_procAddress == null {
-		glBindFragDataLocation_procAddress = pointer_cast(glGetProcAddressChecked("glBindFragDataLocation"), fun<uint, uint, *sbyte, void>)
+		glBindFragDataLocation_procAddress = pointer_cast(SDL_GL_GetProcAddress("glBindFragDataLocation"), fun<uint, uint, *sbyte, void>)
 	}
 	glBindFragDataLocation_procAddress(program, color, name)
 }
@@ -79,7 +81,7 @@ glBindFragDataLocation(program uint, color uint, name *sbyte) void {
 :glBindFragDataLocationIndexed_procAddress fun<uint, uint, uint, *sbyte, void> #Mutable
 glBindFragDataLocationIndexed(program uint, colorNumber uint, index uint, name *sbyte) void {
 	if glBindFragDataLocationIndexed_procAddress == null {
-		glBindFragDataLocationIndexed_procAddress = pointer_cast(glGetProcAddressChecked("glBindFragDataLocationIndexed"), fun<uint, uint, uint, *sbyte, void>)
+		glBindFragDataLocationIndexed_procAddress = pointer_cast(SDL_GL_GetProcAddress("glBindFragDataLocationIndexed"), fun<uint, uint, uint, *sbyte, void>)
 	}
 	glBindFragDataLocationIndexed_procAddress(program, colorNumber, index, name)
 }
@@ -87,7 +89,7 @@ glBindFragDataLocationIndexed(program uint, colorNumber uint, index uint, name *
 :glBindFramebuffer_procAddress fun<uint, uint, void> #Mutable
 glBindFramebuffer(target uint, framebuffer uint) void {
 	if glBindFramebuffer_procAddress == null {
-		glBindFramebuffer_procAddress = pointer_cast(glGetProcAddressChecked("glBindFramebuffer"), fun<uint, uint, void>)
+		glBindFramebuffer_procAddress = pointer_cast(SDL_GL_GetProcAddress("glBindFramebuffer"), fun<uint, uint, void>)
 	}
 	glBindFramebuffer_procAddress(target, framebuffer)
 }
@@ -95,7 +97,7 @@ glBindFramebuffer(target uint, framebuffer uint) void {
 :glBindRenderbuffer_procAddress fun<uint, uint, void> #Mutable
 glBindRenderbuffer(target uint, renderbuffer uint) void {
 	if glBindRenderbuffer_procAddress == null {
-		glBindRenderbuffer_procAddress = pointer_cast(glGetProcAddressChecked("glBindRenderbuffer"), fun<uint, uint, void>)
+		glBindRenderbuffer_procAddress = pointer_cast(SDL_GL_GetProcAddress("glBindRenderbuffer"), fun<uint, uint, void>)
 	}
 	glBindRenderbuffer_procAddress(target, renderbuffer)
 }
@@ -103,31 +105,71 @@ glBindRenderbuffer(target uint, renderbuffer uint) void {
 :glBindSampler_procAddress fun<uint, uint, void> #Mutable
 glBindSampler(unit uint, sampler uint) void {
 	if glBindSampler_procAddress == null {
-		glBindSampler_procAddress = pointer_cast(glGetProcAddressChecked("glBindSampler"), fun<uint, uint, void>)
+		glBindSampler_procAddress = pointer_cast(SDL_GL_GetProcAddress("glBindSampler"), fun<uint, uint, void>)
 	}
 	glBindSampler_procAddress(unit, sampler)
+}
+
+:glBindTexture_procAddress fun<uint, uint, void> #Mutable
+glBindTexture(target uint, texture uint) void {
+	if glBindTexture_procAddress == null {
+		glBindTexture_procAddress = pointer_cast(SDL_GL_GetProcAddress("glBindTexture"), fun<uint, uint, void>)
+	}
+	glBindTexture_procAddress(target, texture)
 }
 
 :glBindVertexArray_procAddress fun<uint, void> #Mutable
 glBindVertexArray(array uint) void {
 	if glBindVertexArray_procAddress == null {
-		glBindVertexArray_procAddress = pointer_cast(glGetProcAddressChecked("glBindVertexArray"), fun<uint, void>)
+		glBindVertexArray_procAddress = pointer_cast(SDL_GL_GetProcAddress("glBindVertexArray"), fun<uint, void>)
 	}
 	glBindVertexArray_procAddress(array)
+}
+
+:glBlendColor_procAddress fun<float, float, float, float, void> #Mutable
+glBlendColor(red float, green float, blue float, alpha float) void {
+	if glBlendColor_procAddress == null {
+		glBlendColor_procAddress = pointer_cast(SDL_GL_GetProcAddress("glBlendColor"), fun<float, float, float, float, void>)
+	}
+	glBlendColor_procAddress(red, green, blue, alpha)
+}
+
+:glBlendEquation_procAddress fun<uint, void> #Mutable
+glBlendEquation(mode uint) void {
+	if glBlendEquation_procAddress == null {
+		glBlendEquation_procAddress = pointer_cast(SDL_GL_GetProcAddress("glBlendEquation"), fun<uint, void>)
+	}
+	glBlendEquation_procAddress(mode)
 }
 
 :glBlendEquationSeparate_procAddress fun<uint, uint, void> #Mutable
 glBlendEquationSeparate(modeRGB uint, modeAlpha uint) void {
 	if glBlendEquationSeparate_procAddress == null {
-		glBlendEquationSeparate_procAddress = pointer_cast(glGetProcAddressChecked("glBlendEquationSeparate"), fun<uint, uint, void>)
+		glBlendEquationSeparate_procAddress = pointer_cast(SDL_GL_GetProcAddress("glBlendEquationSeparate"), fun<uint, uint, void>)
 	}
 	glBlendEquationSeparate_procAddress(modeRGB, modeAlpha)
+}
+
+:glBlendFunc_procAddress fun<uint, uint, void> #Mutable
+glBlendFunc(sfactor uint, dfactor uint) void {
+	if glBlendFunc_procAddress == null {
+		glBlendFunc_procAddress = pointer_cast(SDL_GL_GetProcAddress("glBlendFunc"), fun<uint, uint, void>)
+	}
+	glBlendFunc_procAddress(sfactor, dfactor)
+}
+
+:glBlendFuncSeparate_procAddress fun<uint, uint, uint, uint, void> #Mutable
+glBlendFuncSeparate(sfactorRGB uint, dfactorRGB uint, sfactorAlpha uint, dfactorAlpha uint) void {
+	if glBlendFuncSeparate_procAddress == null {
+		glBlendFuncSeparate_procAddress = pointer_cast(SDL_GL_GetProcAddress("glBlendFuncSeparate"), fun<uint, uint, uint, uint, void>)
+	}
+	glBlendFuncSeparate_procAddress(sfactorRGB, dfactorRGB, sfactorAlpha, dfactorAlpha)
 }
 
 :glBlitFramebuffer_procAddress fun<int, int, int, int, int, int, int, int, uint, uint, void> #Mutable
 glBlitFramebuffer(srcX0 int, srcY0 int, srcX1 int, srcY1 int, dstX0 int, dstY0 int, dstX1 int, dstY1 int, mask uint, filter uint) void {
 	if glBlitFramebuffer_procAddress == null {
-		glBlitFramebuffer_procAddress = pointer_cast(glGetProcAddressChecked("glBlitFramebuffer"), fun<int, int, int, int, int, int, int, int, uint, uint, void>)
+		glBlitFramebuffer_procAddress = pointer_cast(SDL_GL_GetProcAddress("glBlitFramebuffer"), fun<int, int, int, int, int, int, int, int, uint, uint, void>)
 	}
 	glBlitFramebuffer_procAddress(srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter)
 }
@@ -135,7 +177,7 @@ glBlitFramebuffer(srcX0 int, srcY0 int, srcX1 int, srcY1 int, dstX0 int, dstY0 i
 :glBufferData_procAddress fun<uint, ssize, pointer, uint, void> #Mutable
 glBufferData(target uint, size ssize, data pointer, usage uint) void {
 	if glBufferData_procAddress == null {
-		glBufferData_procAddress = pointer_cast(glGetProcAddressChecked("glBufferData"), fun<uint, ssize, pointer, uint, void>)
+		glBufferData_procAddress = pointer_cast(SDL_GL_GetProcAddress("glBufferData"), fun<uint, ssize, pointer, uint, void>)
 	}
 	glBufferData_procAddress(target, size, data, usage)
 }
@@ -143,7 +185,7 @@ glBufferData(target uint, size ssize, data pointer, usage uint) void {
 :glBufferSubData_procAddress fun<uint, ssize, ssize, pointer, void> #Mutable
 glBufferSubData(target uint, offset ssize, size ssize, data pointer) void {
 	if glBufferSubData_procAddress == null {
-		glBufferSubData_procAddress = pointer_cast(glGetProcAddressChecked("glBufferSubData"), fun<uint, ssize, ssize, pointer, void>)
+		glBufferSubData_procAddress = pointer_cast(SDL_GL_GetProcAddress("glBufferSubData"), fun<uint, ssize, ssize, pointer, void>)
 	}
 	glBufferSubData_procAddress(target, offset, size, data)
 }
@@ -151,7 +193,7 @@ glBufferSubData(target uint, offset ssize, size ssize, data pointer) void {
 :glCheckFramebufferStatus_procAddress fun<uint, uint> #Mutable
 glCheckFramebufferStatus(target uint) uint {
 	if glCheckFramebufferStatus_procAddress == null {
-		glCheckFramebufferStatus_procAddress = pointer_cast(glGetProcAddressChecked("glCheckFramebufferStatus"), fun<uint, uint>)
+		glCheckFramebufferStatus_procAddress = pointer_cast(SDL_GL_GetProcAddress("glCheckFramebufferStatus"), fun<uint, uint>)
 	}
 	return glCheckFramebufferStatus_procAddress(target)
 }
@@ -159,15 +201,23 @@ glCheckFramebufferStatus(target uint) uint {
 :glClampColor_procAddress fun<uint, uint, void> #Mutable
 glClampColor(target uint, clamp uint) void {
 	if glClampColor_procAddress == null {
-		glClampColor_procAddress = pointer_cast(glGetProcAddressChecked("glClampColor"), fun<uint, uint, void>)
+		glClampColor_procAddress = pointer_cast(SDL_GL_GetProcAddress("glClampColor"), fun<uint, uint, void>)
 	}
 	glClampColor_procAddress(target, clamp)
+}
+
+:glClear_procAddress fun<uint, void> #Mutable
+glClear(mask uint) void {
+	if glClear_procAddress == null {
+		glClear_procAddress = pointer_cast(SDL_GL_GetProcAddress("glClear"), fun<uint, void>)
+	}
+	glClear_procAddress(mask)
 }
 
 :glClearBufferfi_procAddress fun<uint, int, float, int, void> #Mutable
 glClearBufferfi(buffer uint, drawbuffer int, depth float, stencil int) void {
 	if glClearBufferfi_procAddress == null {
-		glClearBufferfi_procAddress = pointer_cast(glGetProcAddressChecked("glClearBufferfi"), fun<uint, int, float, int, void>)
+		glClearBufferfi_procAddress = pointer_cast(SDL_GL_GetProcAddress("glClearBufferfi"), fun<uint, int, float, int, void>)
 	}
 	glClearBufferfi_procAddress(buffer, drawbuffer, depth, stencil)
 }
@@ -175,7 +225,7 @@ glClearBufferfi(buffer uint, drawbuffer int, depth float, stencil int) void {
 :glClearBufferfv_procAddress fun<uint, int, *float, void> #Mutable
 glClearBufferfv(buffer uint, drawbuffer int, value *float) void {
 	if glClearBufferfv_procAddress == null {
-		glClearBufferfv_procAddress = pointer_cast(glGetProcAddressChecked("glClearBufferfv"), fun<uint, int, *float, void>)
+		glClearBufferfv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glClearBufferfv"), fun<uint, int, *float, void>)
 	}
 	glClearBufferfv_procAddress(buffer, drawbuffer, value)
 }
@@ -183,7 +233,7 @@ glClearBufferfv(buffer uint, drawbuffer int, value *float) void {
 :glClearBufferiv_procAddress fun<uint, int, *int, void> #Mutable
 glClearBufferiv(buffer uint, drawbuffer int, value *int) void {
 	if glClearBufferiv_procAddress == null {
-		glClearBufferiv_procAddress = pointer_cast(glGetProcAddressChecked("glClearBufferiv"), fun<uint, int, *int, void>)
+		glClearBufferiv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glClearBufferiv"), fun<uint, int, *int, void>)
 	}
 	glClearBufferiv_procAddress(buffer, drawbuffer, value)
 }
@@ -191,79 +241,167 @@ glClearBufferiv(buffer uint, drawbuffer int, value *int) void {
 :glClearBufferuiv_procAddress fun<uint, int, *uint, void> #Mutable
 glClearBufferuiv(buffer uint, drawbuffer int, value *uint) void {
 	if glClearBufferuiv_procAddress == null {
-		glClearBufferuiv_procAddress = pointer_cast(glGetProcAddressChecked("glClearBufferuiv"), fun<uint, int, *uint, void>)
+		glClearBufferuiv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glClearBufferuiv"), fun<uint, int, *uint, void>)
 	}
 	glClearBufferuiv_procAddress(buffer, drawbuffer, value)
+}
+
+:glClearColor_procAddress fun<float, float, float, float, void> #Mutable
+glClearColor(red float, green float, blue float, alpha float) void {
+	if glClearColor_procAddress == null {
+		glClearColor_procAddress = pointer_cast(SDL_GL_GetProcAddress("glClearColor"), fun<float, float, float, float, void>)
+	}
+	glClearColor_procAddress(red, green, blue, alpha)
+}
+
+:glClearDepth_procAddress fun<double, void> #Mutable
+glClearDepth(depth double) void {
+	if glClearDepth_procAddress == null {
+		glClearDepth_procAddress = pointer_cast(SDL_GL_GetProcAddress("glClearDepth"), fun<double, void>)
+	}
+	glClearDepth_procAddress(depth)
+}
+
+:glClearStencil_procAddress fun<int, void> #Mutable
+glClearStencil(s int) void {
+	if glClearStencil_procAddress == null {
+		glClearStencil_procAddress = pointer_cast(SDL_GL_GetProcAddress("glClearStencil"), fun<int, void>)
+	}
+	glClearStencil_procAddress(s)
 }
 
 :glClientWaitSync_procAddress fun<pointer, uint, ulong, uint> #Mutable
 glClientWaitSync(sync pointer, flags uint, timeout ulong) uint {
 	if glClientWaitSync_procAddress == null {
-		glClientWaitSync_procAddress = pointer_cast(glGetProcAddressChecked("glClientWaitSync"), fun<pointer, uint, ulong, uint>)
+		glClientWaitSync_procAddress = pointer_cast(SDL_GL_GetProcAddress("glClientWaitSync"), fun<pointer, uint, ulong, uint>)
 	}
 	return glClientWaitSync_procAddress(sync, flags, timeout)
 }
 
-:glColorMaski_procAddress fun<uint, bool, bool, bool, bool, void> #Mutable
-glColorMaski(index uint, r bool, g bool, b bool, a bool) void {
+:glColorMask_procAddress fun<byte, byte, byte, byte, void> #Mutable
+glColorMask(red byte, green byte, blue byte, alpha byte) void {
+	if glColorMask_procAddress == null {
+		glColorMask_procAddress = pointer_cast(SDL_GL_GetProcAddress("glColorMask"), fun<byte, byte, byte, byte, void>)
+	}
+	glColorMask_procAddress(red, green, blue, alpha)
+}
+
+:glColorMaski_procAddress fun<uint, byte, byte, byte, byte, void> #Mutable
+glColorMaski(index uint, r byte, g byte, b byte, a byte) void {
 	if glColorMaski_procAddress == null {
-		glColorMaski_procAddress = pointer_cast(glGetProcAddressChecked("glColorMaski"), fun<uint, bool, bool, bool, bool, void>)
+		glColorMaski_procAddress = pointer_cast(SDL_GL_GetProcAddress("glColorMaski"), fun<uint, byte, byte, byte, byte, void>)
 	}
 	glColorMaski_procAddress(index, r, g, b, a)
-}
-
-:glColorP3ui_procAddress fun<uint, uint, void> #Mutable
-glColorP3ui(type uint, color uint) void {
-	if glColorP3ui_procAddress == null {
-		glColorP3ui_procAddress = pointer_cast(glGetProcAddressChecked("glColorP3ui"), fun<uint, uint, void>)
-	}
-	glColorP3ui_procAddress(type, color)
-}
-
-:glColorP3uiv_procAddress fun<uint, *uint, void> #Mutable
-glColorP3uiv(type uint, color *uint) void {
-	if glColorP3uiv_procAddress == null {
-		glColorP3uiv_procAddress = pointer_cast(glGetProcAddressChecked("glColorP3uiv"), fun<uint, *uint, void>)
-	}
-	glColorP3uiv_procAddress(type, color)
-}
-
-:glColorP4ui_procAddress fun<uint, uint, void> #Mutable
-glColorP4ui(type uint, color uint) void {
-	if glColorP4ui_procAddress == null {
-		glColorP4ui_procAddress = pointer_cast(glGetProcAddressChecked("glColorP4ui"), fun<uint, uint, void>)
-	}
-	glColorP4ui_procAddress(type, color)
-}
-
-:glColorP4uiv_procAddress fun<uint, *uint, void> #Mutable
-glColorP4uiv(type uint, color *uint) void {
-	if glColorP4uiv_procAddress == null {
-		glColorP4uiv_procAddress = pointer_cast(glGetProcAddressChecked("glColorP4uiv"), fun<uint, *uint, void>)
-	}
-	glColorP4uiv_procAddress(type, color)
 }
 
 :glCompileShader_procAddress fun<uint, void> #Mutable
 glCompileShader(shader uint) void {
 	if glCompileShader_procAddress == null {
-		glCompileShader_procAddress = pointer_cast(glGetProcAddressChecked("glCompileShader"), fun<uint, void>)
+		glCompileShader_procAddress = pointer_cast(SDL_GL_GetProcAddress("glCompileShader"), fun<uint, void>)
 	}
 	glCompileShader_procAddress(shader)
+}
+
+:glCompressedTexImage1D_procAddress fun<uint, int, uint, int, int, int, pointer, void> #Mutable
+glCompressedTexImage1D(target uint, level int, internalformat uint, width int, border int, imageSize int, data pointer) void {
+	if glCompressedTexImage1D_procAddress == null {
+		glCompressedTexImage1D_procAddress = pointer_cast(SDL_GL_GetProcAddress("glCompressedTexImage1D"), fun<uint, int, uint, int, int, int, pointer, void>)
+	}
+	glCompressedTexImage1D_procAddress(target, level, internalformat, width, border, imageSize, data)
+}
+
+:glCompressedTexImage2D_procAddress fun<uint, int, uint, int, int, int, int, pointer, void> #Mutable
+glCompressedTexImage2D(target uint, level int, internalformat uint, width int, height int, border int, imageSize int, data pointer) void {
+	if glCompressedTexImage2D_procAddress == null {
+		glCompressedTexImage2D_procAddress = pointer_cast(SDL_GL_GetProcAddress("glCompressedTexImage2D"), fun<uint, int, uint, int, int, int, int, pointer, void>)
+	}
+	glCompressedTexImage2D_procAddress(target, level, internalformat, width, height, border, imageSize, data)
+}
+
+:glCompressedTexImage3D_procAddress fun<uint, int, uint, int, int, int, int, int, pointer, void> #Mutable
+glCompressedTexImage3D(target uint, level int, internalformat uint, width int, height int, depth int, border int, imageSize int, data pointer) void {
+	if glCompressedTexImage3D_procAddress == null {
+		glCompressedTexImage3D_procAddress = pointer_cast(SDL_GL_GetProcAddress("glCompressedTexImage3D"), fun<uint, int, uint, int, int, int, int, int, pointer, void>)
+	}
+	glCompressedTexImage3D_procAddress(target, level, internalformat, width, height, depth, border, imageSize, data)
+}
+
+:glCompressedTexSubImage1D_procAddress fun<uint, int, int, int, uint, int, pointer, void> #Mutable
+glCompressedTexSubImage1D(target uint, level int, xoffset int, width int, format uint, imageSize int, data pointer) void {
+	if glCompressedTexSubImage1D_procAddress == null {
+		glCompressedTexSubImage1D_procAddress = pointer_cast(SDL_GL_GetProcAddress("glCompressedTexSubImage1D"), fun<uint, int, int, int, uint, int, pointer, void>)
+	}
+	glCompressedTexSubImage1D_procAddress(target, level, xoffset, width, format, imageSize, data)
+}
+
+:glCompressedTexSubImage2D_procAddress fun<uint, int, int, int, int, int, uint, int, pointer, void> #Mutable
+glCompressedTexSubImage2D(target uint, level int, xoffset int, yoffset int, width int, height int, format uint, imageSize int, data pointer) void {
+	if glCompressedTexSubImage2D_procAddress == null {
+		glCompressedTexSubImage2D_procAddress = pointer_cast(SDL_GL_GetProcAddress("glCompressedTexSubImage2D"), fun<uint, int, int, int, int, int, uint, int, pointer, void>)
+	}
+	glCompressedTexSubImage2D_procAddress(target, level, xoffset, yoffset, width, height, format, imageSize, data)
+}
+
+:glCompressedTexSubImage3D_procAddress fun<uint, int, int, int, int, int, int, int, uint, int, pointer, void> #Mutable
+glCompressedTexSubImage3D(target uint, level int, xoffset int, yoffset int, zoffset int, width int, height int, depth int, format uint, imageSize int, data pointer) void {
+	if glCompressedTexSubImage3D_procAddress == null {
+		glCompressedTexSubImage3D_procAddress = pointer_cast(SDL_GL_GetProcAddress("glCompressedTexSubImage3D"), fun<uint, int, int, int, int, int, int, int, uint, int, pointer, void>)
+	}
+	glCompressedTexSubImage3D_procAddress(target, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, data)
 }
 
 :glCopyBufferSubData_procAddress fun<uint, uint, ssize, ssize, ssize, void> #Mutable
 glCopyBufferSubData(readTarget uint, writeTarget uint, readOffset ssize, writeOffset ssize, size ssize) void {
 	if glCopyBufferSubData_procAddress == null {
-		glCopyBufferSubData_procAddress = pointer_cast(glGetProcAddressChecked("glCopyBufferSubData"), fun<uint, uint, ssize, ssize, ssize, void>)
+		glCopyBufferSubData_procAddress = pointer_cast(SDL_GL_GetProcAddress("glCopyBufferSubData"), fun<uint, uint, ssize, ssize, ssize, void>)
 	}
 	glCopyBufferSubData_procAddress(readTarget, writeTarget, readOffset, writeOffset, size)
+}
+
+:glCopyTexImage1D_procAddress fun<uint, int, uint, int, int, int, int, void> #Mutable
+glCopyTexImage1D(target uint, level int, internalformat uint, x int, y int, width int, border int) void {
+	if glCopyTexImage1D_procAddress == null {
+		glCopyTexImage1D_procAddress = pointer_cast(SDL_GL_GetProcAddress("glCopyTexImage1D"), fun<uint, int, uint, int, int, int, int, void>)
+	}
+	glCopyTexImage1D_procAddress(target, level, internalformat, x, y, width, border)
+}
+
+:glCopyTexImage2D_procAddress fun<uint, int, uint, int, int, int, int, int, void> #Mutable
+glCopyTexImage2D(target uint, level int, internalformat uint, x int, y int, width int, height int, border int) void {
+	if glCopyTexImage2D_procAddress == null {
+		glCopyTexImage2D_procAddress = pointer_cast(SDL_GL_GetProcAddress("glCopyTexImage2D"), fun<uint, int, uint, int, int, int, int, int, void>)
+	}
+	glCopyTexImage2D_procAddress(target, level, internalformat, x, y, width, height, border)
+}
+
+:glCopyTexSubImage1D_procAddress fun<uint, int, int, int, int, int, void> #Mutable
+glCopyTexSubImage1D(target uint, level int, xoffset int, x int, y int, width int) void {
+	if glCopyTexSubImage1D_procAddress == null {
+		glCopyTexSubImage1D_procAddress = pointer_cast(SDL_GL_GetProcAddress("glCopyTexSubImage1D"), fun<uint, int, int, int, int, int, void>)
+	}
+	glCopyTexSubImage1D_procAddress(target, level, xoffset, x, y, width)
+}
+
+:glCopyTexSubImage2D_procAddress fun<uint, int, int, int, int, int, int, int, void> #Mutable
+glCopyTexSubImage2D(target uint, level int, xoffset int, yoffset int, x int, y int, width int, height int) void {
+	if glCopyTexSubImage2D_procAddress == null {
+		glCopyTexSubImage2D_procAddress = pointer_cast(SDL_GL_GetProcAddress("glCopyTexSubImage2D"), fun<uint, int, int, int, int, int, int, int, void>)
+	}
+	glCopyTexSubImage2D_procAddress(target, level, xoffset, yoffset, x, y, width, height)
+}
+
+:glCopyTexSubImage3D_procAddress fun<uint, int, int, int, int, int, int, int, int, void> #Mutable
+glCopyTexSubImage3D(target uint, level int, xoffset int, yoffset int, zoffset int, x int, y int, width int, height int) void {
+	if glCopyTexSubImage3D_procAddress == null {
+		glCopyTexSubImage3D_procAddress = pointer_cast(SDL_GL_GetProcAddress("glCopyTexSubImage3D"), fun<uint, int, int, int, int, int, int, int, int, void>)
+	}
+	glCopyTexSubImage3D_procAddress(target, level, xoffset, yoffset, zoffset, x, y, width, height)
 }
 
 :glCreateProgram_procAddress fun<uint> #Mutable
 glCreateProgram() uint {
 	if glCreateProgram_procAddress == null {
-		glCreateProgram_procAddress = pointer_cast(glGetProcAddressChecked("glCreateProgram"), fun<uint>)
+		glCreateProgram_procAddress = pointer_cast(SDL_GL_GetProcAddress("glCreateProgram"), fun<uint>)
 	}
 	return glCreateProgram_procAddress()
 }
@@ -271,15 +409,23 @@ glCreateProgram() uint {
 :glCreateShader_procAddress fun<uint, uint> #Mutable
 glCreateShader(type uint) uint {
 	if glCreateShader_procAddress == null {
-		glCreateShader_procAddress = pointer_cast(glGetProcAddressChecked("glCreateShader"), fun<uint, uint>)
+		glCreateShader_procAddress = pointer_cast(SDL_GL_GetProcAddress("glCreateShader"), fun<uint, uint>)
 	}
 	return glCreateShader_procAddress(type)
+}
+
+:glCullFace_procAddress fun<uint, void> #Mutable
+glCullFace(mode uint) void {
+	if glCullFace_procAddress == null {
+		glCullFace_procAddress = pointer_cast(SDL_GL_GetProcAddress("glCullFace"), fun<uint, void>)
+	}
+	glCullFace_procAddress(mode)
 }
 
 :glDeleteBuffers_procAddress fun<int, *uint, void> #Mutable
 glDeleteBuffers(n int, buffers *uint) void {
 	if glDeleteBuffers_procAddress == null {
-		glDeleteBuffers_procAddress = pointer_cast(glGetProcAddressChecked("glDeleteBuffers"), fun<int, *uint, void>)
+		glDeleteBuffers_procAddress = pointer_cast(SDL_GL_GetProcAddress("glDeleteBuffers"), fun<int, *uint, void>)
 	}
 	glDeleteBuffers_procAddress(n, buffers)
 }
@@ -287,7 +433,7 @@ glDeleteBuffers(n int, buffers *uint) void {
 :glDeleteFramebuffers_procAddress fun<int, *uint, void> #Mutable
 glDeleteFramebuffers(n int, framebuffers *uint) void {
 	if glDeleteFramebuffers_procAddress == null {
-		glDeleteFramebuffers_procAddress = pointer_cast(glGetProcAddressChecked("glDeleteFramebuffers"), fun<int, *uint, void>)
+		glDeleteFramebuffers_procAddress = pointer_cast(SDL_GL_GetProcAddress("glDeleteFramebuffers"), fun<int, *uint, void>)
 	}
 	glDeleteFramebuffers_procAddress(n, framebuffers)
 }
@@ -295,7 +441,7 @@ glDeleteFramebuffers(n int, framebuffers *uint) void {
 :glDeleteProgram_procAddress fun<uint, void> #Mutable
 glDeleteProgram(program uint) void {
 	if glDeleteProgram_procAddress == null {
-		glDeleteProgram_procAddress = pointer_cast(glGetProcAddressChecked("glDeleteProgram"), fun<uint, void>)
+		glDeleteProgram_procAddress = pointer_cast(SDL_GL_GetProcAddress("glDeleteProgram"), fun<uint, void>)
 	}
 	glDeleteProgram_procAddress(program)
 }
@@ -303,7 +449,7 @@ glDeleteProgram(program uint) void {
 :glDeleteQueries_procAddress fun<int, *uint, void> #Mutable
 glDeleteQueries(n int, ids *uint) void {
 	if glDeleteQueries_procAddress == null {
-		glDeleteQueries_procAddress = pointer_cast(glGetProcAddressChecked("glDeleteQueries"), fun<int, *uint, void>)
+		glDeleteQueries_procAddress = pointer_cast(SDL_GL_GetProcAddress("glDeleteQueries"), fun<int, *uint, void>)
 	}
 	glDeleteQueries_procAddress(n, ids)
 }
@@ -311,7 +457,7 @@ glDeleteQueries(n int, ids *uint) void {
 :glDeleteRenderbuffers_procAddress fun<int, *uint, void> #Mutable
 glDeleteRenderbuffers(n int, renderbuffers *uint) void {
 	if glDeleteRenderbuffers_procAddress == null {
-		glDeleteRenderbuffers_procAddress = pointer_cast(glGetProcAddressChecked("glDeleteRenderbuffers"), fun<int, *uint, void>)
+		glDeleteRenderbuffers_procAddress = pointer_cast(SDL_GL_GetProcAddress("glDeleteRenderbuffers"), fun<int, *uint, void>)
 	}
 	glDeleteRenderbuffers_procAddress(n, renderbuffers)
 }
@@ -319,7 +465,7 @@ glDeleteRenderbuffers(n int, renderbuffers *uint) void {
 :glDeleteSamplers_procAddress fun<int, *uint, void> #Mutable
 glDeleteSamplers(count int, samplers *uint) void {
 	if glDeleteSamplers_procAddress == null {
-		glDeleteSamplers_procAddress = pointer_cast(glGetProcAddressChecked("glDeleteSamplers"), fun<int, *uint, void>)
+		glDeleteSamplers_procAddress = pointer_cast(SDL_GL_GetProcAddress("glDeleteSamplers"), fun<int, *uint, void>)
 	}
 	glDeleteSamplers_procAddress(count, samplers)
 }
@@ -327,7 +473,7 @@ glDeleteSamplers(count int, samplers *uint) void {
 :glDeleteShader_procAddress fun<uint, void> #Mutable
 glDeleteShader(shader uint) void {
 	if glDeleteShader_procAddress == null {
-		glDeleteShader_procAddress = pointer_cast(glGetProcAddressChecked("glDeleteShader"), fun<uint, void>)
+		glDeleteShader_procAddress = pointer_cast(SDL_GL_GetProcAddress("glDeleteShader"), fun<uint, void>)
 	}
 	glDeleteShader_procAddress(shader)
 }
@@ -335,31 +481,71 @@ glDeleteShader(shader uint) void {
 :glDeleteSync_procAddress fun<pointer, void> #Mutable
 glDeleteSync(sync pointer) void {
 	if glDeleteSync_procAddress == null {
-		glDeleteSync_procAddress = pointer_cast(glGetProcAddressChecked("glDeleteSync"), fun<pointer, void>)
+		glDeleteSync_procAddress = pointer_cast(SDL_GL_GetProcAddress("glDeleteSync"), fun<pointer, void>)
 	}
 	glDeleteSync_procAddress(sync)
+}
+
+:glDeleteTextures_procAddress fun<int, *uint, void> #Mutable
+glDeleteTextures(n int, textures *uint) void {
+	if glDeleteTextures_procAddress == null {
+		glDeleteTextures_procAddress = pointer_cast(SDL_GL_GetProcAddress("glDeleteTextures"), fun<int, *uint, void>)
+	}
+	glDeleteTextures_procAddress(n, textures)
 }
 
 :glDeleteVertexArrays_procAddress fun<int, *uint, void> #Mutable
 glDeleteVertexArrays(n int, arrays *uint) void {
 	if glDeleteVertexArrays_procAddress == null {
-		glDeleteVertexArrays_procAddress = pointer_cast(glGetProcAddressChecked("glDeleteVertexArrays"), fun<int, *uint, void>)
+		glDeleteVertexArrays_procAddress = pointer_cast(SDL_GL_GetProcAddress("glDeleteVertexArrays"), fun<int, *uint, void>)
 	}
 	glDeleteVertexArrays_procAddress(n, arrays)
+}
+
+:glDepthFunc_procAddress fun<uint, void> #Mutable
+glDepthFunc(func uint) void {
+	if glDepthFunc_procAddress == null {
+		glDepthFunc_procAddress = pointer_cast(SDL_GL_GetProcAddress("glDepthFunc"), fun<uint, void>)
+	}
+	glDepthFunc_procAddress(func)
+}
+
+:glDepthMask_procAddress fun<byte, void> #Mutable
+glDepthMask(flag byte) void {
+	if glDepthMask_procAddress == null {
+		glDepthMask_procAddress = pointer_cast(SDL_GL_GetProcAddress("glDepthMask"), fun<byte, void>)
+	}
+	glDepthMask_procAddress(flag)
+}
+
+:glDepthRange_procAddress fun<double, double, void> #Mutable
+glDepthRange(n double, f double) void {
+	if glDepthRange_procAddress == null {
+		glDepthRange_procAddress = pointer_cast(SDL_GL_GetProcAddress("glDepthRange"), fun<double, double, void>)
+	}
+	glDepthRange_procAddress(n, f)
 }
 
 :glDetachShader_procAddress fun<uint, uint, void> #Mutable
 glDetachShader(program uint, shader uint) void {
 	if glDetachShader_procAddress == null {
-		glDetachShader_procAddress = pointer_cast(glGetProcAddressChecked("glDetachShader"), fun<uint, uint, void>)
+		glDetachShader_procAddress = pointer_cast(SDL_GL_GetProcAddress("glDetachShader"), fun<uint, uint, void>)
 	}
 	glDetachShader_procAddress(program, shader)
+}
+
+:glDisable_procAddress fun<uint, void> #Mutable
+glDisable(cap uint) void {
+	if glDisable_procAddress == null {
+		glDisable_procAddress = pointer_cast(SDL_GL_GetProcAddress("glDisable"), fun<uint, void>)
+	}
+	glDisable_procAddress(cap)
 }
 
 :glDisableVertexAttribArray_procAddress fun<uint, void> #Mutable
 glDisableVertexAttribArray(index uint) void {
 	if glDisableVertexAttribArray_procAddress == null {
-		glDisableVertexAttribArray_procAddress = pointer_cast(glGetProcAddressChecked("glDisableVertexAttribArray"), fun<uint, void>)
+		glDisableVertexAttribArray_procAddress = pointer_cast(SDL_GL_GetProcAddress("glDisableVertexAttribArray"), fun<uint, void>)
 	}
 	glDisableVertexAttribArray_procAddress(index)
 }
@@ -367,31 +553,55 @@ glDisableVertexAttribArray(index uint) void {
 :glDisablei_procAddress fun<uint, uint, void> #Mutable
 glDisablei(target uint, index uint) void {
 	if glDisablei_procAddress == null {
-		glDisablei_procAddress = pointer_cast(glGetProcAddressChecked("glDisablei"), fun<uint, uint, void>)
+		glDisablei_procAddress = pointer_cast(SDL_GL_GetProcAddress("glDisablei"), fun<uint, uint, void>)
 	}
 	glDisablei_procAddress(target, index)
+}
+
+:glDrawArrays_procAddress fun<uint, int, int, void> #Mutable
+glDrawArrays(mode uint, first int, count int) void {
+	if glDrawArrays_procAddress == null {
+		glDrawArrays_procAddress = pointer_cast(SDL_GL_GetProcAddress("glDrawArrays"), fun<uint, int, int, void>)
+	}
+	glDrawArrays_procAddress(mode, first, count)
 }
 
 :glDrawArraysInstanced_procAddress fun<uint, int, int, int, void> #Mutable
 glDrawArraysInstanced(mode uint, first int, count int, instancecount int) void {
 	if glDrawArraysInstanced_procAddress == null {
-		glDrawArraysInstanced_procAddress = pointer_cast(glGetProcAddressChecked("glDrawArraysInstanced"), fun<uint, int, int, int, void>)
+		glDrawArraysInstanced_procAddress = pointer_cast(SDL_GL_GetProcAddress("glDrawArraysInstanced"), fun<uint, int, int, int, void>)
 	}
 	glDrawArraysInstanced_procAddress(mode, first, count, instancecount)
+}
+
+:glDrawBuffer_procAddress fun<uint, void> #Mutable
+glDrawBuffer(buf uint) void {
+	if glDrawBuffer_procAddress == null {
+		glDrawBuffer_procAddress = pointer_cast(SDL_GL_GetProcAddress("glDrawBuffer"), fun<uint, void>)
+	}
+	glDrawBuffer_procAddress(buf)
 }
 
 :glDrawBuffers_procAddress fun<int, *uint, void> #Mutable
 glDrawBuffers(n int, bufs *uint) void {
 	if glDrawBuffers_procAddress == null {
-		glDrawBuffers_procAddress = pointer_cast(glGetProcAddressChecked("glDrawBuffers"), fun<int, *uint, void>)
+		glDrawBuffers_procAddress = pointer_cast(SDL_GL_GetProcAddress("glDrawBuffers"), fun<int, *uint, void>)
 	}
 	glDrawBuffers_procAddress(n, bufs)
+}
+
+:glDrawElements_procAddress fun<uint, int, uint, pointer, void> #Mutable
+glDrawElements(mode uint, count int, type uint, indices pointer) void {
+	if glDrawElements_procAddress == null {
+		glDrawElements_procAddress = pointer_cast(SDL_GL_GetProcAddress("glDrawElements"), fun<uint, int, uint, pointer, void>)
+	}
+	glDrawElements_procAddress(mode, count, type, indices)
 }
 
 :glDrawElementsBaseVertex_procAddress fun<uint, int, uint, pointer, int, void> #Mutable
 glDrawElementsBaseVertex(mode uint, count int, type uint, indices pointer, basevertex int) void {
 	if glDrawElementsBaseVertex_procAddress == null {
-		glDrawElementsBaseVertex_procAddress = pointer_cast(glGetProcAddressChecked("glDrawElementsBaseVertex"), fun<uint, int, uint, pointer, int, void>)
+		glDrawElementsBaseVertex_procAddress = pointer_cast(SDL_GL_GetProcAddress("glDrawElementsBaseVertex"), fun<uint, int, uint, pointer, int, void>)
 	}
 	glDrawElementsBaseVertex_procAddress(mode, count, type, indices, basevertex)
 }
@@ -399,7 +609,7 @@ glDrawElementsBaseVertex(mode uint, count int, type uint, indices pointer, basev
 :glDrawElementsInstanced_procAddress fun<uint, int, uint, pointer, int, void> #Mutable
 glDrawElementsInstanced(mode uint, count int, type uint, indices pointer, instancecount int) void {
 	if glDrawElementsInstanced_procAddress == null {
-		glDrawElementsInstanced_procAddress = pointer_cast(glGetProcAddressChecked("glDrawElementsInstanced"), fun<uint, int, uint, pointer, int, void>)
+		glDrawElementsInstanced_procAddress = pointer_cast(SDL_GL_GetProcAddress("glDrawElementsInstanced"), fun<uint, int, uint, pointer, int, void>)
 	}
 	glDrawElementsInstanced_procAddress(mode, count, type, indices, instancecount)
 }
@@ -407,23 +617,39 @@ glDrawElementsInstanced(mode uint, count int, type uint, indices pointer, instan
 :glDrawElementsInstancedBaseVertex_procAddress fun<uint, int, uint, pointer, int, int, void> #Mutable
 glDrawElementsInstancedBaseVertex(mode uint, count int, type uint, indices pointer, instancecount int, basevertex int) void {
 	if glDrawElementsInstancedBaseVertex_procAddress == null {
-		glDrawElementsInstancedBaseVertex_procAddress = pointer_cast(glGetProcAddressChecked("glDrawElementsInstancedBaseVertex"), fun<uint, int, uint, pointer, int, int, void>)
+		glDrawElementsInstancedBaseVertex_procAddress = pointer_cast(SDL_GL_GetProcAddress("glDrawElementsInstancedBaseVertex"), fun<uint, int, uint, pointer, int, int, void>)
 	}
 	glDrawElementsInstancedBaseVertex_procAddress(mode, count, type, indices, instancecount, basevertex)
+}
+
+:glDrawRangeElements_procAddress fun<uint, uint, uint, int, uint, pointer, void> #Mutable
+glDrawRangeElements(mode uint, start uint, end uint, count int, type uint, indices pointer) void {
+	if glDrawRangeElements_procAddress == null {
+		glDrawRangeElements_procAddress = pointer_cast(SDL_GL_GetProcAddress("glDrawRangeElements"), fun<uint, uint, uint, int, uint, pointer, void>)
+	}
+	glDrawRangeElements_procAddress(mode, start, end, count, type, indices)
 }
 
 :glDrawRangeElementsBaseVertex_procAddress fun<uint, uint, uint, int, uint, pointer, int, void> #Mutable
 glDrawRangeElementsBaseVertex(mode uint, start uint, end uint, count int, type uint, indices pointer, basevertex int) void {
 	if glDrawRangeElementsBaseVertex_procAddress == null {
-		glDrawRangeElementsBaseVertex_procAddress = pointer_cast(glGetProcAddressChecked("glDrawRangeElementsBaseVertex"), fun<uint, uint, uint, int, uint, pointer, int, void>)
+		glDrawRangeElementsBaseVertex_procAddress = pointer_cast(SDL_GL_GetProcAddress("glDrawRangeElementsBaseVertex"), fun<uint, uint, uint, int, uint, pointer, int, void>)
 	}
 	glDrawRangeElementsBaseVertex_procAddress(mode, start, end, count, type, indices, basevertex)
+}
+
+:glEnable_procAddress fun<uint, void> #Mutable
+glEnable(cap uint) void {
+	if glEnable_procAddress == null {
+		glEnable_procAddress = pointer_cast(SDL_GL_GetProcAddress("glEnable"), fun<uint, void>)
+	}
+	glEnable_procAddress(cap)
 }
 
 :glEnableVertexAttribArray_procAddress fun<uint, void> #Mutable
 glEnableVertexAttribArray(index uint) void {
 	if glEnableVertexAttribArray_procAddress == null {
-		glEnableVertexAttribArray_procAddress = pointer_cast(glGetProcAddressChecked("glEnableVertexAttribArray"), fun<uint, void>)
+		glEnableVertexAttribArray_procAddress = pointer_cast(SDL_GL_GetProcAddress("glEnableVertexAttribArray"), fun<uint, void>)
 	}
 	glEnableVertexAttribArray_procAddress(index)
 }
@@ -431,7 +657,7 @@ glEnableVertexAttribArray(index uint) void {
 :glEnablei_procAddress fun<uint, uint, void> #Mutable
 glEnablei(target uint, index uint) void {
 	if glEnablei_procAddress == null {
-		glEnablei_procAddress = pointer_cast(glGetProcAddressChecked("glEnablei"), fun<uint, uint, void>)
+		glEnablei_procAddress = pointer_cast(SDL_GL_GetProcAddress("glEnablei"), fun<uint, uint, void>)
 	}
 	glEnablei_procAddress(target, index)
 }
@@ -439,7 +665,7 @@ glEnablei(target uint, index uint) void {
 :glEndConditionalRender_procAddress fun<void> #Mutable
 glEndConditionalRender() void {
 	if glEndConditionalRender_procAddress == null {
-		glEndConditionalRender_procAddress = pointer_cast(glGetProcAddressChecked("glEndConditionalRender"), fun<void>)
+		glEndConditionalRender_procAddress = pointer_cast(SDL_GL_GetProcAddress("glEndConditionalRender"), fun<void>)
 	}
 	glEndConditionalRender_procAddress()
 }
@@ -447,7 +673,7 @@ glEndConditionalRender() void {
 :glEndQuery_procAddress fun<uint, void> #Mutable
 glEndQuery(target uint) void {
 	if glEndQuery_procAddress == null {
-		glEndQuery_procAddress = pointer_cast(glGetProcAddressChecked("glEndQuery"), fun<uint, void>)
+		glEndQuery_procAddress = pointer_cast(SDL_GL_GetProcAddress("glEndQuery"), fun<uint, void>)
 	}
 	glEndQuery_procAddress(target)
 }
@@ -455,7 +681,7 @@ glEndQuery(target uint) void {
 :glEndTransformFeedback_procAddress fun<void> #Mutable
 glEndTransformFeedback() void {
 	if glEndTransformFeedback_procAddress == null {
-		glEndTransformFeedback_procAddress = pointer_cast(glGetProcAddressChecked("glEndTransformFeedback"), fun<void>)
+		glEndTransformFeedback_procAddress = pointer_cast(SDL_GL_GetProcAddress("glEndTransformFeedback"), fun<void>)
 	}
 	glEndTransformFeedback_procAddress()
 }
@@ -463,15 +689,31 @@ glEndTransformFeedback() void {
 :glFenceSync_procAddress fun<uint, uint, pointer> #Mutable
 glFenceSync(condition uint, flags uint) pointer {
 	if glFenceSync_procAddress == null {
-		glFenceSync_procAddress = pointer_cast(glGetProcAddressChecked("glFenceSync"), fun<uint, uint, pointer>)
+		glFenceSync_procAddress = pointer_cast(SDL_GL_GetProcAddress("glFenceSync"), fun<uint, uint, pointer>)
 	}
 	return glFenceSync_procAddress(condition, flags)
+}
+
+:glFinish_procAddress fun<void> #Mutable
+glFinish() void {
+	if glFinish_procAddress == null {
+		glFinish_procAddress = pointer_cast(SDL_GL_GetProcAddress("glFinish"), fun<void>)
+	}
+	glFinish_procAddress()
+}
+
+:glFlush_procAddress fun<void> #Mutable
+glFlush() void {
+	if glFlush_procAddress == null {
+		glFlush_procAddress = pointer_cast(SDL_GL_GetProcAddress("glFlush"), fun<void>)
+	}
+	glFlush_procAddress()
 }
 
 :glFlushMappedBufferRange_procAddress fun<uint, ssize, ssize, void> #Mutable
 glFlushMappedBufferRange(target uint, offset ssize, length ssize) void {
 	if glFlushMappedBufferRange_procAddress == null {
-		glFlushMappedBufferRange_procAddress = pointer_cast(glGetProcAddressChecked("glFlushMappedBufferRange"), fun<uint, ssize, ssize, void>)
+		glFlushMappedBufferRange_procAddress = pointer_cast(SDL_GL_GetProcAddress("glFlushMappedBufferRange"), fun<uint, ssize, ssize, void>)
 	}
 	glFlushMappedBufferRange_procAddress(target, offset, length)
 }
@@ -479,7 +721,7 @@ glFlushMappedBufferRange(target uint, offset ssize, length ssize) void {
 :glFramebufferRenderbuffer_procAddress fun<uint, uint, uint, uint, void> #Mutable
 glFramebufferRenderbuffer(target uint, attachment uint, renderbuffertarget uint, renderbuffer uint) void {
 	if glFramebufferRenderbuffer_procAddress == null {
-		glFramebufferRenderbuffer_procAddress = pointer_cast(glGetProcAddressChecked("glFramebufferRenderbuffer"), fun<uint, uint, uint, uint, void>)
+		glFramebufferRenderbuffer_procAddress = pointer_cast(SDL_GL_GetProcAddress("glFramebufferRenderbuffer"), fun<uint, uint, uint, uint, void>)
 	}
 	glFramebufferRenderbuffer_procAddress(target, attachment, renderbuffertarget, renderbuffer)
 }
@@ -487,7 +729,7 @@ glFramebufferRenderbuffer(target uint, attachment uint, renderbuffertarget uint,
 :glFramebufferTexture_procAddress fun<uint, uint, uint, int, void> #Mutable
 glFramebufferTexture(target uint, attachment uint, texture uint, level int) void {
 	if glFramebufferTexture_procAddress == null {
-		glFramebufferTexture_procAddress = pointer_cast(glGetProcAddressChecked("glFramebufferTexture"), fun<uint, uint, uint, int, void>)
+		glFramebufferTexture_procAddress = pointer_cast(SDL_GL_GetProcAddress("glFramebufferTexture"), fun<uint, uint, uint, int, void>)
 	}
 	glFramebufferTexture_procAddress(target, attachment, texture, level)
 }
@@ -495,7 +737,7 @@ glFramebufferTexture(target uint, attachment uint, texture uint, level int) void
 :glFramebufferTexture1D_procAddress fun<uint, uint, uint, uint, int, void> #Mutable
 glFramebufferTexture1D(target uint, attachment uint, textarget uint, texture uint, level int) void {
 	if glFramebufferTexture1D_procAddress == null {
-		glFramebufferTexture1D_procAddress = pointer_cast(glGetProcAddressChecked("glFramebufferTexture1D"), fun<uint, uint, uint, uint, int, void>)
+		glFramebufferTexture1D_procAddress = pointer_cast(SDL_GL_GetProcAddress("glFramebufferTexture1D"), fun<uint, uint, uint, uint, int, void>)
 	}
 	glFramebufferTexture1D_procAddress(target, attachment, textarget, texture, level)
 }
@@ -503,7 +745,7 @@ glFramebufferTexture1D(target uint, attachment uint, textarget uint, texture uin
 :glFramebufferTexture2D_procAddress fun<uint, uint, uint, uint, int, void> #Mutable
 glFramebufferTexture2D(target uint, attachment uint, textarget uint, texture uint, level int) void {
 	if glFramebufferTexture2D_procAddress == null {
-		glFramebufferTexture2D_procAddress = pointer_cast(glGetProcAddressChecked("glFramebufferTexture2D"), fun<uint, uint, uint, uint, int, void>)
+		glFramebufferTexture2D_procAddress = pointer_cast(SDL_GL_GetProcAddress("glFramebufferTexture2D"), fun<uint, uint, uint, uint, int, void>)
 	}
 	glFramebufferTexture2D_procAddress(target, attachment, textarget, texture, level)
 }
@@ -511,7 +753,7 @@ glFramebufferTexture2D(target uint, attachment uint, textarget uint, texture uin
 :glFramebufferTexture3D_procAddress fun<uint, uint, uint, uint, int, int, void> #Mutable
 glFramebufferTexture3D(target uint, attachment uint, textarget uint, texture uint, level int, zoffset int) void {
 	if glFramebufferTexture3D_procAddress == null {
-		glFramebufferTexture3D_procAddress = pointer_cast(glGetProcAddressChecked("glFramebufferTexture3D"), fun<uint, uint, uint, uint, int, int, void>)
+		glFramebufferTexture3D_procAddress = pointer_cast(SDL_GL_GetProcAddress("glFramebufferTexture3D"), fun<uint, uint, uint, uint, int, int, void>)
 	}
 	glFramebufferTexture3D_procAddress(target, attachment, textarget, texture, level, zoffset)
 }
@@ -519,15 +761,23 @@ glFramebufferTexture3D(target uint, attachment uint, textarget uint, texture uin
 :glFramebufferTextureLayer_procAddress fun<uint, uint, uint, int, int, void> #Mutable
 glFramebufferTextureLayer(target uint, attachment uint, texture uint, level int, layer int) void {
 	if glFramebufferTextureLayer_procAddress == null {
-		glFramebufferTextureLayer_procAddress = pointer_cast(glGetProcAddressChecked("glFramebufferTextureLayer"), fun<uint, uint, uint, int, int, void>)
+		glFramebufferTextureLayer_procAddress = pointer_cast(SDL_GL_GetProcAddress("glFramebufferTextureLayer"), fun<uint, uint, uint, int, int, void>)
 	}
 	glFramebufferTextureLayer_procAddress(target, attachment, texture, level, layer)
+}
+
+:glFrontFace_procAddress fun<uint, void> #Mutable
+glFrontFace(mode uint) void {
+	if glFrontFace_procAddress == null {
+		glFrontFace_procAddress = pointer_cast(SDL_GL_GetProcAddress("glFrontFace"), fun<uint, void>)
+	}
+	glFrontFace_procAddress(mode)
 }
 
 :glGenBuffers_procAddress fun<int, *uint, void> #Mutable
 glGenBuffers(n int, buffers *uint) void {
 	if glGenBuffers_procAddress == null {
-		glGenBuffers_procAddress = pointer_cast(glGetProcAddressChecked("glGenBuffers"), fun<int, *uint, void>)
+		glGenBuffers_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGenBuffers"), fun<int, *uint, void>)
 	}
 	glGenBuffers_procAddress(n, buffers)
 }
@@ -535,7 +785,7 @@ glGenBuffers(n int, buffers *uint) void {
 :glGenFramebuffers_procAddress fun<int, *uint, void> #Mutable
 glGenFramebuffers(n int, framebuffers *uint) void {
 	if glGenFramebuffers_procAddress == null {
-		glGenFramebuffers_procAddress = pointer_cast(glGetProcAddressChecked("glGenFramebuffers"), fun<int, *uint, void>)
+		glGenFramebuffers_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGenFramebuffers"), fun<int, *uint, void>)
 	}
 	glGenFramebuffers_procAddress(n, framebuffers)
 }
@@ -543,7 +793,7 @@ glGenFramebuffers(n int, framebuffers *uint) void {
 :glGenQueries_procAddress fun<int, *uint, void> #Mutable
 glGenQueries(n int, ids *uint) void {
 	if glGenQueries_procAddress == null {
-		glGenQueries_procAddress = pointer_cast(glGetProcAddressChecked("glGenQueries"), fun<int, *uint, void>)
+		glGenQueries_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGenQueries"), fun<int, *uint, void>)
 	}
 	glGenQueries_procAddress(n, ids)
 }
@@ -551,7 +801,7 @@ glGenQueries(n int, ids *uint) void {
 :glGenRenderbuffers_procAddress fun<int, *uint, void> #Mutable
 glGenRenderbuffers(n int, renderbuffers *uint) void {
 	if glGenRenderbuffers_procAddress == null {
-		glGenRenderbuffers_procAddress = pointer_cast(glGetProcAddressChecked("glGenRenderbuffers"), fun<int, *uint, void>)
+		glGenRenderbuffers_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGenRenderbuffers"), fun<int, *uint, void>)
 	}
 	glGenRenderbuffers_procAddress(n, renderbuffers)
 }
@@ -559,15 +809,23 @@ glGenRenderbuffers(n int, renderbuffers *uint) void {
 :glGenSamplers_procAddress fun<int, *uint, void> #Mutable
 glGenSamplers(count int, samplers *uint) void {
 	if glGenSamplers_procAddress == null {
-		glGenSamplers_procAddress = pointer_cast(glGetProcAddressChecked("glGenSamplers"), fun<int, *uint, void>)
+		glGenSamplers_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGenSamplers"), fun<int, *uint, void>)
 	}
 	glGenSamplers_procAddress(count, samplers)
+}
+
+:glGenTextures_procAddress fun<int, *uint, void> #Mutable
+glGenTextures(n int, textures *uint) void {
+	if glGenTextures_procAddress == null {
+		glGenTextures_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGenTextures"), fun<int, *uint, void>)
+	}
+	glGenTextures_procAddress(n, textures)
 }
 
 :glGenVertexArrays_procAddress fun<int, *uint, void> #Mutable
 glGenVertexArrays(n int, arrays *uint) void {
 	if glGenVertexArrays_procAddress == null {
-		glGenVertexArrays_procAddress = pointer_cast(glGetProcAddressChecked("glGenVertexArrays"), fun<int, *uint, void>)
+		glGenVertexArrays_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGenVertexArrays"), fun<int, *uint, void>)
 	}
 	glGenVertexArrays_procAddress(n, arrays)
 }
@@ -575,7 +833,7 @@ glGenVertexArrays(n int, arrays *uint) void {
 :glGenerateMipmap_procAddress fun<uint, void> #Mutable
 glGenerateMipmap(target uint) void {
 	if glGenerateMipmap_procAddress == null {
-		glGenerateMipmap_procAddress = pointer_cast(glGetProcAddressChecked("glGenerateMipmap"), fun<uint, void>)
+		glGenerateMipmap_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGenerateMipmap"), fun<uint, void>)
 	}
 	glGenerateMipmap_procAddress(target)
 }
@@ -583,7 +841,7 @@ glGenerateMipmap(target uint) void {
 :glGetActiveAttrib_procAddress fun<uint, uint, int, *int, *int, *uint, *sbyte, void> #Mutable
 glGetActiveAttrib(program uint, index uint, bufSize int, length *int, size *int, type *uint, name *sbyte) void {
 	if glGetActiveAttrib_procAddress == null {
-		glGetActiveAttrib_procAddress = pointer_cast(glGetProcAddressChecked("glGetActiveAttrib"), fun<uint, uint, int, *int, *int, *uint, *sbyte, void>)
+		glGetActiveAttrib_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetActiveAttrib"), fun<uint, uint, int, *int, *int, *uint, *sbyte, void>)
 	}
 	glGetActiveAttrib_procAddress(program, index, bufSize, length, size, type, name)
 }
@@ -591,7 +849,7 @@ glGetActiveAttrib(program uint, index uint, bufSize int, length *int, size *int,
 :glGetActiveUniform_procAddress fun<uint, uint, int, *int, *int, *uint, *sbyte, void> #Mutable
 glGetActiveUniform(program uint, index uint, bufSize int, length *int, size *int, type *uint, name *sbyte) void {
 	if glGetActiveUniform_procAddress == null {
-		glGetActiveUniform_procAddress = pointer_cast(glGetProcAddressChecked("glGetActiveUniform"), fun<uint, uint, int, *int, *int, *uint, *sbyte, void>)
+		glGetActiveUniform_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetActiveUniform"), fun<uint, uint, int, *int, *int, *uint, *sbyte, void>)
 	}
 	glGetActiveUniform_procAddress(program, index, bufSize, length, size, type, name)
 }
@@ -599,7 +857,7 @@ glGetActiveUniform(program uint, index uint, bufSize int, length *int, size *int
 :glGetActiveUniformBlockName_procAddress fun<uint, uint, int, *int, *sbyte, void> #Mutable
 glGetActiveUniformBlockName(program uint, uniformBlockIndex uint, bufSize int, length *int, uniformBlockName *sbyte) void {
 	if glGetActiveUniformBlockName_procAddress == null {
-		glGetActiveUniformBlockName_procAddress = pointer_cast(glGetProcAddressChecked("glGetActiveUniformBlockName"), fun<uint, uint, int, *int, *sbyte, void>)
+		glGetActiveUniformBlockName_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetActiveUniformBlockName"), fun<uint, uint, int, *int, *sbyte, void>)
 	}
 	glGetActiveUniformBlockName_procAddress(program, uniformBlockIndex, bufSize, length, uniformBlockName)
 }
@@ -607,7 +865,7 @@ glGetActiveUniformBlockName(program uint, uniformBlockIndex uint, bufSize int, l
 :glGetActiveUniformBlockiv_procAddress fun<uint, uint, uint, *int, void> #Mutable
 glGetActiveUniformBlockiv(program uint, uniformBlockIndex uint, pname uint, params *int) void {
 	if glGetActiveUniformBlockiv_procAddress == null {
-		glGetActiveUniformBlockiv_procAddress = pointer_cast(glGetProcAddressChecked("glGetActiveUniformBlockiv"), fun<uint, uint, uint, *int, void>)
+		glGetActiveUniformBlockiv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetActiveUniformBlockiv"), fun<uint, uint, uint, *int, void>)
 	}
 	glGetActiveUniformBlockiv_procAddress(program, uniformBlockIndex, pname, params)
 }
@@ -615,7 +873,7 @@ glGetActiveUniformBlockiv(program uint, uniformBlockIndex uint, pname uint, para
 :glGetActiveUniformName_procAddress fun<uint, uint, int, *int, *sbyte, void> #Mutable
 glGetActiveUniformName(program uint, uniformIndex uint, bufSize int, length *int, uniformName *sbyte) void {
 	if glGetActiveUniformName_procAddress == null {
-		glGetActiveUniformName_procAddress = pointer_cast(glGetProcAddressChecked("glGetActiveUniformName"), fun<uint, uint, int, *int, *sbyte, void>)
+		glGetActiveUniformName_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetActiveUniformName"), fun<uint, uint, int, *int, *sbyte, void>)
 	}
 	glGetActiveUniformName_procAddress(program, uniformIndex, bufSize, length, uniformName)
 }
@@ -623,7 +881,7 @@ glGetActiveUniformName(program uint, uniformIndex uint, bufSize int, length *int
 :glGetActiveUniformsiv_procAddress fun<uint, int, *uint, uint, *int, void> #Mutable
 glGetActiveUniformsiv(program uint, uniformCount int, uniformIndices *uint, pname uint, params *int) void {
 	if glGetActiveUniformsiv_procAddress == null {
-		glGetActiveUniformsiv_procAddress = pointer_cast(glGetProcAddressChecked("glGetActiveUniformsiv"), fun<uint, int, *uint, uint, *int, void>)
+		glGetActiveUniformsiv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetActiveUniformsiv"), fun<uint, int, *uint, uint, *int, void>)
 	}
 	glGetActiveUniformsiv_procAddress(program, uniformCount, uniformIndices, pname, params)
 }
@@ -631,7 +889,7 @@ glGetActiveUniformsiv(program uint, uniformCount int, uniformIndices *uint, pnam
 :glGetAttachedShaders_procAddress fun<uint, int, *int, *uint, void> #Mutable
 glGetAttachedShaders(program uint, maxCount int, count *int, shaders *uint) void {
 	if glGetAttachedShaders_procAddress == null {
-		glGetAttachedShaders_procAddress = pointer_cast(glGetProcAddressChecked("glGetAttachedShaders"), fun<uint, int, *int, *uint, void>)
+		glGetAttachedShaders_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetAttachedShaders"), fun<uint, int, *int, *uint, void>)
 	}
 	glGetAttachedShaders_procAddress(program, maxCount, count, shaders)
 }
@@ -639,23 +897,31 @@ glGetAttachedShaders(program uint, maxCount int, count *int, shaders *uint) void
 :glGetAttribLocation_procAddress fun<uint, *sbyte, int> #Mutable
 glGetAttribLocation(program uint, name *sbyte) int {
 	if glGetAttribLocation_procAddress == null {
-		glGetAttribLocation_procAddress = pointer_cast(glGetProcAddressChecked("glGetAttribLocation"), fun<uint, *sbyte, int>)
+		glGetAttribLocation_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetAttribLocation"), fun<uint, *sbyte, int>)
 	}
 	return glGetAttribLocation_procAddress(program, name)
 }
 
-:glGetBooleani_v_procAddress fun<uint, uint, *bool, void> #Mutable
-glGetBooleani_v(target uint, index uint, data *bool) void {
+:glGetBooleani_v_procAddress fun<uint, uint, *byte, void> #Mutable
+glGetBooleani_v(target uint, index uint, data *byte) void {
 	if glGetBooleani_v_procAddress == null {
-		glGetBooleani_v_procAddress = pointer_cast(glGetProcAddressChecked("glGetBooleani_v"), fun<uint, uint, *bool, void>)
+		glGetBooleani_v_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetBooleani_v"), fun<uint, uint, *byte, void>)
 	}
 	glGetBooleani_v_procAddress(target, index, data)
+}
+
+:glGetBooleanv_procAddress fun<uint, *byte, void> #Mutable
+glGetBooleanv(pname uint, data *byte) void {
+	if glGetBooleanv_procAddress == null {
+		glGetBooleanv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetBooleanv"), fun<uint, *byte, void>)
+	}
+	glGetBooleanv_procAddress(pname, data)
 }
 
 :glGetBufferParameteri64v_procAddress fun<uint, uint, *long, void> #Mutable
 glGetBufferParameteri64v(target uint, pname uint, params *long) void {
 	if glGetBufferParameteri64v_procAddress == null {
-		glGetBufferParameteri64v_procAddress = pointer_cast(glGetProcAddressChecked("glGetBufferParameteri64v"), fun<uint, uint, *long, void>)
+		glGetBufferParameteri64v_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetBufferParameteri64v"), fun<uint, uint, *long, void>)
 	}
 	glGetBufferParameteri64v_procAddress(target, pname, params)
 }
@@ -663,7 +929,7 @@ glGetBufferParameteri64v(target uint, pname uint, params *long) void {
 :glGetBufferParameteriv_procAddress fun<uint, uint, *int, void> #Mutable
 glGetBufferParameteriv(target uint, pname uint, params *int) void {
 	if glGetBufferParameteriv_procAddress == null {
-		glGetBufferParameteriv_procAddress = pointer_cast(glGetProcAddressChecked("glGetBufferParameteriv"), fun<uint, uint, *int, void>)
+		glGetBufferParameteriv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetBufferParameteriv"), fun<uint, uint, *int, void>)
 	}
 	glGetBufferParameteriv_procAddress(target, pname, params)
 }
@@ -671,7 +937,7 @@ glGetBufferParameteriv(target uint, pname uint, params *int) void {
 :glGetBufferPointerv_procAddress fun<uint, uint, *pointer, void> #Mutable
 glGetBufferPointerv(target uint, pname uint, params *pointer) void {
 	if glGetBufferPointerv_procAddress == null {
-		glGetBufferPointerv_procAddress = pointer_cast(glGetProcAddressChecked("glGetBufferPointerv"), fun<uint, uint, *pointer, void>)
+		glGetBufferPointerv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetBufferPointerv"), fun<uint, uint, *pointer, void>)
 	}
 	glGetBufferPointerv_procAddress(target, pname, params)
 }
@@ -679,15 +945,47 @@ glGetBufferPointerv(target uint, pname uint, params *pointer) void {
 :glGetBufferSubData_procAddress fun<uint, ssize, ssize, pointer, void> #Mutable
 glGetBufferSubData(target uint, offset ssize, size ssize, data pointer) void {
 	if glGetBufferSubData_procAddress == null {
-		glGetBufferSubData_procAddress = pointer_cast(glGetProcAddressChecked("glGetBufferSubData"), fun<uint, ssize, ssize, pointer, void>)
+		glGetBufferSubData_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetBufferSubData"), fun<uint, ssize, ssize, pointer, void>)
 	}
 	glGetBufferSubData_procAddress(target, offset, size, data)
+}
+
+:glGetCompressedTexImage_procAddress fun<uint, int, pointer, void> #Mutable
+glGetCompressedTexImage(target uint, level int, img pointer) void {
+	if glGetCompressedTexImage_procAddress == null {
+		glGetCompressedTexImage_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetCompressedTexImage"), fun<uint, int, pointer, void>)
+	}
+	glGetCompressedTexImage_procAddress(target, level, img)
+}
+
+:glGetDoublev_procAddress fun<uint, *double, void> #Mutable
+glGetDoublev(pname uint, data *double) void {
+	if glGetDoublev_procAddress == null {
+		glGetDoublev_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetDoublev"), fun<uint, *double, void>)
+	}
+	glGetDoublev_procAddress(pname, data)
+}
+
+:glGetError_procAddress fun<uint> #Mutable
+glGetError() uint {
+	if glGetError_procAddress == null {
+		glGetError_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetError"), fun<uint>)
+	}
+	return glGetError_procAddress()
+}
+
+:glGetFloatv_procAddress fun<uint, *float, void> #Mutable
+glGetFloatv(pname uint, data *float) void {
+	if glGetFloatv_procAddress == null {
+		glGetFloatv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetFloatv"), fun<uint, *float, void>)
+	}
+	glGetFloatv_procAddress(pname, data)
 }
 
 :glGetFragDataIndex_procAddress fun<uint, *sbyte, int> #Mutable
 glGetFragDataIndex(program uint, name *sbyte) int {
 	if glGetFragDataIndex_procAddress == null {
-		glGetFragDataIndex_procAddress = pointer_cast(glGetProcAddressChecked("glGetFragDataIndex"), fun<uint, *sbyte, int>)
+		glGetFragDataIndex_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetFragDataIndex"), fun<uint, *sbyte, int>)
 	}
 	return glGetFragDataIndex_procAddress(program, name)
 }
@@ -695,7 +993,7 @@ glGetFragDataIndex(program uint, name *sbyte) int {
 :glGetFragDataLocation_procAddress fun<uint, *sbyte, int> #Mutable
 glGetFragDataLocation(program uint, name *sbyte) int {
 	if glGetFragDataLocation_procAddress == null {
-		glGetFragDataLocation_procAddress = pointer_cast(glGetProcAddressChecked("glGetFragDataLocation"), fun<uint, *sbyte, int>)
+		glGetFragDataLocation_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetFragDataLocation"), fun<uint, *sbyte, int>)
 	}
 	return glGetFragDataLocation_procAddress(program, name)
 }
@@ -703,7 +1001,7 @@ glGetFragDataLocation(program uint, name *sbyte) int {
 :glGetFramebufferAttachmentParameteriv_procAddress fun<uint, uint, uint, *int, void> #Mutable
 glGetFramebufferAttachmentParameteriv(target uint, attachment uint, pname uint, params *int) void {
 	if glGetFramebufferAttachmentParameteriv_procAddress == null {
-		glGetFramebufferAttachmentParameteriv_procAddress = pointer_cast(glGetProcAddressChecked("glGetFramebufferAttachmentParameteriv"), fun<uint, uint, uint, *int, void>)
+		glGetFramebufferAttachmentParameteriv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetFramebufferAttachmentParameteriv"), fun<uint, uint, uint, *int, void>)
 	}
 	glGetFramebufferAttachmentParameteriv_procAddress(target, attachment, pname, params)
 }
@@ -711,7 +1009,7 @@ glGetFramebufferAttachmentParameteriv(target uint, attachment uint, pname uint, 
 :glGetInteger64i_v_procAddress fun<uint, uint, *long, void> #Mutable
 glGetInteger64i_v(target uint, index uint, data *long) void {
 	if glGetInteger64i_v_procAddress == null {
-		glGetInteger64i_v_procAddress = pointer_cast(glGetProcAddressChecked("glGetInteger64i_v"), fun<uint, uint, *long, void>)
+		glGetInteger64i_v_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetInteger64i_v"), fun<uint, uint, *long, void>)
 	}
 	glGetInteger64i_v_procAddress(target, index, data)
 }
@@ -719,7 +1017,7 @@ glGetInteger64i_v(target uint, index uint, data *long) void {
 :glGetInteger64v_procAddress fun<uint, *long, void> #Mutable
 glGetInteger64v(pname uint, data *long) void {
 	if glGetInteger64v_procAddress == null {
-		glGetInteger64v_procAddress = pointer_cast(glGetProcAddressChecked("glGetInteger64v"), fun<uint, *long, void>)
+		glGetInteger64v_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetInteger64v"), fun<uint, *long, void>)
 	}
 	glGetInteger64v_procAddress(pname, data)
 }
@@ -727,15 +1025,23 @@ glGetInteger64v(pname uint, data *long) void {
 :glGetIntegeri_v_procAddress fun<uint, uint, *int, void> #Mutable
 glGetIntegeri_v(target uint, index uint, data *int) void {
 	if glGetIntegeri_v_procAddress == null {
-		glGetIntegeri_v_procAddress = pointer_cast(glGetProcAddressChecked("glGetIntegeri_v"), fun<uint, uint, *int, void>)
+		glGetIntegeri_v_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetIntegeri_v"), fun<uint, uint, *int, void>)
 	}
 	glGetIntegeri_v_procAddress(target, index, data)
+}
+
+:glGetIntegerv_procAddress fun<uint, *int, void> #Mutable
+glGetIntegerv(pname uint, data *int) void {
+	if glGetIntegerv_procAddress == null {
+		glGetIntegerv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetIntegerv"), fun<uint, *int, void>)
+	}
+	glGetIntegerv_procAddress(pname, data)
 }
 
 :glGetMultisamplefv_procAddress fun<uint, uint, *float, void> #Mutable
 glGetMultisamplefv(pname uint, index uint, val *float) void {
 	if glGetMultisamplefv_procAddress == null {
-		glGetMultisamplefv_procAddress = pointer_cast(glGetProcAddressChecked("glGetMultisamplefv"), fun<uint, uint, *float, void>)
+		glGetMultisamplefv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetMultisamplefv"), fun<uint, uint, *float, void>)
 	}
 	glGetMultisamplefv_procAddress(pname, index, val)
 }
@@ -743,7 +1049,7 @@ glGetMultisamplefv(pname uint, index uint, val *float) void {
 :glGetProgramInfoLog_procAddress fun<uint, int, *int, *sbyte, void> #Mutable
 glGetProgramInfoLog(program uint, bufSize int, length *int, infoLog *sbyte) void {
 	if glGetProgramInfoLog_procAddress == null {
-		glGetProgramInfoLog_procAddress = pointer_cast(glGetProcAddressChecked("glGetProgramInfoLog"), fun<uint, int, *int, *sbyte, void>)
+		glGetProgramInfoLog_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetProgramInfoLog"), fun<uint, int, *int, *sbyte, void>)
 	}
 	glGetProgramInfoLog_procAddress(program, bufSize, length, infoLog)
 }
@@ -751,7 +1057,7 @@ glGetProgramInfoLog(program uint, bufSize int, length *int, infoLog *sbyte) void
 :glGetProgramiv_procAddress fun<uint, uint, *int, void> #Mutable
 glGetProgramiv(program uint, pname uint, params *int) void {
 	if glGetProgramiv_procAddress == null {
-		glGetProgramiv_procAddress = pointer_cast(glGetProcAddressChecked("glGetProgramiv"), fun<uint, uint, *int, void>)
+		glGetProgramiv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetProgramiv"), fun<uint, uint, *int, void>)
 	}
 	glGetProgramiv_procAddress(program, pname, params)
 }
@@ -759,7 +1065,7 @@ glGetProgramiv(program uint, pname uint, params *int) void {
 :glGetQueryObjecti64v_procAddress fun<uint, uint, *long, void> #Mutable
 glGetQueryObjecti64v(id uint, pname uint, params *long) void {
 	if glGetQueryObjecti64v_procAddress == null {
-		glGetQueryObjecti64v_procAddress = pointer_cast(glGetProcAddressChecked("glGetQueryObjecti64v"), fun<uint, uint, *long, void>)
+		glGetQueryObjecti64v_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetQueryObjecti64v"), fun<uint, uint, *long, void>)
 	}
 	glGetQueryObjecti64v_procAddress(id, pname, params)
 }
@@ -767,7 +1073,7 @@ glGetQueryObjecti64v(id uint, pname uint, params *long) void {
 :glGetQueryObjectiv_procAddress fun<uint, uint, *int, void> #Mutable
 glGetQueryObjectiv(id uint, pname uint, params *int) void {
 	if glGetQueryObjectiv_procAddress == null {
-		glGetQueryObjectiv_procAddress = pointer_cast(glGetProcAddressChecked("glGetQueryObjectiv"), fun<uint, uint, *int, void>)
+		glGetQueryObjectiv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetQueryObjectiv"), fun<uint, uint, *int, void>)
 	}
 	glGetQueryObjectiv_procAddress(id, pname, params)
 }
@@ -775,7 +1081,7 @@ glGetQueryObjectiv(id uint, pname uint, params *int) void {
 :glGetQueryObjectui64v_procAddress fun<uint, uint, *ulong, void> #Mutable
 glGetQueryObjectui64v(id uint, pname uint, params *ulong) void {
 	if glGetQueryObjectui64v_procAddress == null {
-		glGetQueryObjectui64v_procAddress = pointer_cast(glGetProcAddressChecked("glGetQueryObjectui64v"), fun<uint, uint, *ulong, void>)
+		glGetQueryObjectui64v_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetQueryObjectui64v"), fun<uint, uint, *ulong, void>)
 	}
 	glGetQueryObjectui64v_procAddress(id, pname, params)
 }
@@ -783,7 +1089,7 @@ glGetQueryObjectui64v(id uint, pname uint, params *ulong) void {
 :glGetQueryObjectuiv_procAddress fun<uint, uint, *uint, void> #Mutable
 glGetQueryObjectuiv(id uint, pname uint, params *uint) void {
 	if glGetQueryObjectuiv_procAddress == null {
-		glGetQueryObjectuiv_procAddress = pointer_cast(glGetProcAddressChecked("glGetQueryObjectuiv"), fun<uint, uint, *uint, void>)
+		glGetQueryObjectuiv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetQueryObjectuiv"), fun<uint, uint, *uint, void>)
 	}
 	glGetQueryObjectuiv_procAddress(id, pname, params)
 }
@@ -791,7 +1097,7 @@ glGetQueryObjectuiv(id uint, pname uint, params *uint) void {
 :glGetQueryiv_procAddress fun<uint, uint, *int, void> #Mutable
 glGetQueryiv(target uint, pname uint, params *int) void {
 	if glGetQueryiv_procAddress == null {
-		glGetQueryiv_procAddress = pointer_cast(glGetProcAddressChecked("glGetQueryiv"), fun<uint, uint, *int, void>)
+		glGetQueryiv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetQueryiv"), fun<uint, uint, *int, void>)
 	}
 	glGetQueryiv_procAddress(target, pname, params)
 }
@@ -799,7 +1105,7 @@ glGetQueryiv(target uint, pname uint, params *int) void {
 :glGetRenderbufferParameteriv_procAddress fun<uint, uint, *int, void> #Mutable
 glGetRenderbufferParameteriv(target uint, pname uint, params *int) void {
 	if glGetRenderbufferParameteriv_procAddress == null {
-		glGetRenderbufferParameteriv_procAddress = pointer_cast(glGetProcAddressChecked("glGetRenderbufferParameteriv"), fun<uint, uint, *int, void>)
+		glGetRenderbufferParameteriv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetRenderbufferParameteriv"), fun<uint, uint, *int, void>)
 	}
 	glGetRenderbufferParameteriv_procAddress(target, pname, params)
 }
@@ -807,7 +1113,7 @@ glGetRenderbufferParameteriv(target uint, pname uint, params *int) void {
 :glGetSamplerParameterIiv_procAddress fun<uint, uint, *int, void> #Mutable
 glGetSamplerParameterIiv(sampler uint, pname uint, params *int) void {
 	if glGetSamplerParameterIiv_procAddress == null {
-		glGetSamplerParameterIiv_procAddress = pointer_cast(glGetProcAddressChecked("glGetSamplerParameterIiv"), fun<uint, uint, *int, void>)
+		glGetSamplerParameterIiv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetSamplerParameterIiv"), fun<uint, uint, *int, void>)
 	}
 	glGetSamplerParameterIiv_procAddress(sampler, pname, params)
 }
@@ -815,7 +1121,7 @@ glGetSamplerParameterIiv(sampler uint, pname uint, params *int) void {
 :glGetSamplerParameterIuiv_procAddress fun<uint, uint, *uint, void> #Mutable
 glGetSamplerParameterIuiv(sampler uint, pname uint, params *uint) void {
 	if glGetSamplerParameterIuiv_procAddress == null {
-		glGetSamplerParameterIuiv_procAddress = pointer_cast(glGetProcAddressChecked("glGetSamplerParameterIuiv"), fun<uint, uint, *uint, void>)
+		glGetSamplerParameterIuiv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetSamplerParameterIuiv"), fun<uint, uint, *uint, void>)
 	}
 	glGetSamplerParameterIuiv_procAddress(sampler, pname, params)
 }
@@ -823,7 +1129,7 @@ glGetSamplerParameterIuiv(sampler uint, pname uint, params *uint) void {
 :glGetSamplerParameterfv_procAddress fun<uint, uint, *float, void> #Mutable
 glGetSamplerParameterfv(sampler uint, pname uint, params *float) void {
 	if glGetSamplerParameterfv_procAddress == null {
-		glGetSamplerParameterfv_procAddress = pointer_cast(glGetProcAddressChecked("glGetSamplerParameterfv"), fun<uint, uint, *float, void>)
+		glGetSamplerParameterfv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetSamplerParameterfv"), fun<uint, uint, *float, void>)
 	}
 	glGetSamplerParameterfv_procAddress(sampler, pname, params)
 }
@@ -831,7 +1137,7 @@ glGetSamplerParameterfv(sampler uint, pname uint, params *float) void {
 :glGetSamplerParameteriv_procAddress fun<uint, uint, *int, void> #Mutable
 glGetSamplerParameteriv(sampler uint, pname uint, params *int) void {
 	if glGetSamplerParameteriv_procAddress == null {
-		glGetSamplerParameteriv_procAddress = pointer_cast(glGetProcAddressChecked("glGetSamplerParameteriv"), fun<uint, uint, *int, void>)
+		glGetSamplerParameteriv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetSamplerParameteriv"), fun<uint, uint, *int, void>)
 	}
 	glGetSamplerParameteriv_procAddress(sampler, pname, params)
 }
@@ -839,7 +1145,7 @@ glGetSamplerParameteriv(sampler uint, pname uint, params *int) void {
 :glGetShaderInfoLog_procAddress fun<uint, int, *int, *sbyte, void> #Mutable
 glGetShaderInfoLog(shader uint, bufSize int, length *int, infoLog *sbyte) void {
 	if glGetShaderInfoLog_procAddress == null {
-		glGetShaderInfoLog_procAddress = pointer_cast(glGetProcAddressChecked("glGetShaderInfoLog"), fun<uint, int, *int, *sbyte, void>)
+		glGetShaderInfoLog_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetShaderInfoLog"), fun<uint, int, *int, *sbyte, void>)
 	}
 	glGetShaderInfoLog_procAddress(shader, bufSize, length, infoLog)
 }
@@ -847,7 +1153,7 @@ glGetShaderInfoLog(shader uint, bufSize int, length *int, infoLog *sbyte) void {
 :glGetShaderSource_procAddress fun<uint, int, *int, *sbyte, void> #Mutable
 glGetShaderSource(shader uint, bufSize int, length *int, source *sbyte) void {
 	if glGetShaderSource_procAddress == null {
-		glGetShaderSource_procAddress = pointer_cast(glGetProcAddressChecked("glGetShaderSource"), fun<uint, int, *int, *sbyte, void>)
+		glGetShaderSource_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetShaderSource"), fun<uint, int, *int, *sbyte, void>)
 	}
 	glGetShaderSource_procAddress(shader, bufSize, length, source)
 }
@@ -855,15 +1161,23 @@ glGetShaderSource(shader uint, bufSize int, length *int, source *sbyte) void {
 :glGetShaderiv_procAddress fun<uint, uint, *int, void> #Mutable
 glGetShaderiv(shader uint, pname uint, params *int) void {
 	if glGetShaderiv_procAddress == null {
-		glGetShaderiv_procAddress = pointer_cast(glGetProcAddressChecked("glGetShaderiv"), fun<uint, uint, *int, void>)
+		glGetShaderiv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetShaderiv"), fun<uint, uint, *int, void>)
 	}
 	glGetShaderiv_procAddress(shader, pname, params)
+}
+
+:glGetString_procAddress fun<uint, *byte> #Mutable
+glGetString(name uint) *byte {
+	if glGetString_procAddress == null {
+		glGetString_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetString"), fun<uint, *byte>)
+	}
+	return glGetString_procAddress(name)
 }
 
 :glGetStringi_procAddress fun<uint, uint, *byte> #Mutable
 glGetStringi(name uint, index uint) *byte {
 	if glGetStringi_procAddress == null {
-		glGetStringi_procAddress = pointer_cast(glGetProcAddressChecked("glGetStringi"), fun<uint, uint, *byte>)
+		glGetStringi_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetStringi"), fun<uint, uint, *byte>)
 	}
 	return glGetStringi_procAddress(name, index)
 }
@@ -871,15 +1185,39 @@ glGetStringi(name uint, index uint) *byte {
 :glGetSynciv_procAddress fun<pointer, uint, int, *int, *int, void> #Mutable
 glGetSynciv(sync pointer, pname uint, count int, length *int, values *int) void {
 	if glGetSynciv_procAddress == null {
-		glGetSynciv_procAddress = pointer_cast(glGetProcAddressChecked("glGetSynciv"), fun<pointer, uint, int, *int, *int, void>)
+		glGetSynciv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetSynciv"), fun<pointer, uint, int, *int, *int, void>)
 	}
 	glGetSynciv_procAddress(sync, pname, count, length, values)
+}
+
+:glGetTexImage_procAddress fun<uint, int, uint, uint, pointer, void> #Mutable
+glGetTexImage(target uint, level int, format uint, type uint, pixels pointer) void {
+	if glGetTexImage_procAddress == null {
+		glGetTexImage_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetTexImage"), fun<uint, int, uint, uint, pointer, void>)
+	}
+	glGetTexImage_procAddress(target, level, format, type, pixels)
+}
+
+:glGetTexLevelParameterfv_procAddress fun<uint, int, uint, *float, void> #Mutable
+glGetTexLevelParameterfv(target uint, level int, pname uint, params *float) void {
+	if glGetTexLevelParameterfv_procAddress == null {
+		glGetTexLevelParameterfv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetTexLevelParameterfv"), fun<uint, int, uint, *float, void>)
+	}
+	glGetTexLevelParameterfv_procAddress(target, level, pname, params)
+}
+
+:glGetTexLevelParameteriv_procAddress fun<uint, int, uint, *int, void> #Mutable
+glGetTexLevelParameteriv(target uint, level int, pname uint, params *int) void {
+	if glGetTexLevelParameteriv_procAddress == null {
+		glGetTexLevelParameteriv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetTexLevelParameteriv"), fun<uint, int, uint, *int, void>)
+	}
+	glGetTexLevelParameteriv_procAddress(target, level, pname, params)
 }
 
 :glGetTexParameterIiv_procAddress fun<uint, uint, *int, void> #Mutable
 glGetTexParameterIiv(target uint, pname uint, params *int) void {
 	if glGetTexParameterIiv_procAddress == null {
-		glGetTexParameterIiv_procAddress = pointer_cast(glGetProcAddressChecked("glGetTexParameterIiv"), fun<uint, uint, *int, void>)
+		glGetTexParameterIiv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetTexParameterIiv"), fun<uint, uint, *int, void>)
 	}
 	glGetTexParameterIiv_procAddress(target, pname, params)
 }
@@ -887,15 +1225,31 @@ glGetTexParameterIiv(target uint, pname uint, params *int) void {
 :glGetTexParameterIuiv_procAddress fun<uint, uint, *uint, void> #Mutable
 glGetTexParameterIuiv(target uint, pname uint, params *uint) void {
 	if glGetTexParameterIuiv_procAddress == null {
-		glGetTexParameterIuiv_procAddress = pointer_cast(glGetProcAddressChecked("glGetTexParameterIuiv"), fun<uint, uint, *uint, void>)
+		glGetTexParameterIuiv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetTexParameterIuiv"), fun<uint, uint, *uint, void>)
 	}
 	glGetTexParameterIuiv_procAddress(target, pname, params)
+}
+
+:glGetTexParameterfv_procAddress fun<uint, uint, *float, void> #Mutable
+glGetTexParameterfv(target uint, pname uint, params *float) void {
+	if glGetTexParameterfv_procAddress == null {
+		glGetTexParameterfv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetTexParameterfv"), fun<uint, uint, *float, void>)
+	}
+	glGetTexParameterfv_procAddress(target, pname, params)
+}
+
+:glGetTexParameteriv_procAddress fun<uint, uint, *int, void> #Mutable
+glGetTexParameteriv(target uint, pname uint, params *int) void {
+	if glGetTexParameteriv_procAddress == null {
+		glGetTexParameteriv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetTexParameteriv"), fun<uint, uint, *int, void>)
+	}
+	glGetTexParameteriv_procAddress(target, pname, params)
 }
 
 :glGetTransformFeedbackVarying_procAddress fun<uint, uint, int, *int, *int, *uint, *sbyte, void> #Mutable
 glGetTransformFeedbackVarying(program uint, index uint, bufSize int, length *int, size *int, type *uint, name *sbyte) void {
 	if glGetTransformFeedbackVarying_procAddress == null {
-		glGetTransformFeedbackVarying_procAddress = pointer_cast(glGetProcAddressChecked("glGetTransformFeedbackVarying"), fun<uint, uint, int, *int, *int, *uint, *sbyte, void>)
+		glGetTransformFeedbackVarying_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetTransformFeedbackVarying"), fun<uint, uint, int, *int, *int, *uint, *sbyte, void>)
 	}
 	glGetTransformFeedbackVarying_procAddress(program, index, bufSize, length, size, type, name)
 }
@@ -903,7 +1257,7 @@ glGetTransformFeedbackVarying(program uint, index uint, bufSize int, length *int
 :glGetUniformBlockIndex_procAddress fun<uint, *sbyte, uint> #Mutable
 glGetUniformBlockIndex(program uint, uniformBlockName *sbyte) uint {
 	if glGetUniformBlockIndex_procAddress == null {
-		glGetUniformBlockIndex_procAddress = pointer_cast(glGetProcAddressChecked("glGetUniformBlockIndex"), fun<uint, *sbyte, uint>)
+		glGetUniformBlockIndex_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetUniformBlockIndex"), fun<uint, *sbyte, uint>)
 	}
 	return glGetUniformBlockIndex_procAddress(program, uniformBlockName)
 }
@@ -911,7 +1265,7 @@ glGetUniformBlockIndex(program uint, uniformBlockName *sbyte) uint {
 :glGetUniformIndices_procAddress fun<uint, int, **sbyte, *uint, void> #Mutable
 glGetUniformIndices(program uint, uniformCount int, uniformNames **sbyte, uniformIndices *uint) void {
 	if glGetUniformIndices_procAddress == null {
-		glGetUniformIndices_procAddress = pointer_cast(glGetProcAddressChecked("glGetUniformIndices"), fun<uint, int, **sbyte, *uint, void>)
+		glGetUniformIndices_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetUniformIndices"), fun<uint, int, **sbyte, *uint, void>)
 	}
 	glGetUniformIndices_procAddress(program, uniformCount, uniformNames, uniformIndices)
 }
@@ -919,7 +1273,7 @@ glGetUniformIndices(program uint, uniformCount int, uniformNames **sbyte, unifor
 :glGetUniformLocation_procAddress fun<uint, *sbyte, int> #Mutable
 glGetUniformLocation(program uint, name *sbyte) int {
 	if glGetUniformLocation_procAddress == null {
-		glGetUniformLocation_procAddress = pointer_cast(glGetProcAddressChecked("glGetUniformLocation"), fun<uint, *sbyte, int>)
+		glGetUniformLocation_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetUniformLocation"), fun<uint, *sbyte, int>)
 	}
 	return glGetUniformLocation_procAddress(program, name)
 }
@@ -927,7 +1281,7 @@ glGetUniformLocation(program uint, name *sbyte) int {
 :glGetUniformfv_procAddress fun<uint, int, *float, void> #Mutable
 glGetUniformfv(program uint, location int, params *float) void {
 	if glGetUniformfv_procAddress == null {
-		glGetUniformfv_procAddress = pointer_cast(glGetProcAddressChecked("glGetUniformfv"), fun<uint, int, *float, void>)
+		glGetUniformfv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetUniformfv"), fun<uint, int, *float, void>)
 	}
 	glGetUniformfv_procAddress(program, location, params)
 }
@@ -935,7 +1289,7 @@ glGetUniformfv(program uint, location int, params *float) void {
 :glGetUniformiv_procAddress fun<uint, int, *int, void> #Mutable
 glGetUniformiv(program uint, location int, params *int) void {
 	if glGetUniformiv_procAddress == null {
-		glGetUniformiv_procAddress = pointer_cast(glGetProcAddressChecked("glGetUniformiv"), fun<uint, int, *int, void>)
+		glGetUniformiv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetUniformiv"), fun<uint, int, *int, void>)
 	}
 	glGetUniformiv_procAddress(program, location, params)
 }
@@ -943,7 +1297,7 @@ glGetUniformiv(program uint, location int, params *int) void {
 :glGetUniformuiv_procAddress fun<uint, int, *uint, void> #Mutable
 glGetUniformuiv(program uint, location int, params *uint) void {
 	if glGetUniformuiv_procAddress == null {
-		glGetUniformuiv_procAddress = pointer_cast(glGetProcAddressChecked("glGetUniformuiv"), fun<uint, int, *uint, void>)
+		glGetUniformuiv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetUniformuiv"), fun<uint, int, *uint, void>)
 	}
 	glGetUniformuiv_procAddress(program, location, params)
 }
@@ -951,7 +1305,7 @@ glGetUniformuiv(program uint, location int, params *uint) void {
 :glGetVertexAttribIiv_procAddress fun<uint, uint, *int, void> #Mutable
 glGetVertexAttribIiv(index uint, pname uint, params *int) void {
 	if glGetVertexAttribIiv_procAddress == null {
-		glGetVertexAttribIiv_procAddress = pointer_cast(glGetProcAddressChecked("glGetVertexAttribIiv"), fun<uint, uint, *int, void>)
+		glGetVertexAttribIiv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetVertexAttribIiv"), fun<uint, uint, *int, void>)
 	}
 	glGetVertexAttribIiv_procAddress(index, pname, params)
 }
@@ -959,23 +1313,23 @@ glGetVertexAttribIiv(index uint, pname uint, params *int) void {
 :glGetVertexAttribIuiv_procAddress fun<uint, uint, *uint, void> #Mutable
 glGetVertexAttribIuiv(index uint, pname uint, params *uint) void {
 	if glGetVertexAttribIuiv_procAddress == null {
-		glGetVertexAttribIuiv_procAddress = pointer_cast(glGetProcAddressChecked("glGetVertexAttribIuiv"), fun<uint, uint, *uint, void>)
+		glGetVertexAttribIuiv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetVertexAttribIuiv"), fun<uint, uint, *uint, void>)
 	}
 	glGetVertexAttribIuiv_procAddress(index, pname, params)
 }
 
 :glGetVertexAttribPointerv_procAddress fun<uint, uint, *pointer, void> #Mutable
-glGetVertexAttribPointerv(index uint, pname uint, pointer *pointer) void {
+glGetVertexAttribPointerv(index uint, pname uint, pointer_ *pointer) void {
 	if glGetVertexAttribPointerv_procAddress == null {
-		glGetVertexAttribPointerv_procAddress = pointer_cast(glGetProcAddressChecked("glGetVertexAttribPointerv"), fun<uint, uint, *pointer, void>)
+		glGetVertexAttribPointerv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetVertexAttribPointerv"), fun<uint, uint, *pointer, void>)
 	}
-	glGetVertexAttribPointerv_procAddress(index, pname, pointer)
+	glGetVertexAttribPointerv_procAddress(index, pname, pointer_)
 }
 
 :glGetVertexAttribdv_procAddress fun<uint, uint, *double, void> #Mutable
 glGetVertexAttribdv(index uint, pname uint, params *double) void {
 	if glGetVertexAttribdv_procAddress == null {
-		glGetVertexAttribdv_procAddress = pointer_cast(glGetProcAddressChecked("glGetVertexAttribdv"), fun<uint, uint, *double, void>)
+		glGetVertexAttribdv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetVertexAttribdv"), fun<uint, uint, *double, void>)
 	}
 	glGetVertexAttribdv_procAddress(index, pname, params)
 }
@@ -983,7 +1337,7 @@ glGetVertexAttribdv(index uint, pname uint, params *double) void {
 :glGetVertexAttribfv_procAddress fun<uint, uint, *float, void> #Mutable
 glGetVertexAttribfv(index uint, pname uint, params *float) void {
 	if glGetVertexAttribfv_procAddress == null {
-		glGetVertexAttribfv_procAddress = pointer_cast(glGetProcAddressChecked("glGetVertexAttribfv"), fun<uint, uint, *float, void>)
+		glGetVertexAttribfv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetVertexAttribfv"), fun<uint, uint, *float, void>)
 	}
 	glGetVertexAttribfv_procAddress(index, pname, params)
 }
@@ -991,103 +1345,143 @@ glGetVertexAttribfv(index uint, pname uint, params *float) void {
 :glGetVertexAttribiv_procAddress fun<uint, uint, *int, void> #Mutable
 glGetVertexAttribiv(index uint, pname uint, params *int) void {
 	if glGetVertexAttribiv_procAddress == null {
-		glGetVertexAttribiv_procAddress = pointer_cast(glGetProcAddressChecked("glGetVertexAttribiv"), fun<uint, uint, *int, void>)
+		glGetVertexAttribiv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glGetVertexAttribiv"), fun<uint, uint, *int, void>)
 	}
 	glGetVertexAttribiv_procAddress(index, pname, params)
 }
 
-:glIsBuffer_procAddress fun<uint, bool> #Mutable
-glIsBuffer(buffer uint) bool {
+:glHint_procAddress fun<uint, uint, void> #Mutable
+glHint(target uint, mode uint) void {
+	if glHint_procAddress == null {
+		glHint_procAddress = pointer_cast(SDL_GL_GetProcAddress("glHint"), fun<uint, uint, void>)
+	}
+	glHint_procAddress(target, mode)
+}
+
+:glIsBuffer_procAddress fun<uint, byte> #Mutable
+glIsBuffer(buffer uint) byte {
 	if glIsBuffer_procAddress == null {
-		glIsBuffer_procAddress = pointer_cast(glGetProcAddressChecked("glIsBuffer"), fun<uint, bool>)
+		glIsBuffer_procAddress = pointer_cast(SDL_GL_GetProcAddress("glIsBuffer"), fun<uint, byte>)
 	}
 	return glIsBuffer_procAddress(buffer)
 }
 
-:glIsEnabledi_procAddress fun<uint, uint, bool> #Mutable
-glIsEnabledi(target uint, index uint) bool {
+:glIsEnabled_procAddress fun<uint, byte> #Mutable
+glIsEnabled(cap uint) byte {
+	if glIsEnabled_procAddress == null {
+		glIsEnabled_procAddress = pointer_cast(SDL_GL_GetProcAddress("glIsEnabled"), fun<uint, byte>)
+	}
+	return glIsEnabled_procAddress(cap)
+}
+
+:glIsEnabledi_procAddress fun<uint, uint, byte> #Mutable
+glIsEnabledi(target uint, index uint) byte {
 	if glIsEnabledi_procAddress == null {
-		glIsEnabledi_procAddress = pointer_cast(glGetProcAddressChecked("glIsEnabledi"), fun<uint, uint, bool>)
+		glIsEnabledi_procAddress = pointer_cast(SDL_GL_GetProcAddress("glIsEnabledi"), fun<uint, uint, byte>)
 	}
 	return glIsEnabledi_procAddress(target, index)
 }
 
-:glIsFramebuffer_procAddress fun<uint, bool> #Mutable
-glIsFramebuffer(framebuffer uint) bool {
+:glIsFramebuffer_procAddress fun<uint, byte> #Mutable
+glIsFramebuffer(framebuffer uint) byte {
 	if glIsFramebuffer_procAddress == null {
-		glIsFramebuffer_procAddress = pointer_cast(glGetProcAddressChecked("glIsFramebuffer"), fun<uint, bool>)
+		glIsFramebuffer_procAddress = pointer_cast(SDL_GL_GetProcAddress("glIsFramebuffer"), fun<uint, byte>)
 	}
 	return glIsFramebuffer_procAddress(framebuffer)
 }
 
-:glIsProgram_procAddress fun<uint, bool> #Mutable
-glIsProgram(program uint) bool {
+:glIsProgram_procAddress fun<uint, byte> #Mutable
+glIsProgram(program uint) byte {
 	if glIsProgram_procAddress == null {
-		glIsProgram_procAddress = pointer_cast(glGetProcAddressChecked("glIsProgram"), fun<uint, bool>)
+		glIsProgram_procAddress = pointer_cast(SDL_GL_GetProcAddress("glIsProgram"), fun<uint, byte>)
 	}
 	return glIsProgram_procAddress(program)
 }
 
-:glIsQuery_procAddress fun<uint, bool> #Mutable
-glIsQuery(id uint) bool {
+:glIsQuery_procAddress fun<uint, byte> #Mutable
+glIsQuery(id uint) byte {
 	if glIsQuery_procAddress == null {
-		glIsQuery_procAddress = pointer_cast(glGetProcAddressChecked("glIsQuery"), fun<uint, bool>)
+		glIsQuery_procAddress = pointer_cast(SDL_GL_GetProcAddress("glIsQuery"), fun<uint, byte>)
 	}
 	return glIsQuery_procAddress(id)
 }
 
-:glIsRenderbuffer_procAddress fun<uint, bool> #Mutable
-glIsRenderbuffer(renderbuffer uint) bool {
+:glIsRenderbuffer_procAddress fun<uint, byte> #Mutable
+glIsRenderbuffer(renderbuffer uint) byte {
 	if glIsRenderbuffer_procAddress == null {
-		glIsRenderbuffer_procAddress = pointer_cast(glGetProcAddressChecked("glIsRenderbuffer"), fun<uint, bool>)
+		glIsRenderbuffer_procAddress = pointer_cast(SDL_GL_GetProcAddress("glIsRenderbuffer"), fun<uint, byte>)
 	}
 	return glIsRenderbuffer_procAddress(renderbuffer)
 }
 
-:glIsSampler_procAddress fun<uint, bool> #Mutable
-glIsSampler(sampler uint) bool {
+:glIsSampler_procAddress fun<uint, byte> #Mutable
+glIsSampler(sampler uint) byte {
 	if glIsSampler_procAddress == null {
-		glIsSampler_procAddress = pointer_cast(glGetProcAddressChecked("glIsSampler"), fun<uint, bool>)
+		glIsSampler_procAddress = pointer_cast(SDL_GL_GetProcAddress("glIsSampler"), fun<uint, byte>)
 	}
 	return glIsSampler_procAddress(sampler)
 }
 
-:glIsShader_procAddress fun<uint, bool> #Mutable
-glIsShader(shader uint) bool {
+:glIsShader_procAddress fun<uint, byte> #Mutable
+glIsShader(shader uint) byte {
 	if glIsShader_procAddress == null {
-		glIsShader_procAddress = pointer_cast(glGetProcAddressChecked("glIsShader"), fun<uint, bool>)
+		glIsShader_procAddress = pointer_cast(SDL_GL_GetProcAddress("glIsShader"), fun<uint, byte>)
 	}
 	return glIsShader_procAddress(shader)
 }
 
-:glIsSync_procAddress fun<pointer, bool> #Mutable
-glIsSync(sync pointer) bool {
+:glIsSync_procAddress fun<pointer, byte> #Mutable
+glIsSync(sync pointer) byte {
 	if glIsSync_procAddress == null {
-		glIsSync_procAddress = pointer_cast(glGetProcAddressChecked("glIsSync"), fun<pointer, bool>)
+		glIsSync_procAddress = pointer_cast(SDL_GL_GetProcAddress("glIsSync"), fun<pointer, byte>)
 	}
 	return glIsSync_procAddress(sync)
 }
 
-:glIsVertexArray_procAddress fun<uint, bool> #Mutable
-glIsVertexArray(array uint) bool {
+:glIsTexture_procAddress fun<uint, byte> #Mutable
+glIsTexture(texture uint) byte {
+	if glIsTexture_procAddress == null {
+		glIsTexture_procAddress = pointer_cast(SDL_GL_GetProcAddress("glIsTexture"), fun<uint, byte>)
+	}
+	return glIsTexture_procAddress(texture)
+}
+
+:glIsVertexArray_procAddress fun<uint, byte> #Mutable
+glIsVertexArray(array uint) byte {
 	if glIsVertexArray_procAddress == null {
-		glIsVertexArray_procAddress = pointer_cast(glGetProcAddressChecked("glIsVertexArray"), fun<uint, bool>)
+		glIsVertexArray_procAddress = pointer_cast(SDL_GL_GetProcAddress("glIsVertexArray"), fun<uint, byte>)
 	}
 	return glIsVertexArray_procAddress(array)
+}
+
+:glLineWidth_procAddress fun<float, void> #Mutable
+glLineWidth(width float) void {
+	if glLineWidth_procAddress == null {
+		glLineWidth_procAddress = pointer_cast(SDL_GL_GetProcAddress("glLineWidth"), fun<float, void>)
+	}
+	glLineWidth_procAddress(width)
 }
 
 :glLinkProgram_procAddress fun<uint, void> #Mutable
 glLinkProgram(program uint) void {
 	if glLinkProgram_procAddress == null {
-		glLinkProgram_procAddress = pointer_cast(glGetProcAddressChecked("glLinkProgram"), fun<uint, void>)
+		glLinkProgram_procAddress = pointer_cast(SDL_GL_GetProcAddress("glLinkProgram"), fun<uint, void>)
 	}
 	glLinkProgram_procAddress(program)
+}
+
+:glLogicOp_procAddress fun<uint, void> #Mutable
+glLogicOp(opcode uint) void {
+	if glLogicOp_procAddress == null {
+		glLogicOp_procAddress = pointer_cast(SDL_GL_GetProcAddress("glLogicOp"), fun<uint, void>)
+	}
+	glLogicOp_procAddress(opcode)
 }
 
 :glMapBuffer_procAddress fun<uint, uint, pointer> #Mutable
 glMapBuffer(target uint, access uint) pointer {
 	if glMapBuffer_procAddress == null {
-		glMapBuffer_procAddress = pointer_cast(glGetProcAddressChecked("glMapBuffer"), fun<uint, uint, pointer>)
+		glMapBuffer_procAddress = pointer_cast(SDL_GL_GetProcAddress("glMapBuffer"), fun<uint, uint, pointer>)
 	}
 	return glMapBuffer_procAddress(target, access)
 }
@@ -1095,103 +1489,111 @@ glMapBuffer(target uint, access uint) pointer {
 :glMapBufferRange_procAddress fun<uint, ssize, ssize, uint, pointer> #Mutable
 glMapBufferRange(target uint, offset ssize, length ssize, access uint) pointer {
 	if glMapBufferRange_procAddress == null {
-		glMapBufferRange_procAddress = pointer_cast(glGetProcAddressChecked("glMapBufferRange"), fun<uint, ssize, ssize, uint, pointer>)
+		glMapBufferRange_procAddress = pointer_cast(SDL_GL_GetProcAddress("glMapBufferRange"), fun<uint, ssize, ssize, uint, pointer>)
 	}
 	return glMapBufferRange_procAddress(target, offset, length, access)
+}
+
+:glMultiDrawArrays_procAddress fun<uint, *int, *int, int, void> #Mutable
+glMultiDrawArrays(mode uint, first *int, count *int, drawcount int) void {
+	if glMultiDrawArrays_procAddress == null {
+		glMultiDrawArrays_procAddress = pointer_cast(SDL_GL_GetProcAddress("glMultiDrawArrays"), fun<uint, *int, *int, int, void>)
+	}
+	glMultiDrawArrays_procAddress(mode, first, count, drawcount)
+}
+
+:glMultiDrawElements_procAddress fun<uint, *int, uint, *pointer, int, void> #Mutable
+glMultiDrawElements(mode uint, count *int, type uint, indices *pointer, drawcount int) void {
+	if glMultiDrawElements_procAddress == null {
+		glMultiDrawElements_procAddress = pointer_cast(SDL_GL_GetProcAddress("glMultiDrawElements"), fun<uint, *int, uint, *pointer, int, void>)
+	}
+	glMultiDrawElements_procAddress(mode, count, type, indices, drawcount)
 }
 
 :glMultiDrawElementsBaseVertex_procAddress fun<uint, *int, uint, *pointer, int, *int, void> #Mutable
 glMultiDrawElementsBaseVertex(mode uint, count *int, type uint, indices *pointer, drawcount int, basevertex *int) void {
 	if glMultiDrawElementsBaseVertex_procAddress == null {
-		glMultiDrawElementsBaseVertex_procAddress = pointer_cast(glGetProcAddressChecked("glMultiDrawElementsBaseVertex"), fun<uint, *int, uint, *pointer, int, *int, void>)
+		glMultiDrawElementsBaseVertex_procAddress = pointer_cast(SDL_GL_GetProcAddress("glMultiDrawElementsBaseVertex"), fun<uint, *int, uint, *pointer, int, *int, void>)
 	}
 	glMultiDrawElementsBaseVertex_procAddress(mode, count, type, indices, drawcount, basevertex)
 }
 
-:glMultiTexCoordP1ui_procAddress fun<uint, uint, uint, void> #Mutable
-glMultiTexCoordP1ui(texture uint, type uint, coords uint) void {
-	if glMultiTexCoordP1ui_procAddress == null {
-		glMultiTexCoordP1ui_procAddress = pointer_cast(glGetProcAddressChecked("glMultiTexCoordP1ui"), fun<uint, uint, uint, void>)
+:glPixelStoref_procAddress fun<uint, float, void> #Mutable
+glPixelStoref(pname uint, param float) void {
+	if glPixelStoref_procAddress == null {
+		glPixelStoref_procAddress = pointer_cast(SDL_GL_GetProcAddress("glPixelStoref"), fun<uint, float, void>)
 	}
-	glMultiTexCoordP1ui_procAddress(texture, type, coords)
+	glPixelStoref_procAddress(pname, param)
 }
 
-:glMultiTexCoordP1uiv_procAddress fun<uint, uint, *uint, void> #Mutable
-glMultiTexCoordP1uiv(texture uint, type uint, coords *uint) void {
-	if glMultiTexCoordP1uiv_procAddress == null {
-		glMultiTexCoordP1uiv_procAddress = pointer_cast(glGetProcAddressChecked("glMultiTexCoordP1uiv"), fun<uint, uint, *uint, void>)
+:glPixelStorei_procAddress fun<uint, int, void> #Mutable
+glPixelStorei(pname uint, param int) void {
+	if glPixelStorei_procAddress == null {
+		glPixelStorei_procAddress = pointer_cast(SDL_GL_GetProcAddress("glPixelStorei"), fun<uint, int, void>)
 	}
-	glMultiTexCoordP1uiv_procAddress(texture, type, coords)
+	glPixelStorei_procAddress(pname, param)
 }
 
-:glMultiTexCoordP2ui_procAddress fun<uint, uint, uint, void> #Mutable
-glMultiTexCoordP2ui(texture uint, type uint, coords uint) void {
-	if glMultiTexCoordP2ui_procAddress == null {
-		glMultiTexCoordP2ui_procAddress = pointer_cast(glGetProcAddressChecked("glMultiTexCoordP2ui"), fun<uint, uint, uint, void>)
+:glPointParameterf_procAddress fun<uint, float, void> #Mutable
+glPointParameterf(pname uint, param float) void {
+	if glPointParameterf_procAddress == null {
+		glPointParameterf_procAddress = pointer_cast(SDL_GL_GetProcAddress("glPointParameterf"), fun<uint, float, void>)
 	}
-	glMultiTexCoordP2ui_procAddress(texture, type, coords)
+	glPointParameterf_procAddress(pname, param)
 }
 
-:glMultiTexCoordP2uiv_procAddress fun<uint, uint, *uint, void> #Mutable
-glMultiTexCoordP2uiv(texture uint, type uint, coords *uint) void {
-	if glMultiTexCoordP2uiv_procAddress == null {
-		glMultiTexCoordP2uiv_procAddress = pointer_cast(glGetProcAddressChecked("glMultiTexCoordP2uiv"), fun<uint, uint, *uint, void>)
+:glPointParameterfv_procAddress fun<uint, *float, void> #Mutable
+glPointParameterfv(pname uint, params *float) void {
+	if glPointParameterfv_procAddress == null {
+		glPointParameterfv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glPointParameterfv"), fun<uint, *float, void>)
 	}
-	glMultiTexCoordP2uiv_procAddress(texture, type, coords)
+	glPointParameterfv_procAddress(pname, params)
 }
 
-:glMultiTexCoordP3ui_procAddress fun<uint, uint, uint, void> #Mutable
-glMultiTexCoordP3ui(texture uint, type uint, coords uint) void {
-	if glMultiTexCoordP3ui_procAddress == null {
-		glMultiTexCoordP3ui_procAddress = pointer_cast(glGetProcAddressChecked("glMultiTexCoordP3ui"), fun<uint, uint, uint, void>)
+:glPointParameteri_procAddress fun<uint, int, void> #Mutable
+glPointParameteri(pname uint, param int) void {
+	if glPointParameteri_procAddress == null {
+		glPointParameteri_procAddress = pointer_cast(SDL_GL_GetProcAddress("glPointParameteri"), fun<uint, int, void>)
 	}
-	glMultiTexCoordP3ui_procAddress(texture, type, coords)
+	glPointParameteri_procAddress(pname, param)
 }
 
-:glMultiTexCoordP3uiv_procAddress fun<uint, uint, *uint, void> #Mutable
-glMultiTexCoordP3uiv(texture uint, type uint, coords *uint) void {
-	if glMultiTexCoordP3uiv_procAddress == null {
-		glMultiTexCoordP3uiv_procAddress = pointer_cast(glGetProcAddressChecked("glMultiTexCoordP3uiv"), fun<uint, uint, *uint, void>)
+:glPointParameteriv_procAddress fun<uint, *int, void> #Mutable
+glPointParameteriv(pname uint, params *int) void {
+	if glPointParameteriv_procAddress == null {
+		glPointParameteriv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glPointParameteriv"), fun<uint, *int, void>)
 	}
-	glMultiTexCoordP3uiv_procAddress(texture, type, coords)
+	glPointParameteriv_procAddress(pname, params)
 }
 
-:glMultiTexCoordP4ui_procAddress fun<uint, uint, uint, void> #Mutable
-glMultiTexCoordP4ui(texture uint, type uint, coords uint) void {
-	if glMultiTexCoordP4ui_procAddress == null {
-		glMultiTexCoordP4ui_procAddress = pointer_cast(glGetProcAddressChecked("glMultiTexCoordP4ui"), fun<uint, uint, uint, void>)
+:glPointSize_procAddress fun<float, void> #Mutable
+glPointSize(size float) void {
+	if glPointSize_procAddress == null {
+		glPointSize_procAddress = pointer_cast(SDL_GL_GetProcAddress("glPointSize"), fun<float, void>)
 	}
-	glMultiTexCoordP4ui_procAddress(texture, type, coords)
+	glPointSize_procAddress(size)
 }
 
-:glMultiTexCoordP4uiv_procAddress fun<uint, uint, *uint, void> #Mutable
-glMultiTexCoordP4uiv(texture uint, type uint, coords *uint) void {
-	if glMultiTexCoordP4uiv_procAddress == null {
-		glMultiTexCoordP4uiv_procAddress = pointer_cast(glGetProcAddressChecked("glMultiTexCoordP4uiv"), fun<uint, uint, *uint, void>)
+:glPolygonMode_procAddress fun<uint, uint, void> #Mutable
+glPolygonMode(face uint, mode uint) void {
+	if glPolygonMode_procAddress == null {
+		glPolygonMode_procAddress = pointer_cast(SDL_GL_GetProcAddress("glPolygonMode"), fun<uint, uint, void>)
 	}
-	glMultiTexCoordP4uiv_procAddress(texture, type, coords)
+	glPolygonMode_procAddress(face, mode)
 }
 
-:glNormalP3ui_procAddress fun<uint, uint, void> #Mutable
-glNormalP3ui(type uint, coords uint) void {
-	if glNormalP3ui_procAddress == null {
-		glNormalP3ui_procAddress = pointer_cast(glGetProcAddressChecked("glNormalP3ui"), fun<uint, uint, void>)
+:glPolygonOffset_procAddress fun<float, float, void> #Mutable
+glPolygonOffset(factor float, units float) void {
+	if glPolygonOffset_procAddress == null {
+		glPolygonOffset_procAddress = pointer_cast(SDL_GL_GetProcAddress("glPolygonOffset"), fun<float, float, void>)
 	}
-	glNormalP3ui_procAddress(type, coords)
-}
-
-:glNormalP3uiv_procAddress fun<uint, *uint, void> #Mutable
-glNormalP3uiv(type uint, coords *uint) void {
-	if glNormalP3uiv_procAddress == null {
-		glNormalP3uiv_procAddress = pointer_cast(glGetProcAddressChecked("glNormalP3uiv"), fun<uint, *uint, void>)
-	}
-	glNormalP3uiv_procAddress(type, coords)
+	glPolygonOffset_procAddress(factor, units)
 }
 
 :glPrimitiveRestartIndex_procAddress fun<uint, void> #Mutable
 glPrimitiveRestartIndex(index uint) void {
 	if glPrimitiveRestartIndex_procAddress == null {
-		glPrimitiveRestartIndex_procAddress = pointer_cast(glGetProcAddressChecked("glPrimitiveRestartIndex"), fun<uint, void>)
+		glPrimitiveRestartIndex_procAddress = pointer_cast(SDL_GL_GetProcAddress("glPrimitiveRestartIndex"), fun<uint, void>)
 	}
 	glPrimitiveRestartIndex_procAddress(index)
 }
@@ -1199,7 +1601,7 @@ glPrimitiveRestartIndex(index uint) void {
 :glProvokingVertex_procAddress fun<uint, void> #Mutable
 glProvokingVertex(mode uint) void {
 	if glProvokingVertex_procAddress == null {
-		glProvokingVertex_procAddress = pointer_cast(glGetProcAddressChecked("glProvokingVertex"), fun<uint, void>)
+		glProvokingVertex_procAddress = pointer_cast(SDL_GL_GetProcAddress("glProvokingVertex"), fun<uint, void>)
 	}
 	glProvokingVertex_procAddress(mode)
 }
@@ -1207,15 +1609,31 @@ glProvokingVertex(mode uint) void {
 :glQueryCounter_procAddress fun<uint, uint, void> #Mutable
 glQueryCounter(id uint, target uint) void {
 	if glQueryCounter_procAddress == null {
-		glQueryCounter_procAddress = pointer_cast(glGetProcAddressChecked("glQueryCounter"), fun<uint, uint, void>)
+		glQueryCounter_procAddress = pointer_cast(SDL_GL_GetProcAddress("glQueryCounter"), fun<uint, uint, void>)
 	}
 	glQueryCounter_procAddress(id, target)
+}
+
+:glReadBuffer_procAddress fun<uint, void> #Mutable
+glReadBuffer(src uint) void {
+	if glReadBuffer_procAddress == null {
+		glReadBuffer_procAddress = pointer_cast(SDL_GL_GetProcAddress("glReadBuffer"), fun<uint, void>)
+	}
+	glReadBuffer_procAddress(src)
+}
+
+:glReadPixels_procAddress fun<int, int, int, int, uint, uint, pointer, void> #Mutable
+glReadPixels(x int, y int, width int, height int, format uint, type uint, pixels pointer) void {
+	if glReadPixels_procAddress == null {
+		glReadPixels_procAddress = pointer_cast(SDL_GL_GetProcAddress("glReadPixels"), fun<int, int, int, int, uint, uint, pointer, void>)
+	}
+	glReadPixels_procAddress(x, y, width, height, format, type, pixels)
 }
 
 :glRenderbufferStorage_procAddress fun<uint, uint, int, int, void> #Mutable
 glRenderbufferStorage(target uint, internalformat uint, width int, height int) void {
 	if glRenderbufferStorage_procAddress == null {
-		glRenderbufferStorage_procAddress = pointer_cast(glGetProcAddressChecked("glRenderbufferStorage"), fun<uint, uint, int, int, void>)
+		glRenderbufferStorage_procAddress = pointer_cast(SDL_GL_GetProcAddress("glRenderbufferStorage"), fun<uint, uint, int, int, void>)
 	}
 	glRenderbufferStorage_procAddress(target, internalformat, width, height)
 }
@@ -1223,15 +1641,23 @@ glRenderbufferStorage(target uint, internalformat uint, width int, height int) v
 :glRenderbufferStorageMultisample_procAddress fun<uint, int, uint, int, int, void> #Mutable
 glRenderbufferStorageMultisample(target uint, samples int, internalformat uint, width int, height int) void {
 	if glRenderbufferStorageMultisample_procAddress == null {
-		glRenderbufferStorageMultisample_procAddress = pointer_cast(glGetProcAddressChecked("glRenderbufferStorageMultisample"), fun<uint, int, uint, int, int, void>)
+		glRenderbufferStorageMultisample_procAddress = pointer_cast(SDL_GL_GetProcAddress("glRenderbufferStorageMultisample"), fun<uint, int, uint, int, int, void>)
 	}
 	glRenderbufferStorageMultisample_procAddress(target, samples, internalformat, width, height)
+}
+
+:glSampleCoverage_procAddress fun<float, byte, void> #Mutable
+glSampleCoverage(value float, invert byte) void {
+	if glSampleCoverage_procAddress == null {
+		glSampleCoverage_procAddress = pointer_cast(SDL_GL_GetProcAddress("glSampleCoverage"), fun<float, byte, void>)
+	}
+	glSampleCoverage_procAddress(value, invert)
 }
 
 :glSampleMaski_procAddress fun<uint, uint, void> #Mutable
 glSampleMaski(maskNumber uint, mask uint) void {
 	if glSampleMaski_procAddress == null {
-		glSampleMaski_procAddress = pointer_cast(glGetProcAddressChecked("glSampleMaski"), fun<uint, uint, void>)
+		glSampleMaski_procAddress = pointer_cast(SDL_GL_GetProcAddress("glSampleMaski"), fun<uint, uint, void>)
 	}
 	glSampleMaski_procAddress(maskNumber, mask)
 }
@@ -1239,7 +1665,7 @@ glSampleMaski(maskNumber uint, mask uint) void {
 :glSamplerParameterIiv_procAddress fun<uint, uint, *int, void> #Mutable
 glSamplerParameterIiv(sampler uint, pname uint, param *int) void {
 	if glSamplerParameterIiv_procAddress == null {
-		glSamplerParameterIiv_procAddress = pointer_cast(glGetProcAddressChecked("glSamplerParameterIiv"), fun<uint, uint, *int, void>)
+		glSamplerParameterIiv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glSamplerParameterIiv"), fun<uint, uint, *int, void>)
 	}
 	glSamplerParameterIiv_procAddress(sampler, pname, param)
 }
@@ -1247,7 +1673,7 @@ glSamplerParameterIiv(sampler uint, pname uint, param *int) void {
 :glSamplerParameterIuiv_procAddress fun<uint, uint, *uint, void> #Mutable
 glSamplerParameterIuiv(sampler uint, pname uint, param *uint) void {
 	if glSamplerParameterIuiv_procAddress == null {
-		glSamplerParameterIuiv_procAddress = pointer_cast(glGetProcAddressChecked("glSamplerParameterIuiv"), fun<uint, uint, *uint, void>)
+		glSamplerParameterIuiv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glSamplerParameterIuiv"), fun<uint, uint, *uint, void>)
 	}
 	glSamplerParameterIuiv_procAddress(sampler, pname, param)
 }
@@ -1255,7 +1681,7 @@ glSamplerParameterIuiv(sampler uint, pname uint, param *uint) void {
 :glSamplerParameterf_procAddress fun<uint, uint, float, void> #Mutable
 glSamplerParameterf(sampler uint, pname uint, param float) void {
 	if glSamplerParameterf_procAddress == null {
-		glSamplerParameterf_procAddress = pointer_cast(glGetProcAddressChecked("glSamplerParameterf"), fun<uint, uint, float, void>)
+		glSamplerParameterf_procAddress = pointer_cast(SDL_GL_GetProcAddress("glSamplerParameterf"), fun<uint, uint, float, void>)
 	}
 	glSamplerParameterf_procAddress(sampler, pname, param)
 }
@@ -1263,7 +1689,7 @@ glSamplerParameterf(sampler uint, pname uint, param float) void {
 :glSamplerParameterfv_procAddress fun<uint, uint, *float, void> #Mutable
 glSamplerParameterfv(sampler uint, pname uint, param *float) void {
 	if glSamplerParameterfv_procAddress == null {
-		glSamplerParameterfv_procAddress = pointer_cast(glGetProcAddressChecked("glSamplerParameterfv"), fun<uint, uint, *float, void>)
+		glSamplerParameterfv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glSamplerParameterfv"), fun<uint, uint, *float, void>)
 	}
 	glSamplerParameterfv_procAddress(sampler, pname, param)
 }
@@ -1271,7 +1697,7 @@ glSamplerParameterfv(sampler uint, pname uint, param *float) void {
 :glSamplerParameteri_procAddress fun<uint, uint, int, void> #Mutable
 glSamplerParameteri(sampler uint, pname uint, param int) void {
 	if glSamplerParameteri_procAddress == null {
-		glSamplerParameteri_procAddress = pointer_cast(glGetProcAddressChecked("glSamplerParameteri"), fun<uint, uint, int, void>)
+		glSamplerParameteri_procAddress = pointer_cast(SDL_GL_GetProcAddress("glSamplerParameteri"), fun<uint, uint, int, void>)
 	}
 	glSamplerParameteri_procAddress(sampler, pname, param)
 }
@@ -1279,55 +1705,71 @@ glSamplerParameteri(sampler uint, pname uint, param int) void {
 :glSamplerParameteriv_procAddress fun<uint, uint, *int, void> #Mutable
 glSamplerParameteriv(sampler uint, pname uint, param *int) void {
 	if glSamplerParameteriv_procAddress == null {
-		glSamplerParameteriv_procAddress = pointer_cast(glGetProcAddressChecked("glSamplerParameteriv"), fun<uint, uint, *int, void>)
+		glSamplerParameteriv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glSamplerParameteriv"), fun<uint, uint, *int, void>)
 	}
 	glSamplerParameteriv_procAddress(sampler, pname, param)
 }
 
-:glSecondaryColorP3ui_procAddress fun<uint, uint, void> #Mutable
-glSecondaryColorP3ui(type uint, color uint) void {
-	if glSecondaryColorP3ui_procAddress == null {
-		glSecondaryColorP3ui_procAddress = pointer_cast(glGetProcAddressChecked("glSecondaryColorP3ui"), fun<uint, uint, void>)
+:glScissor_procAddress fun<int, int, int, int, void> #Mutable
+glScissor(x int, y int, width int, height int) void {
+	if glScissor_procAddress == null {
+		glScissor_procAddress = pointer_cast(SDL_GL_GetProcAddress("glScissor"), fun<int, int, int, int, void>)
 	}
-	glSecondaryColorP3ui_procAddress(type, color)
-}
-
-:glSecondaryColorP3uiv_procAddress fun<uint, *uint, void> #Mutable
-glSecondaryColorP3uiv(type uint, color *uint) void {
-	if glSecondaryColorP3uiv_procAddress == null {
-		glSecondaryColorP3uiv_procAddress = pointer_cast(glGetProcAddressChecked("glSecondaryColorP3uiv"), fun<uint, *uint, void>)
-	}
-	glSecondaryColorP3uiv_procAddress(type, color)
+	glScissor_procAddress(x, y, width, height)
 }
 
 :glShaderSource_procAddress fun<uint, int, **sbyte, *int, void> #Mutable
 glShaderSource(shader uint, count int, string_ **sbyte, length *int) void {
 	if glShaderSource_procAddress == null {
-		glShaderSource_procAddress = pointer_cast(glGetProcAddressChecked("glShaderSource"), fun<uint, int, **sbyte, *int, void>)
+		glShaderSource_procAddress = pointer_cast(SDL_GL_GetProcAddress("glShaderSource"), fun<uint, int, **sbyte, *int, void>)
 	}
 	glShaderSource_procAddress(shader, count, string_, length)
+}
+
+:glStencilFunc_procAddress fun<uint, int, uint, void> #Mutable
+glStencilFunc(func uint, ref_ int, mask uint) void {
+	if glStencilFunc_procAddress == null {
+		glStencilFunc_procAddress = pointer_cast(SDL_GL_GetProcAddress("glStencilFunc"), fun<uint, int, uint, void>)
+	}
+	glStencilFunc_procAddress(func, ref_, mask)
 }
 
 :glStencilFuncSeparate_procAddress fun<uint, uint, int, uint, void> #Mutable
 glStencilFuncSeparate(face uint, func uint, ref_ int, mask uint) void {
 	if glStencilFuncSeparate_procAddress == null {
-		glStencilFuncSeparate_procAddress = pointer_cast(glGetProcAddressChecked("glStencilFuncSeparate"), fun<uint, uint, int, uint, void>)
+		glStencilFuncSeparate_procAddress = pointer_cast(SDL_GL_GetProcAddress("glStencilFuncSeparate"), fun<uint, uint, int, uint, void>)
 	}
 	glStencilFuncSeparate_procAddress(face, func, ref_, mask)
+}
+
+:glStencilMask_procAddress fun<uint, void> #Mutable
+glStencilMask(mask uint) void {
+	if glStencilMask_procAddress == null {
+		glStencilMask_procAddress = pointer_cast(SDL_GL_GetProcAddress("glStencilMask"), fun<uint, void>)
+	}
+	glStencilMask_procAddress(mask)
 }
 
 :glStencilMaskSeparate_procAddress fun<uint, uint, void> #Mutable
 glStencilMaskSeparate(face uint, mask uint) void {
 	if glStencilMaskSeparate_procAddress == null {
-		glStencilMaskSeparate_procAddress = pointer_cast(glGetProcAddressChecked("glStencilMaskSeparate"), fun<uint, uint, void>)
+		glStencilMaskSeparate_procAddress = pointer_cast(SDL_GL_GetProcAddress("glStencilMaskSeparate"), fun<uint, uint, void>)
 	}
 	glStencilMaskSeparate_procAddress(face, mask)
+}
+
+:glStencilOp_procAddress fun<uint, uint, uint, void> #Mutable
+glStencilOp(fail uint, zfail uint, zpass uint) void {
+	if glStencilOp_procAddress == null {
+		glStencilOp_procAddress = pointer_cast(SDL_GL_GetProcAddress("glStencilOp"), fun<uint, uint, uint, void>)
+	}
+	glStencilOp_procAddress(fail, zfail, zpass)
 }
 
 :glStencilOpSeparate_procAddress fun<uint, uint, uint, uint, void> #Mutable
 glStencilOpSeparate(face uint, sfail uint, dpfail uint, dppass uint) void {
 	if glStencilOpSeparate_procAddress == null {
-		glStencilOpSeparate_procAddress = pointer_cast(glGetProcAddressChecked("glStencilOpSeparate"), fun<uint, uint, uint, uint, void>)
+		glStencilOpSeparate_procAddress = pointer_cast(SDL_GL_GetProcAddress("glStencilOpSeparate"), fun<uint, uint, uint, uint, void>)
 	}
 	glStencilOpSeparate_procAddress(face, sfail, dpfail, dppass)
 }
@@ -1335,87 +1777,47 @@ glStencilOpSeparate(face uint, sfail uint, dpfail uint, dppass uint) void {
 :glTexBuffer_procAddress fun<uint, uint, uint, void> #Mutable
 glTexBuffer(target uint, internalformat uint, buffer uint) void {
 	if glTexBuffer_procAddress == null {
-		glTexBuffer_procAddress = pointer_cast(glGetProcAddressChecked("glTexBuffer"), fun<uint, uint, uint, void>)
+		glTexBuffer_procAddress = pointer_cast(SDL_GL_GetProcAddress("glTexBuffer"), fun<uint, uint, uint, void>)
 	}
 	glTexBuffer_procAddress(target, internalformat, buffer)
 }
 
-:glTexCoordP1ui_procAddress fun<uint, uint, void> #Mutable
-glTexCoordP1ui(type uint, coords uint) void {
-	if glTexCoordP1ui_procAddress == null {
-		glTexCoordP1ui_procAddress = pointer_cast(glGetProcAddressChecked("glTexCoordP1ui"), fun<uint, uint, void>)
+:glTexImage1D_procAddress fun<uint, int, int, int, int, uint, uint, pointer, void> #Mutable
+glTexImage1D(target uint, level int, internalformat int, width int, border int, format uint, type uint, pixels pointer) void {
+	if glTexImage1D_procAddress == null {
+		glTexImage1D_procAddress = pointer_cast(SDL_GL_GetProcAddress("glTexImage1D"), fun<uint, int, int, int, int, uint, uint, pointer, void>)
 	}
-	glTexCoordP1ui_procAddress(type, coords)
+	glTexImage1D_procAddress(target, level, internalformat, width, border, format, type, pixels)
 }
 
-:glTexCoordP1uiv_procAddress fun<uint, *uint, void> #Mutable
-glTexCoordP1uiv(type uint, coords *uint) void {
-	if glTexCoordP1uiv_procAddress == null {
-		glTexCoordP1uiv_procAddress = pointer_cast(glGetProcAddressChecked("glTexCoordP1uiv"), fun<uint, *uint, void>)
+:glTexImage2D_procAddress fun<uint, int, int, int, int, int, uint, uint, pointer, void> #Mutable
+glTexImage2D(target uint, level int, internalformat int, width int, height int, border int, format uint, type uint, pixels pointer) void {
+	if glTexImage2D_procAddress == null {
+		glTexImage2D_procAddress = pointer_cast(SDL_GL_GetProcAddress("glTexImage2D"), fun<uint, int, int, int, int, int, uint, uint, pointer, void>)
 	}
-	glTexCoordP1uiv_procAddress(type, coords)
+	glTexImage2D_procAddress(target, level, internalformat, width, height, border, format, type, pixels)
 }
 
-:glTexCoordP2ui_procAddress fun<uint, uint, void> #Mutable
-glTexCoordP2ui(type uint, coords uint) void {
-	if glTexCoordP2ui_procAddress == null {
-		glTexCoordP2ui_procAddress = pointer_cast(glGetProcAddressChecked("glTexCoordP2ui"), fun<uint, uint, void>)
-	}
-	glTexCoordP2ui_procAddress(type, coords)
-}
-
-:glTexCoordP2uiv_procAddress fun<uint, *uint, void> #Mutable
-glTexCoordP2uiv(type uint, coords *uint) void {
-	if glTexCoordP2uiv_procAddress == null {
-		glTexCoordP2uiv_procAddress = pointer_cast(glGetProcAddressChecked("glTexCoordP2uiv"), fun<uint, *uint, void>)
-	}
-	glTexCoordP2uiv_procAddress(type, coords)
-}
-
-:glTexCoordP3ui_procAddress fun<uint, uint, void> #Mutable
-glTexCoordP3ui(type uint, coords uint) void {
-	if glTexCoordP3ui_procAddress == null {
-		glTexCoordP3ui_procAddress = pointer_cast(glGetProcAddressChecked("glTexCoordP3ui"), fun<uint, uint, void>)
-	}
-	glTexCoordP3ui_procAddress(type, coords)
-}
-
-:glTexCoordP3uiv_procAddress fun<uint, *uint, void> #Mutable
-glTexCoordP3uiv(type uint, coords *uint) void {
-	if glTexCoordP3uiv_procAddress == null {
-		glTexCoordP3uiv_procAddress = pointer_cast(glGetProcAddressChecked("glTexCoordP3uiv"), fun<uint, *uint, void>)
-	}
-	glTexCoordP3uiv_procAddress(type, coords)
-}
-
-:glTexCoordP4ui_procAddress fun<uint, uint, void> #Mutable
-glTexCoordP4ui(type uint, coords uint) void {
-	if glTexCoordP4ui_procAddress == null {
-		glTexCoordP4ui_procAddress = pointer_cast(glGetProcAddressChecked("glTexCoordP4ui"), fun<uint, uint, void>)
-	}
-	glTexCoordP4ui_procAddress(type, coords)
-}
-
-:glTexCoordP4uiv_procAddress fun<uint, *uint, void> #Mutable
-glTexCoordP4uiv(type uint, coords *uint) void {
-	if glTexCoordP4uiv_procAddress == null {
-		glTexCoordP4uiv_procAddress = pointer_cast(glGetProcAddressChecked("glTexCoordP4uiv"), fun<uint, *uint, void>)
-	}
-	glTexCoordP4uiv_procAddress(type, coords)
-}
-
-:glTexImage2DMultisample_procAddress fun<uint, int, uint, int, int, bool, void> #Mutable
-glTexImage2DMultisample(target uint, samples int, internalformat uint, width int, height int, fixedsamplelocations bool) void {
+:glTexImage2DMultisample_procAddress fun<uint, int, uint, int, int, byte, void> #Mutable
+glTexImage2DMultisample(target uint, samples int, internalformat uint, width int, height int, fixedsamplelocations byte) void {
 	if glTexImage2DMultisample_procAddress == null {
-		glTexImage2DMultisample_procAddress = pointer_cast(glGetProcAddressChecked("glTexImage2DMultisample"), fun<uint, int, uint, int, int, bool, void>)
+		glTexImage2DMultisample_procAddress = pointer_cast(SDL_GL_GetProcAddress("glTexImage2DMultisample"), fun<uint, int, uint, int, int, byte, void>)
 	}
 	glTexImage2DMultisample_procAddress(target, samples, internalformat, width, height, fixedsamplelocations)
 }
 
-:glTexImage3DMultisample_procAddress fun<uint, int, uint, int, int, int, bool, void> #Mutable
-glTexImage3DMultisample(target uint, samples int, internalformat uint, width int, height int, depth int, fixedsamplelocations bool) void {
+:glTexImage3D_procAddress fun<uint, int, int, int, int, int, int, uint, uint, pointer, void> #Mutable
+glTexImage3D(target uint, level int, internalformat int, width int, height int, depth int, border int, format uint, type uint, pixels pointer) void {
+	if glTexImage3D_procAddress == null {
+		glTexImage3D_procAddress = pointer_cast(SDL_GL_GetProcAddress("glTexImage3D"), fun<uint, int, int, int, int, int, int, uint, uint, pointer, void>)
+	}
+	glTexImage3D_procAddress(target, level, internalformat, width, height, depth, border, format, type, pixels)
+}
+
+:glTexImage3DMultisample_procAddress fun<uint, int, uint, int, int, int, byte, void> #Mutable
+glTexImage3DMultisample(target uint, samples int, internalformat uint, width int, height int, depth int, fixedsamplelocations byte) void {
 	if glTexImage3DMultisample_procAddress == null {
-		glTexImage3DMultisample_procAddress = pointer_cast(glGetProcAddressChecked("glTexImage3DMultisample"), fun<uint, int, uint, int, int, int, bool, void>)
+		glTexImage3DMultisample_procAddress = pointer_cast(SDL_GL_GetProcAddress("glTexImage3DMultisample"), fun<uint, int, uint, int, int, int, byte, void>)
 	}
 	glTexImage3DMultisample_procAddress(target, samples, internalformat, width, height, depth, fixedsamplelocations)
 }
@@ -1423,7 +1825,7 @@ glTexImage3DMultisample(target uint, samples int, internalformat uint, width int
 :glTexParameterIiv_procAddress fun<uint, uint, *int, void> #Mutable
 glTexParameterIiv(target uint, pname uint, params *int) void {
 	if glTexParameterIiv_procAddress == null {
-		glTexParameterIiv_procAddress = pointer_cast(glGetProcAddressChecked("glTexParameterIiv"), fun<uint, uint, *int, void>)
+		glTexParameterIiv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glTexParameterIiv"), fun<uint, uint, *int, void>)
 	}
 	glTexParameterIiv_procAddress(target, pname, params)
 }
@@ -1431,15 +1833,71 @@ glTexParameterIiv(target uint, pname uint, params *int) void {
 :glTexParameterIuiv_procAddress fun<uint, uint, *uint, void> #Mutable
 glTexParameterIuiv(target uint, pname uint, params *uint) void {
 	if glTexParameterIuiv_procAddress == null {
-		glTexParameterIuiv_procAddress = pointer_cast(glGetProcAddressChecked("glTexParameterIuiv"), fun<uint, uint, *uint, void>)
+		glTexParameterIuiv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glTexParameterIuiv"), fun<uint, uint, *uint, void>)
 	}
 	glTexParameterIuiv_procAddress(target, pname, params)
+}
+
+:glTexParameterf_procAddress fun<uint, uint, float, void> #Mutable
+glTexParameterf(target uint, pname uint, param float) void {
+	if glTexParameterf_procAddress == null {
+		glTexParameterf_procAddress = pointer_cast(SDL_GL_GetProcAddress("glTexParameterf"), fun<uint, uint, float, void>)
+	}
+	glTexParameterf_procAddress(target, pname, param)
+}
+
+:glTexParameterfv_procAddress fun<uint, uint, *float, void> #Mutable
+glTexParameterfv(target uint, pname uint, params *float) void {
+	if glTexParameterfv_procAddress == null {
+		glTexParameterfv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glTexParameterfv"), fun<uint, uint, *float, void>)
+	}
+	glTexParameterfv_procAddress(target, pname, params)
+}
+
+:glTexParameteri_procAddress fun<uint, uint, int, void> #Mutable
+glTexParameteri(target uint, pname uint, param int) void {
+	if glTexParameteri_procAddress == null {
+		glTexParameteri_procAddress = pointer_cast(SDL_GL_GetProcAddress("glTexParameteri"), fun<uint, uint, int, void>)
+	}
+	glTexParameteri_procAddress(target, pname, param)
+}
+
+:glTexParameteriv_procAddress fun<uint, uint, *int, void> #Mutable
+glTexParameteriv(target uint, pname uint, params *int) void {
+	if glTexParameteriv_procAddress == null {
+		glTexParameteriv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glTexParameteriv"), fun<uint, uint, *int, void>)
+	}
+	glTexParameteriv_procAddress(target, pname, params)
+}
+
+:glTexSubImage1D_procAddress fun<uint, int, int, int, uint, uint, pointer, void> #Mutable
+glTexSubImage1D(target uint, level int, xoffset int, width int, format uint, type uint, pixels pointer) void {
+	if glTexSubImage1D_procAddress == null {
+		glTexSubImage1D_procAddress = pointer_cast(SDL_GL_GetProcAddress("glTexSubImage1D"), fun<uint, int, int, int, uint, uint, pointer, void>)
+	}
+	glTexSubImage1D_procAddress(target, level, xoffset, width, format, type, pixels)
+}
+
+:glTexSubImage2D_procAddress fun<uint, int, int, int, int, int, uint, uint, pointer, void> #Mutable
+glTexSubImage2D(target uint, level int, xoffset int, yoffset int, width int, height int, format uint, type uint, pixels pointer) void {
+	if glTexSubImage2D_procAddress == null {
+		glTexSubImage2D_procAddress = pointer_cast(SDL_GL_GetProcAddress("glTexSubImage2D"), fun<uint, int, int, int, int, int, uint, uint, pointer, void>)
+	}
+	glTexSubImage2D_procAddress(target, level, xoffset, yoffset, width, height, format, type, pixels)
+}
+
+:glTexSubImage3D_procAddress fun<uint, int, int, int, int, int, int, int, uint, uint, pointer, void> #Mutable
+glTexSubImage3D(target uint, level int, xoffset int, yoffset int, zoffset int, width int, height int, depth int, format uint, type uint, pixels pointer) void {
+	if glTexSubImage3D_procAddress == null {
+		glTexSubImage3D_procAddress = pointer_cast(SDL_GL_GetProcAddress("glTexSubImage3D"), fun<uint, int, int, int, int, int, int, int, uint, uint, pointer, void>)
+	}
+	glTexSubImage3D_procAddress(target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels)
 }
 
 :glTransformFeedbackVaryings_procAddress fun<uint, int, **sbyte, uint, void> #Mutable
 glTransformFeedbackVaryings(program uint, count int, varyings **sbyte, bufferMode uint) void {
 	if glTransformFeedbackVaryings_procAddress == null {
-		glTransformFeedbackVaryings_procAddress = pointer_cast(glGetProcAddressChecked("glTransformFeedbackVaryings"), fun<uint, int, **sbyte, uint, void>)
+		glTransformFeedbackVaryings_procAddress = pointer_cast(SDL_GL_GetProcAddress("glTransformFeedbackVaryings"), fun<uint, int, **sbyte, uint, void>)
 	}
 	glTransformFeedbackVaryings_procAddress(program, count, varyings, bufferMode)
 }
@@ -1447,7 +1905,7 @@ glTransformFeedbackVaryings(program uint, count int, varyings **sbyte, bufferMod
 :glUniform1f_procAddress fun<int, float, void> #Mutable
 glUniform1f(location int, v0 float) void {
 	if glUniform1f_procAddress == null {
-		glUniform1f_procAddress = pointer_cast(glGetProcAddressChecked("glUniform1f"), fun<int, float, void>)
+		glUniform1f_procAddress = pointer_cast(SDL_GL_GetProcAddress("glUniform1f"), fun<int, float, void>)
 	}
 	glUniform1f_procAddress(location, v0)
 }
@@ -1455,7 +1913,7 @@ glUniform1f(location int, v0 float) void {
 :glUniform1fv_procAddress fun<int, int, *float, void> #Mutable
 glUniform1fv(location int, count int, value *float) void {
 	if glUniform1fv_procAddress == null {
-		glUniform1fv_procAddress = pointer_cast(glGetProcAddressChecked("glUniform1fv"), fun<int, int, *float, void>)
+		glUniform1fv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glUniform1fv"), fun<int, int, *float, void>)
 	}
 	glUniform1fv_procAddress(location, count, value)
 }
@@ -1463,7 +1921,7 @@ glUniform1fv(location int, count int, value *float) void {
 :glUniform1i_procAddress fun<int, int, void> #Mutable
 glUniform1i(location int, v0 int) void {
 	if glUniform1i_procAddress == null {
-		glUniform1i_procAddress = pointer_cast(glGetProcAddressChecked("glUniform1i"), fun<int, int, void>)
+		glUniform1i_procAddress = pointer_cast(SDL_GL_GetProcAddress("glUniform1i"), fun<int, int, void>)
 	}
 	glUniform1i_procAddress(location, v0)
 }
@@ -1471,7 +1929,7 @@ glUniform1i(location int, v0 int) void {
 :glUniform1iv_procAddress fun<int, int, *int, void> #Mutable
 glUniform1iv(location int, count int, value *int) void {
 	if glUniform1iv_procAddress == null {
-		glUniform1iv_procAddress = pointer_cast(glGetProcAddressChecked("glUniform1iv"), fun<int, int, *int, void>)
+		glUniform1iv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glUniform1iv"), fun<int, int, *int, void>)
 	}
 	glUniform1iv_procAddress(location, count, value)
 }
@@ -1479,7 +1937,7 @@ glUniform1iv(location int, count int, value *int) void {
 :glUniform1ui_procAddress fun<int, uint, void> #Mutable
 glUniform1ui(location int, v0 uint) void {
 	if glUniform1ui_procAddress == null {
-		glUniform1ui_procAddress = pointer_cast(glGetProcAddressChecked("glUniform1ui"), fun<int, uint, void>)
+		glUniform1ui_procAddress = pointer_cast(SDL_GL_GetProcAddress("glUniform1ui"), fun<int, uint, void>)
 	}
 	glUniform1ui_procAddress(location, v0)
 }
@@ -1487,7 +1945,7 @@ glUniform1ui(location int, v0 uint) void {
 :glUniform1uiv_procAddress fun<int, int, *uint, void> #Mutable
 glUniform1uiv(location int, count int, value *uint) void {
 	if glUniform1uiv_procAddress == null {
-		glUniform1uiv_procAddress = pointer_cast(glGetProcAddressChecked("glUniform1uiv"), fun<int, int, *uint, void>)
+		glUniform1uiv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glUniform1uiv"), fun<int, int, *uint, void>)
 	}
 	glUniform1uiv_procAddress(location, count, value)
 }
@@ -1495,7 +1953,7 @@ glUniform1uiv(location int, count int, value *uint) void {
 :glUniform2f_procAddress fun<int, float, float, void> #Mutable
 glUniform2f(location int, v0 float, v1 float) void {
 	if glUniform2f_procAddress == null {
-		glUniform2f_procAddress = pointer_cast(glGetProcAddressChecked("glUniform2f"), fun<int, float, float, void>)
+		glUniform2f_procAddress = pointer_cast(SDL_GL_GetProcAddress("glUniform2f"), fun<int, float, float, void>)
 	}
 	glUniform2f_procAddress(location, v0, v1)
 }
@@ -1503,7 +1961,7 @@ glUniform2f(location int, v0 float, v1 float) void {
 :glUniform2fv_procAddress fun<int, int, *float, void> #Mutable
 glUniform2fv(location int, count int, value *float) void {
 	if glUniform2fv_procAddress == null {
-		glUniform2fv_procAddress = pointer_cast(glGetProcAddressChecked("glUniform2fv"), fun<int, int, *float, void>)
+		glUniform2fv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glUniform2fv"), fun<int, int, *float, void>)
 	}
 	glUniform2fv_procAddress(location, count, value)
 }
@@ -1511,7 +1969,7 @@ glUniform2fv(location int, count int, value *float) void {
 :glUniform2i_procAddress fun<int, int, int, void> #Mutable
 glUniform2i(location int, v0 int, v1 int) void {
 	if glUniform2i_procAddress == null {
-		glUniform2i_procAddress = pointer_cast(glGetProcAddressChecked("glUniform2i"), fun<int, int, int, void>)
+		glUniform2i_procAddress = pointer_cast(SDL_GL_GetProcAddress("glUniform2i"), fun<int, int, int, void>)
 	}
 	glUniform2i_procAddress(location, v0, v1)
 }
@@ -1519,7 +1977,7 @@ glUniform2i(location int, v0 int, v1 int) void {
 :glUniform2iv_procAddress fun<int, int, *int, void> #Mutable
 glUniform2iv(location int, count int, value *int) void {
 	if glUniform2iv_procAddress == null {
-		glUniform2iv_procAddress = pointer_cast(glGetProcAddressChecked("glUniform2iv"), fun<int, int, *int, void>)
+		glUniform2iv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glUniform2iv"), fun<int, int, *int, void>)
 	}
 	glUniform2iv_procAddress(location, count, value)
 }
@@ -1527,7 +1985,7 @@ glUniform2iv(location int, count int, value *int) void {
 :glUniform2ui_procAddress fun<int, uint, uint, void> #Mutable
 glUniform2ui(location int, v0 uint, v1 uint) void {
 	if glUniform2ui_procAddress == null {
-		glUniform2ui_procAddress = pointer_cast(glGetProcAddressChecked("glUniform2ui"), fun<int, uint, uint, void>)
+		glUniform2ui_procAddress = pointer_cast(SDL_GL_GetProcAddress("glUniform2ui"), fun<int, uint, uint, void>)
 	}
 	glUniform2ui_procAddress(location, v0, v1)
 }
@@ -1535,7 +1993,7 @@ glUniform2ui(location int, v0 uint, v1 uint) void {
 :glUniform2uiv_procAddress fun<int, int, *uint, void> #Mutable
 glUniform2uiv(location int, count int, value *uint) void {
 	if glUniform2uiv_procAddress == null {
-		glUniform2uiv_procAddress = pointer_cast(glGetProcAddressChecked("glUniform2uiv"), fun<int, int, *uint, void>)
+		glUniform2uiv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glUniform2uiv"), fun<int, int, *uint, void>)
 	}
 	glUniform2uiv_procAddress(location, count, value)
 }
@@ -1543,7 +2001,7 @@ glUniform2uiv(location int, count int, value *uint) void {
 :glUniform3f_procAddress fun<int, float, float, float, void> #Mutable
 glUniform3f(location int, v0 float, v1 float, v2 float) void {
 	if glUniform3f_procAddress == null {
-		glUniform3f_procAddress = pointer_cast(glGetProcAddressChecked("glUniform3f"), fun<int, float, float, float, void>)
+		glUniform3f_procAddress = pointer_cast(SDL_GL_GetProcAddress("glUniform3f"), fun<int, float, float, float, void>)
 	}
 	glUniform3f_procAddress(location, v0, v1, v2)
 }
@@ -1551,7 +2009,7 @@ glUniform3f(location int, v0 float, v1 float, v2 float) void {
 :glUniform3fv_procAddress fun<int, int, *float, void> #Mutable
 glUniform3fv(location int, count int, value *float) void {
 	if glUniform3fv_procAddress == null {
-		glUniform3fv_procAddress = pointer_cast(glGetProcAddressChecked("glUniform3fv"), fun<int, int, *float, void>)
+		glUniform3fv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glUniform3fv"), fun<int, int, *float, void>)
 	}
 	glUniform3fv_procAddress(location, count, value)
 }
@@ -1559,7 +2017,7 @@ glUniform3fv(location int, count int, value *float) void {
 :glUniform3i_procAddress fun<int, int, int, int, void> #Mutable
 glUniform3i(location int, v0 int, v1 int, v2 int) void {
 	if glUniform3i_procAddress == null {
-		glUniform3i_procAddress = pointer_cast(glGetProcAddressChecked("glUniform3i"), fun<int, int, int, int, void>)
+		glUniform3i_procAddress = pointer_cast(SDL_GL_GetProcAddress("glUniform3i"), fun<int, int, int, int, void>)
 	}
 	glUniform3i_procAddress(location, v0, v1, v2)
 }
@@ -1567,7 +2025,7 @@ glUniform3i(location int, v0 int, v1 int, v2 int) void {
 :glUniform3iv_procAddress fun<int, int, *int, void> #Mutable
 glUniform3iv(location int, count int, value *int) void {
 	if glUniform3iv_procAddress == null {
-		glUniform3iv_procAddress = pointer_cast(glGetProcAddressChecked("glUniform3iv"), fun<int, int, *int, void>)
+		glUniform3iv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glUniform3iv"), fun<int, int, *int, void>)
 	}
 	glUniform3iv_procAddress(location, count, value)
 }
@@ -1575,7 +2033,7 @@ glUniform3iv(location int, count int, value *int) void {
 :glUniform3ui_procAddress fun<int, uint, uint, uint, void> #Mutable
 glUniform3ui(location int, v0 uint, v1 uint, v2 uint) void {
 	if glUniform3ui_procAddress == null {
-		glUniform3ui_procAddress = pointer_cast(glGetProcAddressChecked("glUniform3ui"), fun<int, uint, uint, uint, void>)
+		glUniform3ui_procAddress = pointer_cast(SDL_GL_GetProcAddress("glUniform3ui"), fun<int, uint, uint, uint, void>)
 	}
 	glUniform3ui_procAddress(location, v0, v1, v2)
 }
@@ -1583,7 +2041,7 @@ glUniform3ui(location int, v0 uint, v1 uint, v2 uint) void {
 :glUniform3uiv_procAddress fun<int, int, *uint, void> #Mutable
 glUniform3uiv(location int, count int, value *uint) void {
 	if glUniform3uiv_procAddress == null {
-		glUniform3uiv_procAddress = pointer_cast(glGetProcAddressChecked("glUniform3uiv"), fun<int, int, *uint, void>)
+		glUniform3uiv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glUniform3uiv"), fun<int, int, *uint, void>)
 	}
 	glUniform3uiv_procAddress(location, count, value)
 }
@@ -1591,7 +2049,7 @@ glUniform3uiv(location int, count int, value *uint) void {
 :glUniform4f_procAddress fun<int, float, float, float, float, void> #Mutable
 glUniform4f(location int, v0 float, v1 float, v2 float, v3 float) void {
 	if glUniform4f_procAddress == null {
-		glUniform4f_procAddress = pointer_cast(glGetProcAddressChecked("glUniform4f"), fun<int, float, float, float, float, void>)
+		glUniform4f_procAddress = pointer_cast(SDL_GL_GetProcAddress("glUniform4f"), fun<int, float, float, float, float, void>)
 	}
 	glUniform4f_procAddress(location, v0, v1, v2, v3)
 }
@@ -1599,7 +2057,7 @@ glUniform4f(location int, v0 float, v1 float, v2 float, v3 float) void {
 :glUniform4fv_procAddress fun<int, int, *float, void> #Mutable
 glUniform4fv(location int, count int, value *float) void {
 	if glUniform4fv_procAddress == null {
-		glUniform4fv_procAddress = pointer_cast(glGetProcAddressChecked("glUniform4fv"), fun<int, int, *float, void>)
+		glUniform4fv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glUniform4fv"), fun<int, int, *float, void>)
 	}
 	glUniform4fv_procAddress(location, count, value)
 }
@@ -1607,7 +2065,7 @@ glUniform4fv(location int, count int, value *float) void {
 :glUniform4i_procAddress fun<int, int, int, int, int, void> #Mutable
 glUniform4i(location int, v0 int, v1 int, v2 int, v3 int) void {
 	if glUniform4i_procAddress == null {
-		glUniform4i_procAddress = pointer_cast(glGetProcAddressChecked("glUniform4i"), fun<int, int, int, int, int, void>)
+		glUniform4i_procAddress = pointer_cast(SDL_GL_GetProcAddress("glUniform4i"), fun<int, int, int, int, int, void>)
 	}
 	glUniform4i_procAddress(location, v0, v1, v2, v3)
 }
@@ -1615,7 +2073,7 @@ glUniform4i(location int, v0 int, v1 int, v2 int, v3 int) void {
 :glUniform4iv_procAddress fun<int, int, *int, void> #Mutable
 glUniform4iv(location int, count int, value *int) void {
 	if glUniform4iv_procAddress == null {
-		glUniform4iv_procAddress = pointer_cast(glGetProcAddressChecked("glUniform4iv"), fun<int, int, *int, void>)
+		glUniform4iv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glUniform4iv"), fun<int, int, *int, void>)
 	}
 	glUniform4iv_procAddress(location, count, value)
 }
@@ -1623,7 +2081,7 @@ glUniform4iv(location int, count int, value *int) void {
 :glUniform4ui_procAddress fun<int, uint, uint, uint, uint, void> #Mutable
 glUniform4ui(location int, v0 uint, v1 uint, v2 uint, v3 uint) void {
 	if glUniform4ui_procAddress == null {
-		glUniform4ui_procAddress = pointer_cast(glGetProcAddressChecked("glUniform4ui"), fun<int, uint, uint, uint, uint, void>)
+		glUniform4ui_procAddress = pointer_cast(SDL_GL_GetProcAddress("glUniform4ui"), fun<int, uint, uint, uint, uint, void>)
 	}
 	glUniform4ui_procAddress(location, v0, v1, v2, v3)
 }
@@ -1631,7 +2089,7 @@ glUniform4ui(location int, v0 uint, v1 uint, v2 uint, v3 uint) void {
 :glUniform4uiv_procAddress fun<int, int, *uint, void> #Mutable
 glUniform4uiv(location int, count int, value *uint) void {
 	if glUniform4uiv_procAddress == null {
-		glUniform4uiv_procAddress = pointer_cast(glGetProcAddressChecked("glUniform4uiv"), fun<int, int, *uint, void>)
+		glUniform4uiv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glUniform4uiv"), fun<int, int, *uint, void>)
 	}
 	glUniform4uiv_procAddress(location, count, value)
 }
@@ -1639,87 +2097,87 @@ glUniform4uiv(location int, count int, value *uint) void {
 :glUniformBlockBinding_procAddress fun<uint, uint, uint, void> #Mutable
 glUniformBlockBinding(program uint, uniformBlockIndex uint, uniformBlockBinding uint) void {
 	if glUniformBlockBinding_procAddress == null {
-		glUniformBlockBinding_procAddress = pointer_cast(glGetProcAddressChecked("glUniformBlockBinding"), fun<uint, uint, uint, void>)
+		glUniformBlockBinding_procAddress = pointer_cast(SDL_GL_GetProcAddress("glUniformBlockBinding"), fun<uint, uint, uint, void>)
 	}
 	glUniformBlockBinding_procAddress(program, uniformBlockIndex, uniformBlockBinding)
 }
 
-:glUniformMatrix2fv_procAddress fun<int, int, bool, *float, void> #Mutable
-glUniformMatrix2fv(location int, count int, transpose bool, value *float) void {
+:glUniformMatrix2fv_procAddress fun<int, int, byte, *float, void> #Mutable
+glUniformMatrix2fv(location int, count int, transpose byte, value *float) void {
 	if glUniformMatrix2fv_procAddress == null {
-		glUniformMatrix2fv_procAddress = pointer_cast(glGetProcAddressChecked("glUniformMatrix2fv"), fun<int, int, bool, *float, void>)
+		glUniformMatrix2fv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glUniformMatrix2fv"), fun<int, int, byte, *float, void>)
 	}
 	glUniformMatrix2fv_procAddress(location, count, transpose, value)
 }
 
-:glUniformMatrix2x3fv_procAddress fun<int, int, bool, *float, void> #Mutable
-glUniformMatrix2x3fv(location int, count int, transpose bool, value *float) void {
+:glUniformMatrix2x3fv_procAddress fun<int, int, byte, *float, void> #Mutable
+glUniformMatrix2x3fv(location int, count int, transpose byte, value *float) void {
 	if glUniformMatrix2x3fv_procAddress == null {
-		glUniformMatrix2x3fv_procAddress = pointer_cast(glGetProcAddressChecked("glUniformMatrix2x3fv"), fun<int, int, bool, *float, void>)
+		glUniformMatrix2x3fv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glUniformMatrix2x3fv"), fun<int, int, byte, *float, void>)
 	}
 	glUniformMatrix2x3fv_procAddress(location, count, transpose, value)
 }
 
-:glUniformMatrix2x4fv_procAddress fun<int, int, bool, *float, void> #Mutable
-glUniformMatrix2x4fv(location int, count int, transpose bool, value *float) void {
+:glUniformMatrix2x4fv_procAddress fun<int, int, byte, *float, void> #Mutable
+glUniformMatrix2x4fv(location int, count int, transpose byte, value *float) void {
 	if glUniformMatrix2x4fv_procAddress == null {
-		glUniformMatrix2x4fv_procAddress = pointer_cast(glGetProcAddressChecked("glUniformMatrix2x4fv"), fun<int, int, bool, *float, void>)
+		glUniformMatrix2x4fv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glUniformMatrix2x4fv"), fun<int, int, byte, *float, void>)
 	}
 	glUniformMatrix2x4fv_procAddress(location, count, transpose, value)
 }
 
-:glUniformMatrix3fv_procAddress fun<int, int, bool, *float, void> #Mutable
-glUniformMatrix3fv(location int, count int, transpose bool, value *float) void {
+:glUniformMatrix3fv_procAddress fun<int, int, byte, *float, void> #Mutable
+glUniformMatrix3fv(location int, count int, transpose byte, value *float) void {
 	if glUniformMatrix3fv_procAddress == null {
-		glUniformMatrix3fv_procAddress = pointer_cast(glGetProcAddressChecked("glUniformMatrix3fv"), fun<int, int, bool, *float, void>)
+		glUniformMatrix3fv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glUniformMatrix3fv"), fun<int, int, byte, *float, void>)
 	}
 	glUniformMatrix3fv_procAddress(location, count, transpose, value)
 }
 
-:glUniformMatrix3x2fv_procAddress fun<int, int, bool, *float, void> #Mutable
-glUniformMatrix3x2fv(location int, count int, transpose bool, value *float) void {
+:glUniformMatrix3x2fv_procAddress fun<int, int, byte, *float, void> #Mutable
+glUniformMatrix3x2fv(location int, count int, transpose byte, value *float) void {
 	if glUniformMatrix3x2fv_procAddress == null {
-		glUniformMatrix3x2fv_procAddress = pointer_cast(glGetProcAddressChecked("glUniformMatrix3x2fv"), fun<int, int, bool, *float, void>)
+		glUniformMatrix3x2fv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glUniformMatrix3x2fv"), fun<int, int, byte, *float, void>)
 	}
 	glUniformMatrix3x2fv_procAddress(location, count, transpose, value)
 }
 
-:glUniformMatrix3x4fv_procAddress fun<int, int, bool, *float, void> #Mutable
-glUniformMatrix3x4fv(location int, count int, transpose bool, value *float) void {
+:glUniformMatrix3x4fv_procAddress fun<int, int, byte, *float, void> #Mutable
+glUniformMatrix3x4fv(location int, count int, transpose byte, value *float) void {
 	if glUniformMatrix3x4fv_procAddress == null {
-		glUniformMatrix3x4fv_procAddress = pointer_cast(glGetProcAddressChecked("glUniformMatrix3x4fv"), fun<int, int, bool, *float, void>)
+		glUniformMatrix3x4fv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glUniformMatrix3x4fv"), fun<int, int, byte, *float, void>)
 	}
 	glUniformMatrix3x4fv_procAddress(location, count, transpose, value)
 }
 
-:glUniformMatrix4fv_procAddress fun<int, int, bool, *float, void> #Mutable
-glUniformMatrix4fv(location int, count int, transpose bool, value *float) void {
+:glUniformMatrix4fv_procAddress fun<int, int, byte, *float, void> #Mutable
+glUniformMatrix4fv(location int, count int, transpose byte, value *float) void {
 	if glUniformMatrix4fv_procAddress == null {
-		glUniformMatrix4fv_procAddress = pointer_cast(glGetProcAddressChecked("glUniformMatrix4fv"), fun<int, int, bool, *float, void>)
+		glUniformMatrix4fv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glUniformMatrix4fv"), fun<int, int, byte, *float, void>)
 	}
 	glUniformMatrix4fv_procAddress(location, count, transpose, value)
 }
 
-:glUniformMatrix4x2fv_procAddress fun<int, int, bool, *float, void> #Mutable
-glUniformMatrix4x2fv(location int, count int, transpose bool, value *float) void {
+:glUniformMatrix4x2fv_procAddress fun<int, int, byte, *float, void> #Mutable
+glUniformMatrix4x2fv(location int, count int, transpose byte, value *float) void {
 	if glUniformMatrix4x2fv_procAddress == null {
-		glUniformMatrix4x2fv_procAddress = pointer_cast(glGetProcAddressChecked("glUniformMatrix4x2fv"), fun<int, int, bool, *float, void>)
+		glUniformMatrix4x2fv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glUniformMatrix4x2fv"), fun<int, int, byte, *float, void>)
 	}
 	glUniformMatrix4x2fv_procAddress(location, count, transpose, value)
 }
 
-:glUniformMatrix4x3fv_procAddress fun<int, int, bool, *float, void> #Mutable
-glUniformMatrix4x3fv(location int, count int, transpose bool, value *float) void {
+:glUniformMatrix4x3fv_procAddress fun<int, int, byte, *float, void> #Mutable
+glUniformMatrix4x3fv(location int, count int, transpose byte, value *float) void {
 	if glUniformMatrix4x3fv_procAddress == null {
-		glUniformMatrix4x3fv_procAddress = pointer_cast(glGetProcAddressChecked("glUniformMatrix4x3fv"), fun<int, int, bool, *float, void>)
+		glUniformMatrix4x3fv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glUniformMatrix4x3fv"), fun<int, int, byte, *float, void>)
 	}
 	glUniformMatrix4x3fv_procAddress(location, count, transpose, value)
 }
 
-:glUnmapBuffer_procAddress fun<uint, bool> #Mutable
-glUnmapBuffer(target uint) bool {
+:glUnmapBuffer_procAddress fun<uint, byte> #Mutable
+glUnmapBuffer(target uint) byte {
 	if glUnmapBuffer_procAddress == null {
-		glUnmapBuffer_procAddress = pointer_cast(glGetProcAddressChecked("glUnmapBuffer"), fun<uint, bool>)
+		glUnmapBuffer_procAddress = pointer_cast(SDL_GL_GetProcAddress("glUnmapBuffer"), fun<uint, byte>)
 	}
 	return glUnmapBuffer_procAddress(target)
 }
@@ -1727,7 +2185,7 @@ glUnmapBuffer(target uint) bool {
 :glUseProgram_procAddress fun<uint, void> #Mutable
 glUseProgram(program uint) void {
 	if glUseProgram_procAddress == null {
-		glUseProgram_procAddress = pointer_cast(glGetProcAddressChecked("glUseProgram"), fun<uint, void>)
+		glUseProgram_procAddress = pointer_cast(SDL_GL_GetProcAddress("glUseProgram"), fun<uint, void>)
 	}
 	glUseProgram_procAddress(program)
 }
@@ -1735,7 +2193,7 @@ glUseProgram(program uint) void {
 :glValidateProgram_procAddress fun<uint, void> #Mutable
 glValidateProgram(program uint) void {
 	if glValidateProgram_procAddress == null {
-		glValidateProgram_procAddress = pointer_cast(glGetProcAddressChecked("glValidateProgram"), fun<uint, void>)
+		glValidateProgram_procAddress = pointer_cast(SDL_GL_GetProcAddress("glValidateProgram"), fun<uint, void>)
 	}
 	glValidateProgram_procAddress(program)
 }
@@ -1743,7 +2201,7 @@ glValidateProgram(program uint) void {
 :glVertexAttrib1d_procAddress fun<uint, double, void> #Mutable
 glVertexAttrib1d(index uint, x double) void {
 	if glVertexAttrib1d_procAddress == null {
-		glVertexAttrib1d_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttrib1d"), fun<uint, double, void>)
+		glVertexAttrib1d_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttrib1d"), fun<uint, double, void>)
 	}
 	glVertexAttrib1d_procAddress(index, x)
 }
@@ -1751,7 +2209,7 @@ glVertexAttrib1d(index uint, x double) void {
 :glVertexAttrib1dv_procAddress fun<uint, *double, void> #Mutable
 glVertexAttrib1dv(index uint, v *double) void {
 	if glVertexAttrib1dv_procAddress == null {
-		glVertexAttrib1dv_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttrib1dv"), fun<uint, *double, void>)
+		glVertexAttrib1dv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttrib1dv"), fun<uint, *double, void>)
 	}
 	glVertexAttrib1dv_procAddress(index, v)
 }
@@ -1759,7 +2217,7 @@ glVertexAttrib1dv(index uint, v *double) void {
 :glVertexAttrib1f_procAddress fun<uint, float, void> #Mutable
 glVertexAttrib1f(index uint, x float) void {
 	if glVertexAttrib1f_procAddress == null {
-		glVertexAttrib1f_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttrib1f"), fun<uint, float, void>)
+		glVertexAttrib1f_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttrib1f"), fun<uint, float, void>)
 	}
 	glVertexAttrib1f_procAddress(index, x)
 }
@@ -1767,7 +2225,7 @@ glVertexAttrib1f(index uint, x float) void {
 :glVertexAttrib1fv_procAddress fun<uint, *float, void> #Mutable
 glVertexAttrib1fv(index uint, v *float) void {
 	if glVertexAttrib1fv_procAddress == null {
-		glVertexAttrib1fv_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttrib1fv"), fun<uint, *float, void>)
+		glVertexAttrib1fv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttrib1fv"), fun<uint, *float, void>)
 	}
 	glVertexAttrib1fv_procAddress(index, v)
 }
@@ -1775,7 +2233,7 @@ glVertexAttrib1fv(index uint, v *float) void {
 :glVertexAttrib1s_procAddress fun<uint, short, void> #Mutable
 glVertexAttrib1s(index uint, x short) void {
 	if glVertexAttrib1s_procAddress == null {
-		glVertexAttrib1s_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttrib1s"), fun<uint, short, void>)
+		glVertexAttrib1s_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttrib1s"), fun<uint, short, void>)
 	}
 	glVertexAttrib1s_procAddress(index, x)
 }
@@ -1783,7 +2241,7 @@ glVertexAttrib1s(index uint, x short) void {
 :glVertexAttrib1sv_procAddress fun<uint, *short, void> #Mutable
 glVertexAttrib1sv(index uint, v *short) void {
 	if glVertexAttrib1sv_procAddress == null {
-		glVertexAttrib1sv_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttrib1sv"), fun<uint, *short, void>)
+		glVertexAttrib1sv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttrib1sv"), fun<uint, *short, void>)
 	}
 	glVertexAttrib1sv_procAddress(index, v)
 }
@@ -1791,7 +2249,7 @@ glVertexAttrib1sv(index uint, v *short) void {
 :glVertexAttrib2d_procAddress fun<uint, double, double, void> #Mutable
 glVertexAttrib2d(index uint, x double, y double) void {
 	if glVertexAttrib2d_procAddress == null {
-		glVertexAttrib2d_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttrib2d"), fun<uint, double, double, void>)
+		glVertexAttrib2d_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttrib2d"), fun<uint, double, double, void>)
 	}
 	glVertexAttrib2d_procAddress(index, x, y)
 }
@@ -1799,7 +2257,7 @@ glVertexAttrib2d(index uint, x double, y double) void {
 :glVertexAttrib2dv_procAddress fun<uint, *double, void> #Mutable
 glVertexAttrib2dv(index uint, v *double) void {
 	if glVertexAttrib2dv_procAddress == null {
-		glVertexAttrib2dv_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttrib2dv"), fun<uint, *double, void>)
+		glVertexAttrib2dv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttrib2dv"), fun<uint, *double, void>)
 	}
 	glVertexAttrib2dv_procAddress(index, v)
 }
@@ -1807,7 +2265,7 @@ glVertexAttrib2dv(index uint, v *double) void {
 :glVertexAttrib2f_procAddress fun<uint, float, float, void> #Mutable
 glVertexAttrib2f(index uint, x float, y float) void {
 	if glVertexAttrib2f_procAddress == null {
-		glVertexAttrib2f_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttrib2f"), fun<uint, float, float, void>)
+		glVertexAttrib2f_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttrib2f"), fun<uint, float, float, void>)
 	}
 	glVertexAttrib2f_procAddress(index, x, y)
 }
@@ -1815,7 +2273,7 @@ glVertexAttrib2f(index uint, x float, y float) void {
 :glVertexAttrib2fv_procAddress fun<uint, *float, void> #Mutable
 glVertexAttrib2fv(index uint, v *float) void {
 	if glVertexAttrib2fv_procAddress == null {
-		glVertexAttrib2fv_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttrib2fv"), fun<uint, *float, void>)
+		glVertexAttrib2fv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttrib2fv"), fun<uint, *float, void>)
 	}
 	glVertexAttrib2fv_procAddress(index, v)
 }
@@ -1823,7 +2281,7 @@ glVertexAttrib2fv(index uint, v *float) void {
 :glVertexAttrib2s_procAddress fun<uint, short, short, void> #Mutable
 glVertexAttrib2s(index uint, x short, y short) void {
 	if glVertexAttrib2s_procAddress == null {
-		glVertexAttrib2s_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttrib2s"), fun<uint, short, short, void>)
+		glVertexAttrib2s_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttrib2s"), fun<uint, short, short, void>)
 	}
 	glVertexAttrib2s_procAddress(index, x, y)
 }
@@ -1831,7 +2289,7 @@ glVertexAttrib2s(index uint, x short, y short) void {
 :glVertexAttrib2sv_procAddress fun<uint, *short, void> #Mutable
 glVertexAttrib2sv(index uint, v *short) void {
 	if glVertexAttrib2sv_procAddress == null {
-		glVertexAttrib2sv_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttrib2sv"), fun<uint, *short, void>)
+		glVertexAttrib2sv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttrib2sv"), fun<uint, *short, void>)
 	}
 	glVertexAttrib2sv_procAddress(index, v)
 }
@@ -1839,7 +2297,7 @@ glVertexAttrib2sv(index uint, v *short) void {
 :glVertexAttrib3d_procAddress fun<uint, double, double, double, void> #Mutable
 glVertexAttrib3d(index uint, x double, y double, z double) void {
 	if glVertexAttrib3d_procAddress == null {
-		glVertexAttrib3d_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttrib3d"), fun<uint, double, double, double, void>)
+		glVertexAttrib3d_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttrib3d"), fun<uint, double, double, double, void>)
 	}
 	glVertexAttrib3d_procAddress(index, x, y, z)
 }
@@ -1847,7 +2305,7 @@ glVertexAttrib3d(index uint, x double, y double, z double) void {
 :glVertexAttrib3dv_procAddress fun<uint, *double, void> #Mutable
 glVertexAttrib3dv(index uint, v *double) void {
 	if glVertexAttrib3dv_procAddress == null {
-		glVertexAttrib3dv_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttrib3dv"), fun<uint, *double, void>)
+		glVertexAttrib3dv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttrib3dv"), fun<uint, *double, void>)
 	}
 	glVertexAttrib3dv_procAddress(index, v)
 }
@@ -1855,7 +2313,7 @@ glVertexAttrib3dv(index uint, v *double) void {
 :glVertexAttrib3f_procAddress fun<uint, float, float, float, void> #Mutable
 glVertexAttrib3f(index uint, x float, y float, z float) void {
 	if glVertexAttrib3f_procAddress == null {
-		glVertexAttrib3f_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttrib3f"), fun<uint, float, float, float, void>)
+		glVertexAttrib3f_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttrib3f"), fun<uint, float, float, float, void>)
 	}
 	glVertexAttrib3f_procAddress(index, x, y, z)
 }
@@ -1863,7 +2321,7 @@ glVertexAttrib3f(index uint, x float, y float, z float) void {
 :glVertexAttrib3fv_procAddress fun<uint, *float, void> #Mutable
 glVertexAttrib3fv(index uint, v *float) void {
 	if glVertexAttrib3fv_procAddress == null {
-		glVertexAttrib3fv_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttrib3fv"), fun<uint, *float, void>)
+		glVertexAttrib3fv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttrib3fv"), fun<uint, *float, void>)
 	}
 	glVertexAttrib3fv_procAddress(index, v)
 }
@@ -1871,7 +2329,7 @@ glVertexAttrib3fv(index uint, v *float) void {
 :glVertexAttrib3s_procAddress fun<uint, short, short, short, void> #Mutable
 glVertexAttrib3s(index uint, x short, y short, z short) void {
 	if glVertexAttrib3s_procAddress == null {
-		glVertexAttrib3s_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttrib3s"), fun<uint, short, short, short, void>)
+		glVertexAttrib3s_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttrib3s"), fun<uint, short, short, short, void>)
 	}
 	glVertexAttrib3s_procAddress(index, x, y, z)
 }
@@ -1879,7 +2337,7 @@ glVertexAttrib3s(index uint, x short, y short, z short) void {
 :glVertexAttrib3sv_procAddress fun<uint, *short, void> #Mutable
 glVertexAttrib3sv(index uint, v *short) void {
 	if glVertexAttrib3sv_procAddress == null {
-		glVertexAttrib3sv_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttrib3sv"), fun<uint, *short, void>)
+		glVertexAttrib3sv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttrib3sv"), fun<uint, *short, void>)
 	}
 	glVertexAttrib3sv_procAddress(index, v)
 }
@@ -1887,7 +2345,7 @@ glVertexAttrib3sv(index uint, v *short) void {
 :glVertexAttrib4Nbv_procAddress fun<uint, *sbyte, void> #Mutable
 glVertexAttrib4Nbv(index uint, v *sbyte) void {
 	if glVertexAttrib4Nbv_procAddress == null {
-		glVertexAttrib4Nbv_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttrib4Nbv"), fun<uint, *sbyte, void>)
+		glVertexAttrib4Nbv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttrib4Nbv"), fun<uint, *sbyte, void>)
 	}
 	glVertexAttrib4Nbv_procAddress(index, v)
 }
@@ -1895,7 +2353,7 @@ glVertexAttrib4Nbv(index uint, v *sbyte) void {
 :glVertexAttrib4Niv_procAddress fun<uint, *int, void> #Mutable
 glVertexAttrib4Niv(index uint, v *int) void {
 	if glVertexAttrib4Niv_procAddress == null {
-		glVertexAttrib4Niv_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttrib4Niv"), fun<uint, *int, void>)
+		glVertexAttrib4Niv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttrib4Niv"), fun<uint, *int, void>)
 	}
 	glVertexAttrib4Niv_procAddress(index, v)
 }
@@ -1903,7 +2361,7 @@ glVertexAttrib4Niv(index uint, v *int) void {
 :glVertexAttrib4Nsv_procAddress fun<uint, *short, void> #Mutable
 glVertexAttrib4Nsv(index uint, v *short) void {
 	if glVertexAttrib4Nsv_procAddress == null {
-		glVertexAttrib4Nsv_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttrib4Nsv"), fun<uint, *short, void>)
+		glVertexAttrib4Nsv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttrib4Nsv"), fun<uint, *short, void>)
 	}
 	glVertexAttrib4Nsv_procAddress(index, v)
 }
@@ -1911,7 +2369,7 @@ glVertexAttrib4Nsv(index uint, v *short) void {
 :glVertexAttrib4Nub_procAddress fun<uint, byte, byte, byte, byte, void> #Mutable
 glVertexAttrib4Nub(index uint, x byte, y byte, z byte, w byte) void {
 	if glVertexAttrib4Nub_procAddress == null {
-		glVertexAttrib4Nub_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttrib4Nub"), fun<uint, byte, byte, byte, byte, void>)
+		glVertexAttrib4Nub_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttrib4Nub"), fun<uint, byte, byte, byte, byte, void>)
 	}
 	glVertexAttrib4Nub_procAddress(index, x, y, z, w)
 }
@@ -1919,7 +2377,7 @@ glVertexAttrib4Nub(index uint, x byte, y byte, z byte, w byte) void {
 :glVertexAttrib4Nubv_procAddress fun<uint, *byte, void> #Mutable
 glVertexAttrib4Nubv(index uint, v *byte) void {
 	if glVertexAttrib4Nubv_procAddress == null {
-		glVertexAttrib4Nubv_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttrib4Nubv"), fun<uint, *byte, void>)
+		glVertexAttrib4Nubv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttrib4Nubv"), fun<uint, *byte, void>)
 	}
 	glVertexAttrib4Nubv_procAddress(index, v)
 }
@@ -1927,7 +2385,7 @@ glVertexAttrib4Nubv(index uint, v *byte) void {
 :glVertexAttrib4Nuiv_procAddress fun<uint, *uint, void> #Mutable
 glVertexAttrib4Nuiv(index uint, v *uint) void {
 	if glVertexAttrib4Nuiv_procAddress == null {
-		glVertexAttrib4Nuiv_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttrib4Nuiv"), fun<uint, *uint, void>)
+		glVertexAttrib4Nuiv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttrib4Nuiv"), fun<uint, *uint, void>)
 	}
 	glVertexAttrib4Nuiv_procAddress(index, v)
 }
@@ -1935,7 +2393,7 @@ glVertexAttrib4Nuiv(index uint, v *uint) void {
 :glVertexAttrib4Nusv_procAddress fun<uint, *ushort, void> #Mutable
 glVertexAttrib4Nusv(index uint, v *ushort) void {
 	if glVertexAttrib4Nusv_procAddress == null {
-		glVertexAttrib4Nusv_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttrib4Nusv"), fun<uint, *ushort, void>)
+		glVertexAttrib4Nusv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttrib4Nusv"), fun<uint, *ushort, void>)
 	}
 	glVertexAttrib4Nusv_procAddress(index, v)
 }
@@ -1943,7 +2401,7 @@ glVertexAttrib4Nusv(index uint, v *ushort) void {
 :glVertexAttrib4bv_procAddress fun<uint, *sbyte, void> #Mutable
 glVertexAttrib4bv(index uint, v *sbyte) void {
 	if glVertexAttrib4bv_procAddress == null {
-		glVertexAttrib4bv_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttrib4bv"), fun<uint, *sbyte, void>)
+		glVertexAttrib4bv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttrib4bv"), fun<uint, *sbyte, void>)
 	}
 	glVertexAttrib4bv_procAddress(index, v)
 }
@@ -1951,7 +2409,7 @@ glVertexAttrib4bv(index uint, v *sbyte) void {
 :glVertexAttrib4d_procAddress fun<uint, double, double, double, double, void> #Mutable
 glVertexAttrib4d(index uint, x double, y double, z double, w double) void {
 	if glVertexAttrib4d_procAddress == null {
-		glVertexAttrib4d_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttrib4d"), fun<uint, double, double, double, double, void>)
+		glVertexAttrib4d_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttrib4d"), fun<uint, double, double, double, double, void>)
 	}
 	glVertexAttrib4d_procAddress(index, x, y, z, w)
 }
@@ -1959,7 +2417,7 @@ glVertexAttrib4d(index uint, x double, y double, z double, w double) void {
 :glVertexAttrib4dv_procAddress fun<uint, *double, void> #Mutable
 glVertexAttrib4dv(index uint, v *double) void {
 	if glVertexAttrib4dv_procAddress == null {
-		glVertexAttrib4dv_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttrib4dv"), fun<uint, *double, void>)
+		glVertexAttrib4dv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttrib4dv"), fun<uint, *double, void>)
 	}
 	glVertexAttrib4dv_procAddress(index, v)
 }
@@ -1967,7 +2425,7 @@ glVertexAttrib4dv(index uint, v *double) void {
 :glVertexAttrib4f_procAddress fun<uint, float, float, float, float, void> #Mutable
 glVertexAttrib4f(index uint, x float, y float, z float, w float) void {
 	if glVertexAttrib4f_procAddress == null {
-		glVertexAttrib4f_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttrib4f"), fun<uint, float, float, float, float, void>)
+		glVertexAttrib4f_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttrib4f"), fun<uint, float, float, float, float, void>)
 	}
 	glVertexAttrib4f_procAddress(index, x, y, z, w)
 }
@@ -1975,7 +2433,7 @@ glVertexAttrib4f(index uint, x float, y float, z float, w float) void {
 :glVertexAttrib4fv_procAddress fun<uint, *float, void> #Mutable
 glVertexAttrib4fv(index uint, v *float) void {
 	if glVertexAttrib4fv_procAddress == null {
-		glVertexAttrib4fv_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttrib4fv"), fun<uint, *float, void>)
+		glVertexAttrib4fv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttrib4fv"), fun<uint, *float, void>)
 	}
 	glVertexAttrib4fv_procAddress(index, v)
 }
@@ -1983,7 +2441,7 @@ glVertexAttrib4fv(index uint, v *float) void {
 :glVertexAttrib4iv_procAddress fun<uint, *int, void> #Mutable
 glVertexAttrib4iv(index uint, v *int) void {
 	if glVertexAttrib4iv_procAddress == null {
-		glVertexAttrib4iv_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttrib4iv"), fun<uint, *int, void>)
+		glVertexAttrib4iv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttrib4iv"), fun<uint, *int, void>)
 	}
 	glVertexAttrib4iv_procAddress(index, v)
 }
@@ -1991,7 +2449,7 @@ glVertexAttrib4iv(index uint, v *int) void {
 :glVertexAttrib4s_procAddress fun<uint, short, short, short, short, void> #Mutable
 glVertexAttrib4s(index uint, x short, y short, z short, w short) void {
 	if glVertexAttrib4s_procAddress == null {
-		glVertexAttrib4s_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttrib4s"), fun<uint, short, short, short, short, void>)
+		glVertexAttrib4s_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttrib4s"), fun<uint, short, short, short, short, void>)
 	}
 	glVertexAttrib4s_procAddress(index, x, y, z, w)
 }
@@ -1999,7 +2457,7 @@ glVertexAttrib4s(index uint, x short, y short, z short, w short) void {
 :glVertexAttrib4sv_procAddress fun<uint, *short, void> #Mutable
 glVertexAttrib4sv(index uint, v *short) void {
 	if glVertexAttrib4sv_procAddress == null {
-		glVertexAttrib4sv_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttrib4sv"), fun<uint, *short, void>)
+		glVertexAttrib4sv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttrib4sv"), fun<uint, *short, void>)
 	}
 	glVertexAttrib4sv_procAddress(index, v)
 }
@@ -2007,7 +2465,7 @@ glVertexAttrib4sv(index uint, v *short) void {
 :glVertexAttrib4ubv_procAddress fun<uint, *byte, void> #Mutable
 glVertexAttrib4ubv(index uint, v *byte) void {
 	if glVertexAttrib4ubv_procAddress == null {
-		glVertexAttrib4ubv_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttrib4ubv"), fun<uint, *byte, void>)
+		glVertexAttrib4ubv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttrib4ubv"), fun<uint, *byte, void>)
 	}
 	glVertexAttrib4ubv_procAddress(index, v)
 }
@@ -2015,7 +2473,7 @@ glVertexAttrib4ubv(index uint, v *byte) void {
 :glVertexAttrib4uiv_procAddress fun<uint, *uint, void> #Mutable
 glVertexAttrib4uiv(index uint, v *uint) void {
 	if glVertexAttrib4uiv_procAddress == null {
-		glVertexAttrib4uiv_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttrib4uiv"), fun<uint, *uint, void>)
+		glVertexAttrib4uiv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttrib4uiv"), fun<uint, *uint, void>)
 	}
 	glVertexAttrib4uiv_procAddress(index, v)
 }
@@ -2023,7 +2481,7 @@ glVertexAttrib4uiv(index uint, v *uint) void {
 :glVertexAttrib4usv_procAddress fun<uint, *ushort, void> #Mutable
 glVertexAttrib4usv(index uint, v *ushort) void {
 	if glVertexAttrib4usv_procAddress == null {
-		glVertexAttrib4usv_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttrib4usv"), fun<uint, *ushort, void>)
+		glVertexAttrib4usv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttrib4usv"), fun<uint, *ushort, void>)
 	}
 	glVertexAttrib4usv_procAddress(index, v)
 }
@@ -2031,7 +2489,7 @@ glVertexAttrib4usv(index uint, v *ushort) void {
 :glVertexAttribDivisor_procAddress fun<uint, uint, void> #Mutable
 glVertexAttribDivisor(index uint, divisor uint) void {
 	if glVertexAttribDivisor_procAddress == null {
-		glVertexAttribDivisor_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttribDivisor"), fun<uint, uint, void>)
+		glVertexAttribDivisor_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttribDivisor"), fun<uint, uint, void>)
 	}
 	glVertexAttribDivisor_procAddress(index, divisor)
 }
@@ -2039,7 +2497,7 @@ glVertexAttribDivisor(index uint, divisor uint) void {
 :glVertexAttribI1i_procAddress fun<uint, int, void> #Mutable
 glVertexAttribI1i(index uint, x int) void {
 	if glVertexAttribI1i_procAddress == null {
-		glVertexAttribI1i_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttribI1i"), fun<uint, int, void>)
+		glVertexAttribI1i_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttribI1i"), fun<uint, int, void>)
 	}
 	glVertexAttribI1i_procAddress(index, x)
 }
@@ -2047,7 +2505,7 @@ glVertexAttribI1i(index uint, x int) void {
 :glVertexAttribI1iv_procAddress fun<uint, *int, void> #Mutable
 glVertexAttribI1iv(index uint, v *int) void {
 	if glVertexAttribI1iv_procAddress == null {
-		glVertexAttribI1iv_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttribI1iv"), fun<uint, *int, void>)
+		glVertexAttribI1iv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttribI1iv"), fun<uint, *int, void>)
 	}
 	glVertexAttribI1iv_procAddress(index, v)
 }
@@ -2055,7 +2513,7 @@ glVertexAttribI1iv(index uint, v *int) void {
 :glVertexAttribI1ui_procAddress fun<uint, uint, void> #Mutable
 glVertexAttribI1ui(index uint, x uint) void {
 	if glVertexAttribI1ui_procAddress == null {
-		glVertexAttribI1ui_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttribI1ui"), fun<uint, uint, void>)
+		glVertexAttribI1ui_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttribI1ui"), fun<uint, uint, void>)
 	}
 	glVertexAttribI1ui_procAddress(index, x)
 }
@@ -2063,7 +2521,7 @@ glVertexAttribI1ui(index uint, x uint) void {
 :glVertexAttribI1uiv_procAddress fun<uint, *uint, void> #Mutable
 glVertexAttribI1uiv(index uint, v *uint) void {
 	if glVertexAttribI1uiv_procAddress == null {
-		glVertexAttribI1uiv_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttribI1uiv"), fun<uint, *uint, void>)
+		glVertexAttribI1uiv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttribI1uiv"), fun<uint, *uint, void>)
 	}
 	glVertexAttribI1uiv_procAddress(index, v)
 }
@@ -2071,7 +2529,7 @@ glVertexAttribI1uiv(index uint, v *uint) void {
 :glVertexAttribI2i_procAddress fun<uint, int, int, void> #Mutable
 glVertexAttribI2i(index uint, x int, y int) void {
 	if glVertexAttribI2i_procAddress == null {
-		glVertexAttribI2i_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttribI2i"), fun<uint, int, int, void>)
+		glVertexAttribI2i_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttribI2i"), fun<uint, int, int, void>)
 	}
 	glVertexAttribI2i_procAddress(index, x, y)
 }
@@ -2079,7 +2537,7 @@ glVertexAttribI2i(index uint, x int, y int) void {
 :glVertexAttribI2iv_procAddress fun<uint, *int, void> #Mutable
 glVertexAttribI2iv(index uint, v *int) void {
 	if glVertexAttribI2iv_procAddress == null {
-		glVertexAttribI2iv_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttribI2iv"), fun<uint, *int, void>)
+		glVertexAttribI2iv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttribI2iv"), fun<uint, *int, void>)
 	}
 	glVertexAttribI2iv_procAddress(index, v)
 }
@@ -2087,7 +2545,7 @@ glVertexAttribI2iv(index uint, v *int) void {
 :glVertexAttribI2ui_procAddress fun<uint, uint, uint, void> #Mutable
 glVertexAttribI2ui(index uint, x uint, y uint) void {
 	if glVertexAttribI2ui_procAddress == null {
-		glVertexAttribI2ui_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttribI2ui"), fun<uint, uint, uint, void>)
+		glVertexAttribI2ui_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttribI2ui"), fun<uint, uint, uint, void>)
 	}
 	glVertexAttribI2ui_procAddress(index, x, y)
 }
@@ -2095,7 +2553,7 @@ glVertexAttribI2ui(index uint, x uint, y uint) void {
 :glVertexAttribI2uiv_procAddress fun<uint, *uint, void> #Mutable
 glVertexAttribI2uiv(index uint, v *uint) void {
 	if glVertexAttribI2uiv_procAddress == null {
-		glVertexAttribI2uiv_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttribI2uiv"), fun<uint, *uint, void>)
+		glVertexAttribI2uiv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttribI2uiv"), fun<uint, *uint, void>)
 	}
 	glVertexAttribI2uiv_procAddress(index, v)
 }
@@ -2103,7 +2561,7 @@ glVertexAttribI2uiv(index uint, v *uint) void {
 :glVertexAttribI3i_procAddress fun<uint, int, int, int, void> #Mutable
 glVertexAttribI3i(index uint, x int, y int, z int) void {
 	if glVertexAttribI3i_procAddress == null {
-		glVertexAttribI3i_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttribI3i"), fun<uint, int, int, int, void>)
+		glVertexAttribI3i_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttribI3i"), fun<uint, int, int, int, void>)
 	}
 	glVertexAttribI3i_procAddress(index, x, y, z)
 }
@@ -2111,7 +2569,7 @@ glVertexAttribI3i(index uint, x int, y int, z int) void {
 :glVertexAttribI3iv_procAddress fun<uint, *int, void> #Mutable
 glVertexAttribI3iv(index uint, v *int) void {
 	if glVertexAttribI3iv_procAddress == null {
-		glVertexAttribI3iv_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttribI3iv"), fun<uint, *int, void>)
+		glVertexAttribI3iv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttribI3iv"), fun<uint, *int, void>)
 	}
 	glVertexAttribI3iv_procAddress(index, v)
 }
@@ -2119,7 +2577,7 @@ glVertexAttribI3iv(index uint, v *int) void {
 :glVertexAttribI3ui_procAddress fun<uint, uint, uint, uint, void> #Mutable
 glVertexAttribI3ui(index uint, x uint, y uint, z uint) void {
 	if glVertexAttribI3ui_procAddress == null {
-		glVertexAttribI3ui_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttribI3ui"), fun<uint, uint, uint, uint, void>)
+		glVertexAttribI3ui_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttribI3ui"), fun<uint, uint, uint, uint, void>)
 	}
 	glVertexAttribI3ui_procAddress(index, x, y, z)
 }
@@ -2127,7 +2585,7 @@ glVertexAttribI3ui(index uint, x uint, y uint, z uint) void {
 :glVertexAttribI3uiv_procAddress fun<uint, *uint, void> #Mutable
 glVertexAttribI3uiv(index uint, v *uint) void {
 	if glVertexAttribI3uiv_procAddress == null {
-		glVertexAttribI3uiv_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttribI3uiv"), fun<uint, *uint, void>)
+		glVertexAttribI3uiv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttribI3uiv"), fun<uint, *uint, void>)
 	}
 	glVertexAttribI3uiv_procAddress(index, v)
 }
@@ -2135,7 +2593,7 @@ glVertexAttribI3uiv(index uint, v *uint) void {
 :glVertexAttribI4bv_procAddress fun<uint, *sbyte, void> #Mutable
 glVertexAttribI4bv(index uint, v *sbyte) void {
 	if glVertexAttribI4bv_procAddress == null {
-		glVertexAttribI4bv_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttribI4bv"), fun<uint, *sbyte, void>)
+		glVertexAttribI4bv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttribI4bv"), fun<uint, *sbyte, void>)
 	}
 	glVertexAttribI4bv_procAddress(index, v)
 }
@@ -2143,7 +2601,7 @@ glVertexAttribI4bv(index uint, v *sbyte) void {
 :glVertexAttribI4i_procAddress fun<uint, int, int, int, int, void> #Mutable
 glVertexAttribI4i(index uint, x int, y int, z int, w int) void {
 	if glVertexAttribI4i_procAddress == null {
-		glVertexAttribI4i_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttribI4i"), fun<uint, int, int, int, int, void>)
+		glVertexAttribI4i_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttribI4i"), fun<uint, int, int, int, int, void>)
 	}
 	glVertexAttribI4i_procAddress(index, x, y, z, w)
 }
@@ -2151,7 +2609,7 @@ glVertexAttribI4i(index uint, x int, y int, z int, w int) void {
 :glVertexAttribI4iv_procAddress fun<uint, *int, void> #Mutable
 glVertexAttribI4iv(index uint, v *int) void {
 	if glVertexAttribI4iv_procAddress == null {
-		glVertexAttribI4iv_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttribI4iv"), fun<uint, *int, void>)
+		glVertexAttribI4iv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttribI4iv"), fun<uint, *int, void>)
 	}
 	glVertexAttribI4iv_procAddress(index, v)
 }
@@ -2159,7 +2617,7 @@ glVertexAttribI4iv(index uint, v *int) void {
 :glVertexAttribI4sv_procAddress fun<uint, *short, void> #Mutable
 glVertexAttribI4sv(index uint, v *short) void {
 	if glVertexAttribI4sv_procAddress == null {
-		glVertexAttribI4sv_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttribI4sv"), fun<uint, *short, void>)
+		glVertexAttribI4sv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttribI4sv"), fun<uint, *short, void>)
 	}
 	glVertexAttribI4sv_procAddress(index, v)
 }
@@ -2167,7 +2625,7 @@ glVertexAttribI4sv(index uint, v *short) void {
 :glVertexAttribI4ubv_procAddress fun<uint, *byte, void> #Mutable
 glVertexAttribI4ubv(index uint, v *byte) void {
 	if glVertexAttribI4ubv_procAddress == null {
-		glVertexAttribI4ubv_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttribI4ubv"), fun<uint, *byte, void>)
+		glVertexAttribI4ubv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttribI4ubv"), fun<uint, *byte, void>)
 	}
 	glVertexAttribI4ubv_procAddress(index, v)
 }
@@ -2175,7 +2633,7 @@ glVertexAttribI4ubv(index uint, v *byte) void {
 :glVertexAttribI4ui_procAddress fun<uint, uint, uint, uint, uint, void> #Mutable
 glVertexAttribI4ui(index uint, x uint, y uint, z uint, w uint) void {
 	if glVertexAttribI4ui_procAddress == null {
-		glVertexAttribI4ui_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttribI4ui"), fun<uint, uint, uint, uint, uint, void>)
+		glVertexAttribI4ui_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttribI4ui"), fun<uint, uint, uint, uint, uint, void>)
 	}
 	glVertexAttribI4ui_procAddress(index, x, y, z, w)
 }
@@ -2183,7 +2641,7 @@ glVertexAttribI4ui(index uint, x uint, y uint, z uint, w uint) void {
 :glVertexAttribI4uiv_procAddress fun<uint, *uint, void> #Mutable
 glVertexAttribI4uiv(index uint, v *uint) void {
 	if glVertexAttribI4uiv_procAddress == null {
-		glVertexAttribI4uiv_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttribI4uiv"), fun<uint, *uint, void>)
+		glVertexAttribI4uiv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttribI4uiv"), fun<uint, *uint, void>)
 	}
 	glVertexAttribI4uiv_procAddress(index, v)
 }
@@ -2191,143 +2649,103 @@ glVertexAttribI4uiv(index uint, v *uint) void {
 :glVertexAttribI4usv_procAddress fun<uint, *ushort, void> #Mutable
 glVertexAttribI4usv(index uint, v *ushort) void {
 	if glVertexAttribI4usv_procAddress == null {
-		glVertexAttribI4usv_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttribI4usv"), fun<uint, *ushort, void>)
+		glVertexAttribI4usv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttribI4usv"), fun<uint, *ushort, void>)
 	}
 	glVertexAttribI4usv_procAddress(index, v)
 }
 
 :glVertexAttribIPointer_procAddress fun<uint, int, uint, int, pointer, void> #Mutable
-glVertexAttribIPointer(index uint, size int, type uint, stride int, pointer pointer) void {
+glVertexAttribIPointer(index uint, size int, type uint, stride int, pointer_ pointer) void {
 	if glVertexAttribIPointer_procAddress == null {
-		glVertexAttribIPointer_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttribIPointer"), fun<uint, int, uint, int, pointer, void>)
+		glVertexAttribIPointer_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttribIPointer"), fun<uint, int, uint, int, pointer, void>)
 	}
-	glVertexAttribIPointer_procAddress(index, size, type, stride, pointer)
+	glVertexAttribIPointer_procAddress(index, size, type, stride, pointer_)
 }
 
-:glVertexAttribP1ui_procAddress fun<uint, uint, bool, uint, void> #Mutable
-glVertexAttribP1ui(index uint, type uint, normalized bool, value uint) void {
+:glVertexAttribP1ui_procAddress fun<uint, uint, byte, uint, void> #Mutable
+glVertexAttribP1ui(index uint, type uint, normalized byte, value uint) void {
 	if glVertexAttribP1ui_procAddress == null {
-		glVertexAttribP1ui_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttribP1ui"), fun<uint, uint, bool, uint, void>)
+		glVertexAttribP1ui_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttribP1ui"), fun<uint, uint, byte, uint, void>)
 	}
 	glVertexAttribP1ui_procAddress(index, type, normalized, value)
 }
 
-:glVertexAttribP1uiv_procAddress fun<uint, uint, bool, *uint, void> #Mutable
-glVertexAttribP1uiv(index uint, type uint, normalized bool, value *uint) void {
+:glVertexAttribP1uiv_procAddress fun<uint, uint, byte, *uint, void> #Mutable
+glVertexAttribP1uiv(index uint, type uint, normalized byte, value *uint) void {
 	if glVertexAttribP1uiv_procAddress == null {
-		glVertexAttribP1uiv_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttribP1uiv"), fun<uint, uint, bool, *uint, void>)
+		glVertexAttribP1uiv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttribP1uiv"), fun<uint, uint, byte, *uint, void>)
 	}
 	glVertexAttribP1uiv_procAddress(index, type, normalized, value)
 }
 
-:glVertexAttribP2ui_procAddress fun<uint, uint, bool, uint, void> #Mutable
-glVertexAttribP2ui(index uint, type uint, normalized bool, value uint) void {
+:glVertexAttribP2ui_procAddress fun<uint, uint, byte, uint, void> #Mutable
+glVertexAttribP2ui(index uint, type uint, normalized byte, value uint) void {
 	if glVertexAttribP2ui_procAddress == null {
-		glVertexAttribP2ui_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttribP2ui"), fun<uint, uint, bool, uint, void>)
+		glVertexAttribP2ui_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttribP2ui"), fun<uint, uint, byte, uint, void>)
 	}
 	glVertexAttribP2ui_procAddress(index, type, normalized, value)
 }
 
-:glVertexAttribP2uiv_procAddress fun<uint, uint, bool, *uint, void> #Mutable
-glVertexAttribP2uiv(index uint, type uint, normalized bool, value *uint) void {
+:glVertexAttribP2uiv_procAddress fun<uint, uint, byte, *uint, void> #Mutable
+glVertexAttribP2uiv(index uint, type uint, normalized byte, value *uint) void {
 	if glVertexAttribP2uiv_procAddress == null {
-		glVertexAttribP2uiv_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttribP2uiv"), fun<uint, uint, bool, *uint, void>)
+		glVertexAttribP2uiv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttribP2uiv"), fun<uint, uint, byte, *uint, void>)
 	}
 	glVertexAttribP2uiv_procAddress(index, type, normalized, value)
 }
 
-:glVertexAttribP3ui_procAddress fun<uint, uint, bool, uint, void> #Mutable
-glVertexAttribP3ui(index uint, type uint, normalized bool, value uint) void {
+:glVertexAttribP3ui_procAddress fun<uint, uint, byte, uint, void> #Mutable
+glVertexAttribP3ui(index uint, type uint, normalized byte, value uint) void {
 	if glVertexAttribP3ui_procAddress == null {
-		glVertexAttribP3ui_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttribP3ui"), fun<uint, uint, bool, uint, void>)
+		glVertexAttribP3ui_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttribP3ui"), fun<uint, uint, byte, uint, void>)
 	}
 	glVertexAttribP3ui_procAddress(index, type, normalized, value)
 }
 
-:glVertexAttribP3uiv_procAddress fun<uint, uint, bool, *uint, void> #Mutable
-glVertexAttribP3uiv(index uint, type uint, normalized bool, value *uint) void {
+:glVertexAttribP3uiv_procAddress fun<uint, uint, byte, *uint, void> #Mutable
+glVertexAttribP3uiv(index uint, type uint, normalized byte, value *uint) void {
 	if glVertexAttribP3uiv_procAddress == null {
-		glVertexAttribP3uiv_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttribP3uiv"), fun<uint, uint, bool, *uint, void>)
+		glVertexAttribP3uiv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttribP3uiv"), fun<uint, uint, byte, *uint, void>)
 	}
 	glVertexAttribP3uiv_procAddress(index, type, normalized, value)
 }
 
-:glVertexAttribP4ui_procAddress fun<uint, uint, bool, uint, void> #Mutable
-glVertexAttribP4ui(index uint, type uint, normalized bool, value uint) void {
+:glVertexAttribP4ui_procAddress fun<uint, uint, byte, uint, void> #Mutable
+glVertexAttribP4ui(index uint, type uint, normalized byte, value uint) void {
 	if glVertexAttribP4ui_procAddress == null {
-		glVertexAttribP4ui_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttribP4ui"), fun<uint, uint, bool, uint, void>)
+		glVertexAttribP4ui_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttribP4ui"), fun<uint, uint, byte, uint, void>)
 	}
 	glVertexAttribP4ui_procAddress(index, type, normalized, value)
 }
 
-:glVertexAttribP4uiv_procAddress fun<uint, uint, bool, *uint, void> #Mutable
-glVertexAttribP4uiv(index uint, type uint, normalized bool, value *uint) void {
+:glVertexAttribP4uiv_procAddress fun<uint, uint, byte, *uint, void> #Mutable
+glVertexAttribP4uiv(index uint, type uint, normalized byte, value *uint) void {
 	if glVertexAttribP4uiv_procAddress == null {
-		glVertexAttribP4uiv_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttribP4uiv"), fun<uint, uint, bool, *uint, void>)
+		glVertexAttribP4uiv_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttribP4uiv"), fun<uint, uint, byte, *uint, void>)
 	}
 	glVertexAttribP4uiv_procAddress(index, type, normalized, value)
 }
 
-:glVertexAttribPointer_procAddress fun<uint, int, uint, bool, int, pointer, void> #Mutable
-glVertexAttribPointer(index uint, size int, type uint, normalized bool, stride int, pointer pointer) void {
+:glVertexAttribPointer_procAddress fun<uint, int, uint, byte, int, pointer, void> #Mutable
+glVertexAttribPointer(index uint, size int, type uint, normalized byte, stride int, pointer_ pointer) void {
 	if glVertexAttribPointer_procAddress == null {
-		glVertexAttribPointer_procAddress = pointer_cast(glGetProcAddressChecked("glVertexAttribPointer"), fun<uint, int, uint, bool, int, pointer, void>)
+		glVertexAttribPointer_procAddress = pointer_cast(SDL_GL_GetProcAddress("glVertexAttribPointer"), fun<uint, int, uint, byte, int, pointer, void>)
 	}
-	glVertexAttribPointer_procAddress(index, size, type, normalized, stride, pointer)
+	glVertexAttribPointer_procAddress(index, size, type, normalized, stride, pointer_)
 }
 
-:glVertexP2ui_procAddress fun<uint, uint, void> #Mutable
-glVertexP2ui(type uint, value uint) void {
-	if glVertexP2ui_procAddress == null {
-		glVertexP2ui_procAddress = pointer_cast(glGetProcAddressChecked("glVertexP2ui"), fun<uint, uint, void>)
+:glViewport_procAddress fun<int, int, int, int, void> #Mutable
+glViewport(x int, y int, width int, height int) void {
+	if glViewport_procAddress == null {
+		glViewport_procAddress = pointer_cast(SDL_GL_GetProcAddress("glViewport"), fun<int, int, int, int, void>)
 	}
-	glVertexP2ui_procAddress(type, value)
-}
-
-:glVertexP2uiv_procAddress fun<uint, *uint, void> #Mutable
-glVertexP2uiv(type uint, value *uint) void {
-	if glVertexP2uiv_procAddress == null {
-		glVertexP2uiv_procAddress = pointer_cast(glGetProcAddressChecked("glVertexP2uiv"), fun<uint, *uint, void>)
-	}
-	glVertexP2uiv_procAddress(type, value)
-}
-
-:glVertexP3ui_procAddress fun<uint, uint, void> #Mutable
-glVertexP3ui(type uint, value uint) void {
-	if glVertexP3ui_procAddress == null {
-		glVertexP3ui_procAddress = pointer_cast(glGetProcAddressChecked("glVertexP3ui"), fun<uint, uint, void>)
-	}
-	glVertexP3ui_procAddress(type, value)
-}
-
-:glVertexP3uiv_procAddress fun<uint, *uint, void> #Mutable
-glVertexP3uiv(type uint, value *uint) void {
-	if glVertexP3uiv_procAddress == null {
-		glVertexP3uiv_procAddress = pointer_cast(glGetProcAddressChecked("glVertexP3uiv"), fun<uint, *uint, void>)
-	}
-	glVertexP3uiv_procAddress(type, value)
-}
-
-:glVertexP4ui_procAddress fun<uint, uint, void> #Mutable
-glVertexP4ui(type uint, value uint) void {
-	if glVertexP4ui_procAddress == null {
-		glVertexP4ui_procAddress = pointer_cast(glGetProcAddressChecked("glVertexP4ui"), fun<uint, uint, void>)
-	}
-	glVertexP4ui_procAddress(type, value)
-}
-
-:glVertexP4uiv_procAddress fun<uint, *uint, void> #Mutable
-glVertexP4uiv(type uint, value *uint) void {
-	if glVertexP4uiv_procAddress == null {
-		glVertexP4uiv_procAddress = pointer_cast(glGetProcAddressChecked("glVertexP4uiv"), fun<uint, *uint, void>)
-	}
-	glVertexP4uiv_procAddress(type, value)
+	glViewport_procAddress(x, y, width, height)
 }
 
 :glWaitSync_procAddress fun<pointer, uint, ulong, void> #Mutable
 glWaitSync(sync pointer, flags uint, timeout ulong) void {
 	if glWaitSync_procAddress == null {
-		glWaitSync_procAddress = pointer_cast(glGetProcAddressChecked("glWaitSync"), fun<pointer, uint, ulong, void>)
+		glWaitSync_procAddress = pointer_cast(SDL_GL_GetProcAddress("glWaitSync"), fun<pointer, uint, ulong, void>)
 	}
 	glWaitSync_procAddress(sync, flags, timeout)
 }
